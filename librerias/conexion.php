@@ -11,6 +11,7 @@ class conexion
         try {
             //Creamos nuestra nueva instancia de PDO con el driver de Postgres
              $this->enlace = new PDO("pgsql:dbname=JARDIN_BOTANICO;host=localhost;user=postgres;password=1234");
+
             
             //Habilitamos el modo de errores para visualizarlos
             $this->enlace->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
