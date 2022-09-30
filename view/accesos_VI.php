@@ -15,7 +15,7 @@ class accesos_VI
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Gentelella Alela! | </title>
+    <title>Jardin Botanico </title>
 
     <!-- Bootstrap -->
   
@@ -43,32 +43,33 @@ class accesos_VI
       <div class="login_wrapper">
         <div class="animate form login_form">
           <section class="login_content">
-            <form>
+            <form action="index.php" method="post">
               <h1>Login Form</h1>
-              <div>
-                <input type="text" class="form-control" placeholder="Username" required="" />
+              <div class="input-group mb-2">
+                <input type="email" name="correo" class="form-control" placeholder="Correo">
+              </div>
+              <div class="input-group mb-3">
+                <input type="password" name="contrasena" class="form-control" placeholder="contrasena">
               </div>
               <div>
-                <input type="password" class="form-control" placeholder="Password" required="" />
-              </div>
-              <div>
-                <a class="btn btn-default submit" href="index.html">Log in</a>
-                <a class="reset_pass" href="#">Lost your password?</a>
+            
+                <button type="submit" class="btn btn-success ">Iniciar Sesi&oacute;n</button>
               </div>
 
               <div class="clearfix"></div>
 
               <div class="separator">
-                <p class="change_link">New to site?
-                  <a href="#signup" class="to_register"> Create Account </a>
+                <p class="change_link">Aun no tienes cuenta
+                  <a href="#signup" class="to_register"> Registrate </a>
                 </p>
 
                 <div class="clearfix"></div>
                 <br />
 
                 <div>
-                  <h1><i class="fa fa-paw"></i> Gentelella Alela!</h1>
-                  <p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 4 template. Privacy and Terms</p>
+                    <h1><i class="fa fa-leaf  "></i> Jardin Botanico</h1>
+                    <p></p>
+                  
                 </div>
               </div>
             </form>
@@ -103,7 +104,7 @@ class accesos_VI
                 <br />
 
                 <div>
-                  <h1><i class="fa fa-paw"></i> Gentelella Alela!</h1>
+                  <h1><i class="fa fa-leaf  "></i> Jardin Botanico</h1>
                   <p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 4 template. Privacy and Terms</p>
                 </div>
               </div>

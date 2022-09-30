@@ -5,21 +5,22 @@ class accesos_CO
 {
     function __construct(){}
 
-    function iniciarSesion($usuario,$clave)
+    function iniciarSesion($correo,$contrasena)
     {
-        $conexion=new conexion('sel');
+        $conexion=new conexion();
         
         $accesos_MO=new accesos_MO($conexion);
         
-        $arreglo=$accesos_MO->iniciarSesion($usuario,$clave);
+        $arreglo=$accesos_MO->iniciarSesion($correo,$contrasena);
+        echo "dddddddd";
 
-       /* if($arreglo)
+       if($arreglo)
         {
             $objeto_accesos=$arreglo[0];
-            $pers_id=$objeto_accesos->pers_id;
+            $documento=$objeto_accesos->documento;
             
-            $_SESSION['pers_id']=$pers_id;
-        }*/
+            $_SESSION['documento']=$documento;
+        }
 
         header('Location: index.php');
     }
@@ -27,10 +28,8 @@ class accesos_CO
     function salir()
     {
         session_destroy();
+        
     }
-
-
-
 
 }
 ?>

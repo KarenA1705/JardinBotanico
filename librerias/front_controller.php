@@ -5,7 +5,7 @@ class front_controller
     {
         if(empty($ruta))
         {
-            $carpeta='vistas';
+            $carpeta='view';
             $clase='menu_VI';
             $metodo='verMenu';
         }
@@ -18,11 +18,11 @@ class front_controller
             $sufijo=substr($clase,-2);
             if($sufijo=='CO')
             {
-                $carpeta="controladores";
+                $carpeta="controllers";
             }
             else if($sufijo=='VI')
             {
-                $carpeta="vistas";
+                $carpeta="view";
             }
         }
 

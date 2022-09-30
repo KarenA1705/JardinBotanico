@@ -4,25 +4,13 @@ class conexion
     private $enlace;
     private $resultado;
 
-    function __construct($opcion)
+    function __construct()
     {
-        $ip_maquina=IP_MAQUINA;
-        $base_de_datos=BASE_DE_DATOS;
-        
-        if($opcion=='sel')
-        {
-            $usuario=SEL_C;
-            $clave=CLAVE_SEL_C;
-        }
-        else if($opcion=='all')
-        {
-            $usuario=ALL_C;
-            $clave=CLAVE_ALL_C;
-        }
+       
         
         try {
             //Creamos nuestra nueva instancia de PDO con el driver de Postgres
-             $this->enlace = new PDO("pgsql:dbname=personas;host=localhost;user=postgres;password=123");
+             $this->enlace = new PDO("pgsql:dbname=JARDIN_BOTANICO;host=localhost;user=postgres;password=1234");
             
             //Habilitamos el modo de errores para visualizarlos
             $this->enlace->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -33,17 +21,7 @@ class conexion
             } catch (PDOException $e) {
              die("Error : " . $e->getMessage() . "<br/>");
              }
-       /* try
-        {
-            $this->enlace = new PDO("mysql:host=$ip_maquina;dbname=$base_de_datos", $usuario, $clave);
-           
-            return $this->enlace;
-        }
-        catch (PDOException $e)
-        {
-            print "¡Error!: " . $e->getMessage() . "<br/>";
-            exit();
-        }*/
+    
     }
 
     function consultar($sql)

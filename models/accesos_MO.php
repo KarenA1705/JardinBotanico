@@ -8,11 +8,11 @@ class accesos_MO
         $this->conexion=$conexion;
     }
 
-    function iniciarSesion($usuario,$clave)
-    {/*
-        $sql="select pers_id from accesos where acce_usuario='$usuario' and acce_clave='$clave'";
+    function iniciarSesion($correo,$contrasena)
+    {
+        $sql="select documento from coordinador where correo='$correo' and contrasena='$contrasena'";
         $this->conexion->consultar($sql);
-        return $this->conexion->extraerRegistro();*/
+        return $this->conexion->extraerRegistro();
     }
 
 }
