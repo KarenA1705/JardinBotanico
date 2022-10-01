@@ -105,10 +105,8 @@ class familias_VI
                     .then(respuesta => respuesta.json())
                     .then(respuesta => {
                         let familia = document.querySelector('#formulario_agregar_familias #familia').value;
-                        let caracteristica = document.querySelector('#formulario_agregar_familias #carcateristica').value;
+                        let caracteristica = document.querySelector('#formulario_agregar_familias #caracteristica').value;
                         if (respuesta.estado == 'EXITO') {
-
-                            let familia = respuesta.familia;
 
                             let fila = `
                                     <tr>

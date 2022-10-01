@@ -8,7 +8,7 @@ class familias_MO
     $this->conexion = $conexion;
   }
 
-  function agregarfamilias($familia, $carcateristica)
+  function agregarfamilias($familia, $caracteristica)
   {
 
     $sql = "insert into familia (nombre_familia, caracteristicas) values ('$familia','$caracteristica' )";
@@ -40,15 +40,14 @@ class familias_MO
 
     return $arreglo;
   }
-  function seleccionar_documento($clie_documento = '')
+  function seleccionar_familia($familia = '')
   {
+    if ($familia) {
 
-    if ($clie_documento) {
-
-      $sql = "select * from familias where clie_documento='$clie_documento'";
+      $sql = "select * from familia where nombre_familia='$familia'";
     } else {
 
-      $sql = "select * from familias";
+      $sql = "select * from familia";
     }
 
     $this->conexion->consultar($sql);

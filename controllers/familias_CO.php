@@ -17,10 +17,9 @@ class familias_CO
     $familias_MO = new  familias_MO($conexion);
    
     $familia = htmlentities($_POST['familia'], ENT_QUOTES);
-    $carcateristica= ($_POST['carcateristica'], ENT_QUOTES);
+    $caracteristica=htmlentities($_POST['caracteristica'], ENT_QUOTES);
    
-
-    if ( empty($familia) or empty($carcateristica) ) {
+    if ( empty($familia) or empty($caracteristica) ) {
       $arreglo_respuesta = [
         "estado" => "ERROR",
         "mensaje" => "Todos los campos son obligatorios"
@@ -38,7 +37,7 @@ class familias_CO
 
       exit(json_encode($arreglo_respuesta));
     }
-    if (strlen($carcateristica) > 300) {
+    if (strlen($caracteristica) > 300) {
         $arreglo_respuesta = [
           "estado" => "ERROR",
           "mensaje" => "El tamaño de las caracteristicas de la familia deber ser menor de 300 caracteres"
@@ -58,12 +57,12 @@ class familias_CO
 
       exit(json_encode($arreglo_respuesta));
     }
-    $familias_MO->agregarfamilias( $familia, $carcateristica);
+    $familias_MO->agregarfamilias( $familia, $caracteristica);
 
-    $familia= $conexion->traerUltimoId();
-
+    
+    $familia= $conexion->lastInsertId();
     $arreglo_respuesta = [
-      "marc_id" => $marc_id,
+      "familia" => $familia,
       "estado" => "EXITO",
       "mensaje" => "Registro agregado"
 

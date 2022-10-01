@@ -12,7 +12,6 @@ class accesos_CO
         $accesos_MO=new accesos_MO($conexion);
         
         $arreglo=$accesos_MO->iniciarSesion($correo,$contrasena);
-        echo "dddddddd";
 
        if($arreglo)
         {
