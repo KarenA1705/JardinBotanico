@@ -1,0 +1,216 @@
+<?php
+
+class familias_VI
+{
+
+    function __construct()
+    {
+    }
+
+    function agregarFamilias()
+    {
+
+        require_once "models/familias_MO.php";
+        $conexion = new conexion();
+        $familias_MO = new familias_MO($conexion);
+        $arreglo_familias = $familias_MO->seleccionar();
+
+?>
+        <div class="card">
+            <div class="card-header">
+                Agregar familias
+            </div>
+            <div class="card-body">
+                <form id="formulario_agregar_familias">
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="familia">Nombre Familia</label>
+                                <input type="text" class="form-control" id="familia" name="familia">
+
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="caracteristica">Caracteristica</label>
+                                <input type="text" class="form-control" id="caracteristica" name="caracteristica">
+
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <br>
+                            <button type="button" onclick="agregarfamilias();" class="btn btn-success float-right">Agregar</button>
+                        </div>
+                    </div>
+                    <br>
+
+                </form>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                Listar familias
+            </div>
+            <div class="card-body">
+
+                <table class="table table-bordered table-sm table-hover">
+                    <thead class="thead-light">
+                        <tr>
+                            <th scope="col">Nombre Familia</th>
+                            <th style="text-align: center;">Caracteristicas</th>
+                            <th style="text-align: center;">Accion</th>
+                        </tr>
+                    </thead>
+                    <tbody id="lista_familias">
+                        <?php
+                        if ($arreglo_familias) {
+
+                            foreach ($arreglo_familias as $objeto_familias) {
+
+                                $familia = $objeto_familias->nombre_familia;
+                                $caracteristica = $objeto_familias->caracteristicas;
+                        ?>
+                                <tr>
+                                    <td id="familia_td_<?php echo $familia; ?>"> <?php echo $familia; ?> </td>
+                                    <td id="caracteristica_td_<?php echo $caracteristica; ?>"> <?php echo $caracteristica; ?> </td>
+                                    <td style="text-align: center;">
+                                        <input type="hidden" id="familia_<?php echo $familia; ?>" value="<?php echo $familia; ?>">
+                                        <input type="hidden" id="caracteristica_<?php echo $caracteristica; ?>" value="<?php echo $caracteristica; ?>">
+                                        <i class="fas fa-edit" data-toggle="modal" data-target="#Ventana_Modal" style="cursor: pointer;" onclick="verActualizarfamilias('<?php echo $familia; ?>')"></i>
+                                    </td>
+                                </tr>
+                        <?php
+                            }
+                        }
+                        ?>
+                    </tbody>
+                </table>
+
+
+            </div>
+        </div>
+
+        <script>
+            function agregarfamilias() {
+
+
+                var cadena = new FormData(document.querySelector('#formulario_agregar_familias'));
+
+                fetch('familias_CO/agregarfamilias', {
+                        method: 'POST',
+                        body: cadena
+                    })
+                    .then(respuesta => respuesta.json())
+                    .then(respuesta => {
+                        let familia = document.querySelector('#formulario_agregar_familias #familia').value;
+                        let caracteristica = document.querySelector('#formulario_agregar_familias #carcateristica').value;
+                        if (respuesta.estado == 'EXITO') {
+
+                            let familia = respuesta.familia;
+
+                            let fila = `
+                                    <tr>
+                                            <td id="familia_td_${familia}"> ${familia} </td>
+                                            <td id="caracteristica_td_${caracteristica}"> ${caracteristica} </td>
+                                            <td style="text-align: center;">
+                                                <input type="hidden" id="familia_${familia}" value="${familia}">
+                                                <input type="hidden" id="caracteristica_${caracteristica}" value="${caracteristica}">
+                                                <i class="fas fa-edit" data-toggle="modal" data-target="#Ventana_Modal" style="cursor: pointer;" onclick="verActualizarfamilias('${familia}')"></i>
+                                            </td>
+                                        </tr>
+
+                                    <tr>`;
+                            document.querySelector('#lista_familias').insertAdjacentHTML('afterbegin', fila);
+                            document.querySelector('#formulario_agregar_familias ').reset();
+
+                            toastr.success(respuesta.mensaje);
+                        } else if (respuesta.estado = 'ERROR') {
+
+                            toastr.error(respuesta.mensaje);
+
+                        } else {
+
+                            toastr.error('No se devolvio un estado');
+                        }
+                    })
+            }
+
+            function verActualizarfamilias(marc_id) {
+
+
+                let familia = document.querySelector('#familia_' + marc_id).value;
+
+                var cadena = `
+                        <div class="card">
+                            <div class="card-body">
+                                <form id="formulario_actualizar_familias">
+
+                              
+                          
+                                    <div class="form-group">
+                                        <label for="familia">nombre de la marca</label>
+                                        <input type="text" class="form-control" id="familia" name="familia"
+                                            value="${familia}">
+                                    </div>
+                                  
+                                    <input type="hidden" id="marc_id" name="marc_id" value="${marc_id}">
+                                    <button type="button" onclick="actualizarfamilias();" class="btn btn-primary float-right">Actualizar</button>
+                                </form>
+                            </div>
+                        </div>
+                    `;
+
+                document.querySelector('#titulo_modal').innerHTML = 'Actualizar familias';
+
+                document.querySelector('#contenido_modal').innerHTML = cadena;
+
+            }
+
+            function actualizarfamilias() {
+
+                var cadena = new FormData(document.querySelector('#formulario_actualizar_familias'));
+
+                fetch('familias_CO/actualizarfamilias', {
+                        method: 'POST',
+                        body: cadena
+                    })
+                    .then(respuesta => respuesta.json())
+                    .then(respuesta => {
+
+                        if (respuesta.estado == 'EXITO') {
+
+
+                            let familia = document.querySelector('#formulario_actualizar_familias #familia').value;
+
+                            let marc_id = document.querySelector('#formulario_actualizar_familias #marc_id').value;
+
+
+
+                            document.querySelector('#familia_td_' + marc_id).innerHTML = familia;
+                            document.querySelector('#familia_' + marc_id).value = familia;
+
+
+
+                            toastr.success(respuesta.mensaje);
+
+                        } else if (respuesta.estado = 'ERROR') {
+
+                            toastr.error(respuesta.mensaje);
+
+                        } else if (respuesta.estado = 'ADVERTENCIA') {
+
+                            toastr.error(respuesta.mensaje);
+
+                        } else {
+
+                            toastr.error('No se devolvio un estado');
+                        }
+                    });
+            }
+        </script>
+<?php
+    }
+}
+?>

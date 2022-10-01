@@ -16,23 +16,26 @@ class menu_VI
   <!DOCTYPE html>
   <html lang="en">
     <head>
+    <script src="https://kit.fontawesome.com/7d38072211.js" crossorigin="anonymous"></script>
+    
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
       <!-- Meta, title, CSS, favicons, etc. -->
       <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="images/favicon.ico" type="image/ico" />
+      <link rel="icon" href="images/favicon.ico" type="image/ico" />
 
-      <title>Gentelella Alela! | </title>
+      <title>Jardin Botanico</title>
 
       <!-- Bootstrap -->
       <link href="vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
       <!-- Font Awesome -->
-      <link href="vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+       
       <!-- NProgress -->
       <link href="vendors/nprogress/nprogress.css" rel="stylesheet">
       <!-- iCheck -->
       <link href="vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+      <link rel="stylesheet" href="vendors/toastr/toastr.min.css">
     
       <!-- bootstrap-progressbar -->
       <link href="vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
@@ -43,6 +46,7 @@ class menu_VI
 
       <!-- Custom Theme Style -->
       <link href="build/css/custom.min.css" rel="stylesheet">
+ 
     </head>
 
     <body class="nav-md">
@@ -75,14 +79,16 @@ class menu_VI
                 <div class="menu_section">
                   <h3>General</h3>
                   <ul class="nav side-menu">
-                    <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
+                    <li><a><i class="fa fa-pagelines"></i> Inventario <span class="fa fa-chevron-down"></span></a>
                       <ul class="nav child_menu">
-                        <li><a href="index.html">Dashboard</a></li>
-                        <li><a href="index2.html">Dashboard2</a></li>
-                        <li><a href="index3.html">Dashboard3</a></li>
+                        <li><a href="#" onclick="verModulo('plantas_VI/agregarPlantas');">Plantas</a></li>
+                        <li><a  href="#" onclick="verModulo('familias_VI/agregarFamilias');">Familias</a></li>
+                        <li><a  href="#" onclick="verModulo('origenes_VI/agregarOrigenes');">Origenres</a></li>
+                        <li><a  href="#" onclick="verModulo('estados_VI/agregarEstados');">Estados de conservacion</a></li>
+                        <li><a  href="#" onclick="verModulo('habitos_VI/agregarPlantas');">Habitos de crecimiento</a></li>
                       </ul>
                     </li>
-                    <li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
+                    <li><a><i class="fa fa-list-alt"></i> Donaciones <span class="fa fa-chevron-down"></span></a>
                       <ul class="nav child_menu">
                         <li><a href="form.html">General Form</a></li>
                         <li><a href="form_advanced.html">Advanced Components</a></li>
@@ -92,7 +98,7 @@ class menu_VI
                         <li><a href="form_buttons.html">Form Buttons</a></li>
                       </ul>
                     </li>
-                    <li><a><i class="fa fa-desktop"></i> UI Elements <span class="fa fa-chevron-down"></span></a>
+                    <li><a><i class="fa  fa-briefcase"></i> Entidades <span class="fa fa-chevron-down"></span></a>
                       <ul class="nav child_menu">
                         <li><a href="general_elements.html">General Elements</a></li>
                         <li><a href="media_gallery.html">Media Gallery</a></li>
@@ -105,72 +111,9 @@ class menu_VI
                         <li><a href="calendar.html">Calendar</a></li>
                       </ul>
                     </li>
-                    <li><a><i class="fa fa-table"></i> Tables <span class="fa fa-chevron-down"></span></a>
-                      <ul class="nav child_menu">
-                        <li><a href="tables.html">Tables</a></li>
-                        <li><a href="tables_dynamic.html">Table Dynamic</a></li>
-                      </ul>
-                    </li>
-                    <li><a><i class="fa fa-bar-chart-o"></i> Data Presentation <span class="fa fa-chevron-down"></span></a>
-                      <ul class="nav child_menu">
-                        <li><a href="chartjs.html">Chart JS</a></li>
-                        <li><a href="chartjs2.html">Chart JS2</a></li>
-                        <li><a href="morisjs.html">Moris JS</a></li>
-                        <li><a href="echarts.html">ECharts</a></li>
-                        <li><a href="other_charts.html">Other Charts</a></li>
-                      </ul>
-                    </li>
-                    <li><a><i class="fa fa-clone"></i>Layouts <span class="fa fa-chevron-down"></span></a>
-                      <ul class="nav child_menu">
-                        <li><a href="fixed_sidebar.html">Fixed Sidebar</a></li>
-                        <li><a href="fixed_footer.html">Fixed Footer</a></li>
-                      </ul>
-                    </li>
                   </ul>
                 </div>
-                <div class="menu_section">
-                  <h3>Live On</h3>
-                  <ul class="nav side-menu">
-                    <li><a><i class="fa fa-bug"></i> Additional Pages <span class="fa fa-chevron-down"></span></a>
-                      <ul class="nav child_menu">
-                        <li><a href="e_commerce.html">E-commerce</a></li>
-                        <li><a href="projects.html">Projects</a></li>
-                        <li><a href="project_detail.html">Project Detail</a></li>
-                        <li><a href="contacts.html">Contacts</a></li>
-                        <li><a href="profile.html">Profile</a></li>
-                      </ul>
-                    </li>
-                    <li><a><i class="fa fa-windows"></i> Extras <span class="fa fa-chevron-down"></span></a>
-                      <ul class="nav child_menu">
-                        <li><a href="page_403.html">403 Error</a></li>
-                        <li><a href="page_404.html">404 Error</a></li>
-                        <li><a href="page_500.html">500 Error</a></li>
-                        <li><a href="plain_page.html">Plain Page</a></li>
-                        <li><a href="login.html">Login Page</a></li>
-                        <li><a href="pricing_tables.html">Pricing Tables</a></li>
-                      </ul>
-                    </li>
-                    <li><a><i class="fa fa-sitemap"></i> Multilevel Menu <span class="fa fa-chevron-down"></span></a>
-                      <ul class="nav child_menu">
-                          <li><a href="#level1_1">Level One</a>
-                          <li><a>Level One<span class="fa fa-chevron-down"></span></a>
-                            <ul class="nav child_menu">
-                              <li class="sub_menu"><a href="level2.html">Level Two</a>
-                              </li>
-                              <li><a href="#level2_1">Level Two</a>
-                              </li>
-                              <li><a href="#level2_2">Level Two</a>
-                              </li>
-                            </ul>
-                          </li>
-                          <li><a href="#level1_2">Level One</a>
-                          </li>
-                      </ul>
-                    </li>                  
-                    <li><a href="javascript:void(0)"><i class="fa fa-laptop"></i> Landing Page <span class="label label-success pull-right">Coming Soon</span></a></li>
-                  </ul>
-                </div>
-
+                 
               </div>
               <!-- /sidebar menu -->
 
@@ -203,14 +146,11 @@ class menu_VI
                 <ul class=" navbar-right">
                   <li class="nav-item dropdown open" style="padding-left: 15px;">
                     <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                      <img src="production/images/img.jpg" alt="">John Doe
+                      <img src="production/images/img.jpg" alt=""><?php echo $nombres ?>
                     </a>
                     <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
                       <a class="dropdown-item"  href="javascript:;"> Profile</a>
-                        <a class="dropdown-item"  href="javascript:;">
-                          <span class="badge bg-red pull-right">50%</span>
-                          <span>Settings</span>
-                        </a>
+                        
                     <a class="dropdown-item"  href="javascript:;">Help</a>
                       <a class="dropdown-item"  href="#" onclick="salir()" ><i class="fa fa-sign-out pull-right"></i> Log Out</a>
                     </div>
@@ -226,24 +166,20 @@ class menu_VI
           <!-- page content -->
           <div class="right_col" role="main">
             <!-- top tiles -->
-            <div class="row" style="display: inline-block;" >
-            <div class="tile_count">
+            <div class="content" style="display: inline-block;" >
+            <div class="tile_count" id="contenido">
                
                
               </div>
             </div>
           </div>
           <!-- /page content -->
-
-          <!-- footer content -->
-          <footer>
-            <div class="pull-right">
-              Jardin Botánico Jorge Enrique Quintero Arenas  
-            </div>
-            <div class="clearfix"></div>
-          </footer>
-          <!-- /footer content -->
+          
+       
         </div>
+        <footer class="main-footer navbar  navbar-dark">
+                    <strong> </strong> Jardin Botánico Jorge Enrique Quintero Arenas
+                </footer>
       </div>
 
       <!-- jQuery -->
@@ -283,6 +219,8 @@ class menu_VI
       <!-- bootstrap-daterangepicker -->
       <script src="vendors/moment/min/moment.min.js"></script>
       <script src="vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+      <script src="vendors/toastr/toastr.min.js"></script>
+     
 
       <!-- Custom Theme Scripts -->
       <script src="build/js/custom.min.js"></script>
