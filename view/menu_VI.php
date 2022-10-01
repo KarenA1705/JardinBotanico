@@ -85,7 +85,7 @@ class menu_VI
                         <li><a  href="#" onclick="verModulo('familias_VI/agregarFamilias');">Familias</a></li>
                         <li><a  href="#" onclick="verModulo('origenes_VI/agregarOrigenes');">Origenes</a></li>
                         <li><a  href="#" onclick="verModulo('estados_VI/agregarEstados');">Estados de conservacion</a></li>
-                        <li><a  href="#" onclick="verModulo('habitos_VI/agregarPlantas');">Habitos de crecimiento</a></li>
+                        <li><a  href="#" onclick="verModulo('habitos_VI/agregarHabitos');">Habitos de crecimiento</a></li>
                       </ul>
                     </li>
                     <li><a><i class="fa fa-list-alt"></i> Donaciones <span class="fa fa-chevron-down"></span></a>
