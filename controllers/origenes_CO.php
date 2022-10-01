@@ -1,25 +1,25 @@
 <?php
 
-require_once "models/familias_MO.php";
+require_once "models/origenes_MO.php";
 
-class familias_CO
+class origenes_CO
 {
 
   function __construct()
   {
   }
 
-  function agregarfamilias()
+  function agregarorigenes()
   {
 
     $conexion = new conexion();
 
-    $familias_MO = new  familias_MO($conexion);
+    $origenes_MO = new  origenes_MO($conexion);
    
-    $familia = htmlentities($_POST['familia'], ENT_QUOTES);
-    $caracteristica=htmlentities($_POST['caracteristica'], ENT_QUOTES);
+    $codigo = htmlentities($_POST['codigo'], ENT_QUOTES);
+    $nombre=htmlentities($_POST['nombre'], ENT_QUOTES);
    
-    if ( empty($familia) or empty($caracteristica) ) {
+    if ( empty($codigo) or empty($nombre) ) {
       $arreglo_respuesta = [
         "estado" => "ERROR",
         "mensaje" => "Todos los campos son obligatorios"
@@ -28,41 +28,40 @@ class familias_CO
 
       exit(json_encode($arreglo_respuesta));
     }
-    if (strlen($familia) > 20) {
+    if (strlen($codigo) > 25) {
       $arreglo_respuesta = [
         "estado" => "ERROR",
-        "mensaje" => "El tamaño del nombre de la familia deber ser menor de 20 caracteres"
+        "mensaje" => "El tamaño del  codigo deber ser menor de 25 caracteres"
 
       ];
 
       exit(json_encode($arreglo_respuesta));
     }
-    if (strlen($caracteristica) > 300) {
+    if (strlen($nombre) > 25) {
         $arreglo_respuesta = [
           "estado" => "ERROR",
-          "mensaje" => "El tamaño de las caracteristicas de la familia deber ser menor de 300 caracteres"
+          "mensaje" => "El tamaño del nombres deber ser menor de 25 caracteres"
   
         ];
   
         exit(json_encode($arreglo_respuesta));
       }
  
-    $arreglo_familias = $familias_MO->seleccionar_familia($familia);
-    if ($arreglo_familias) {
+    $arreglo_origenes = $origenes_MO->seleccionar_codigo($codigo);
+    if ($arreglo_origenes) {
       $arreglo_respuesta = [
         "estado" => "ERROR",
-        "mensaje" => "El nombre de la familia ($familia) esta duplicado"
+        "mensaje" => "El codigo ($codigo) esta duplicado"
 
       ];
 
       exit(json_encode($arreglo_respuesta));
     }
-    $familias_MO->agregarfamilias( $familia, $caracteristica);
+    $origenes_MO->agregarorigenes( $codigo, $nombre);
 
-    
-    /*$familia= $conexion->lastInsertId();*/
+    /*$codigo= $conexion->lastInsertId();*/
     $arreglo_respuesta = [
-      "familia" => $familia,
+      "codigo" => $codigo,
       "estado" => "EXITO",
       "mensaje" => "Registro agregado"
 
@@ -71,17 +70,17 @@ class familias_CO
     exit(json_encode($arreglo_respuesta));
   }
 
-  function actualizarfamilias()
+  function actualizarorigenes()
   {
 
     $conexion = new conexion();
-    $familias_MO = new  familias_MO($conexion);
+    $origenes_MO = new  origenes_MO($conexion);
  
-    $familia = htmlentities($_POST['familia'], ENT_QUOTES);
-    $caracteristica = htmlentities($_POST['caracteristica'], ENT_QUOTES);
-    $familia_org=htmlentities($_POST['family'], ENT_QUOTES);
+    $codigo = htmlentities($_POST['codigo'], ENT_QUOTES);
+    $nombre = htmlentities($_POST['nombre'], ENT_QUOTES);
+    $codigo_org=htmlentities($_POST['codige'], ENT_QUOTES);
 
-    if (  empty($familia) or empty($caracteristica) ) {
+    if (  empty($codigo) or empty($nombre) ) {
       $arreglo_respuesta = [
         "estado" => "ERROR",
         "mensaje" => "Todos los campos son obligatorios"
@@ -90,27 +89,27 @@ class familias_CO
 
       exit(json_encode($arreglo_respuesta));
     }
-    if (strlen($familia) > 20) {
+    if (strlen($codigo) > 25) {
       $arreglo_respuesta = [
         "estado" => "ERROR",
-        "mensaje" => "El tamaño del nombre debe  ser menor de 20 caracteres"
+        "mensaje" => "El tamaño del codigo debe ser menor de 25 caracteres"
 
       ];
 
       exit(json_encode($arreglo_respuesta));
     }
-    if (strlen($caracteristica) > 300) {
+    if (strlen($nombre) > 25) {
       $arreglo_respuesta = [
         "estado" => "ERROR",
-        "mensaje" => "El tamaño de las caracteristicas de la familia deber ser menor de 300 caracteres"
+        "mensaje" => "El tamaño del nombre  deber ser menor de 25 caracteres"
 
       ];
 
       exit(json_encode($arreglo_respuesta));
     }
 
-    if($familia == $familia_org){
-      $familias_MO->actualizarfamilias($familia, $caracteristica,$familia_org);
+    if($codigo == $codigo_org){
+      $origenes_MO->actualizarorigenes($codigo, $nombre,$codigo_org);
 
       $actualizado = $conexion->filasAfectadas();
   
@@ -131,11 +130,11 @@ class familias_CO
   
       exit(json_encode($arreglo_respuesta, true));
     }else {
-      $arreglo_familias = $familias_MO->seleccionar_familia($familia);
-      if ($arreglo_familias) {
+      $arreglo_origenes = $origenes_MO->seleccionar_codigo($codigo);
+      if ($arreglo_origenes) {
         $arreglo_respuesta = [
           "estado" => "ERROR",
-          "mensaje" => "El nombre de la familia ($familia) esta duplicado"
+          "mensaje" => "El codigo ($codigo) esta duplicado"
 
         ];
 
@@ -143,7 +142,7 @@ class familias_CO
       }
 
     }
-    $familias_MO->actualizarfamilias($familia, $caracteristica,$familia_org);
+    $origenes_MO->actualizarorigenes($codigo, $nombre,$codigo_org);
 
     $actualizado = $conexion->filasAfectadas();
 

@@ -83,7 +83,7 @@ class menu_VI
                       <ul class="nav child_menu">
                         <li><a href="#" onclick="verModulo('plantas_VI/agregarPlantas');">Plantas</a></li>
                         <li><a  href="#" onclick="verModulo('familias_VI/agregarFamilias');">Familias</a></li>
-                        <li><a  href="#" onclick="verModulo('origenes_VI/agregarOrigenes');">Origenres</a></li>
+                        <li><a  href="#" onclick="verModulo('origenes_VI/agregarOrigenes');">Origenes</a></li>
                         <li><a  href="#" onclick="verModulo('estados_VI/agregarEstados');">Estados de conservacion</a></li>
                         <li><a  href="#" onclick="verModulo('habitos_VI/agregarPlantas');">Habitos de crecimiento</a></li>
                       </ul>
@@ -166,17 +166,31 @@ class menu_VI
           <!-- page content -->
           <div class="right_col" role="main">
             <!-- top tiles -->
-            <div class="content" style="display: inline-block;" >
-            <div class="tile_count" id="contenido">
+            <div class="content"   >
+              <div class="tile_count" id="contenido">
                
                
               </div>
             </div>
           </div>
-          <!-- /page content -->
           
        
         </div>
+        <div class="modal fade" id="Ventana_Modal" tabindex="-1" aria-labelledby="titulo_modal" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="titulo_modal"></h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body" id="contenido_modal">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
         <footer class="main-footer navbar  navbar-dark">
                     <strong> </strong> Jardin Botánico Jorge Enrique Quintero Arenas
                 </footer>

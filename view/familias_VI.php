@@ -74,10 +74,10 @@ class familias_VI
                         ?>
                                 <tr>
                                     <td id="familia_td_<?php echo $familia; ?>"> <?php echo $familia; ?> </td>
-                                    <td id="caracteristica_td_<?php echo $caracteristica; ?>"> <?php echo $caracteristica; ?> </td>
+                                    <td id="caracteristica_td_<?php echo $familia; ?>"> <?php echo $caracteristica; ?> </td>
                                     <td style="text-align: center;">
                                         <input type="hidden" id="familia_<?php echo $familia; ?>" value="<?php echo $familia; ?>">
-                                        <input type="hidden" id="caracteristica_<?php echo $caracteristica; ?>" value="<?php echo $caracteristica; ?>">
+                                        <input type="hidden" id="caracteristica_<?php echo $familia; ?>" value="<?php echo $caracteristica; ?>">
                                         <i class="fas fa-edit" data-toggle="modal" data-target="#Ventana_Modal" style="cursor: pointer;" onclick="verActualizarfamilias('<?php echo $familia; ?>')"></i>
                                     </td>
                                 </tr>
@@ -111,10 +111,10 @@ class familias_VI
                             let fila = `
                                     <tr>
                                             <td id="familia_td_${familia}"> ${familia} </td>
-                                            <td id="caracteristica_td_${caracteristica}"> ${caracteristica} </td>
+                                            <td id="caracteristica_td_${familia}"> ${caracteristica} </td>
                                             <td style="text-align: center;">
                                                 <input type="hidden" id="familia_${familia}" value="${familia}">
-                                                <input type="hidden" id="caracteristica_${caracteristica}" value="${caracteristica}">
+                                                <input type="hidden" id="caracteristica_${familia}" value="${caracteristica}">
                                                 <i class="fas fa-edit" data-toggle="modal" data-target="#Ventana_Modal" style="cursor: pointer;" onclick="verActualizarfamilias('${familia}')"></i>
                                             </td>
                                         </tr>
@@ -135,11 +135,10 @@ class familias_VI
                     })
             }
 
-            function verActualizarfamilias(marc_id) {
+            function verActualizarfamilias(nombre) {
 
-
-                let familia = document.querySelector('#familia_' + marc_id).value;
-
+                let familia = document.querySelector('#familia_' + nombre).value;
+                let caracteristica = document.querySelector('#caracteristica_' + nombre).value;
                 var cadena = `
                         <div class="card">
                             <div class="card-body">
@@ -148,13 +147,17 @@ class familias_VI
                               
                           
                                     <div class="form-group">
-                                        <label for="familia">nombre de la marca</label>
+                                        <label for="familia">nombre de la  familia</label>
                                         <input type="text" class="form-control" id="familia" name="familia"
                                             value="${familia}">
                                     </div>
-                                  
-                                    <input type="hidden" id="marc_id" name="marc_id" value="${marc_id}">
-                                    <button type="button" onclick="actualizarfamilias();" class="btn btn-primary float-right">Actualizar</button>
+                                    <div class="form-group">
+                                        <label for="caracteristica">caracteristica</label>
+                                        <input type="text" class="form-control" id="caracteristica" name="caracteristica"
+                                            value="${caracteristica}">
+                                    </div>
+                                    <input type="hidden" id="family" name="family" value="${familia}">
+                                    <button type="button" onclick="actualizarfamilias();" class="btn btn-success float-right">Actualizar</button>
                                 </form>
                             </div>
                         </div>
@@ -182,12 +185,14 @@ class familias_VI
 
                             let familia = document.querySelector('#formulario_actualizar_familias #familia').value;
 
-                            let marc_id = document.querySelector('#formulario_actualizar_familias #marc_id').value;
+                            let nombre = document.querySelector('#formulario_actualizar_familias #family').value;
 
+                            let caracteristica = document.querySelector('#formulario_actualizar_familias #caracteristica').value;
 
-
-                            document.querySelector('#familia_td_' + marc_id).innerHTML = familia;
-                            document.querySelector('#familia_' + marc_id).value = familia;
+                            document.querySelector('#familia_td_' + nombre).innerHTML = familia;
+                            document.querySelector('#familia_' + nombre).value = familia;
+                            document.querySelector('#caracteristica_td_' + nombre).innerHTML = caracteristica;
+                            document.querySelector('#caracteristica_' + nombre).value = caracteristica;
 
 
 

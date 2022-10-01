@@ -29,7 +29,18 @@ class conexion
     {
         $this->resultado=$this->enlace->query($sql) or $this->errorConsulta($sql);
     }
+     
+    function filasAfectadas()
+    {
 
+        if ($this->resultado->rowCount() > 0) {
+
+            return true;
+        } else {
+
+            return false;
+        }
+    }
     function extraerRegistro()
     {
         return $this->resultado->fetchAll(PDO::FETCH_OBJ);

@@ -15,10 +15,10 @@ class familias_MO
 
     $this->conexion->consultar($sql);
   }
-  function actualizarfamilias($clie_documento, $clie_nombres, $clie_apellidos, $familia)
+  function actualizarfamilias($familia, $caracteristica,$familia_org)
   {
 
-    $sql = "update familias set clie_documento='$clie_documento', clie_nombres='$clie_nombres', clie_apellidos='$clie_apellidos' where familia='$familia'";
+    $sql = "update familia set nombre_familia='$familia', caracteristicas='$caracteristica'   where nombre_familia='$familia_org'";
 
     $this->conexion->consultar($sql);
   }
