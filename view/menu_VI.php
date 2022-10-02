@@ -31,19 +31,16 @@ class menu_VI
       <link href="vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
       <!-- Font Awesome -->
        
-      <!-- NProgress -->
       <link href="vendors/nprogress/nprogress.css" rel="stylesheet">
       <!-- iCheck -->
       <link href="vendors/iCheck/skins/flat/green.css" rel="stylesheet">
       <link rel="stylesheet" href="vendors/toastr/toastr.min.css">
-    
       <!-- bootstrap-progressbar -->
       <link href="vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
       <!-- JQVMap -->
       <link href="vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
       <!-- bootstrap-daterangepicker -->
       <link href="vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
-
       <!-- Custom Theme Style -->
       <link href="build/css/custom.min.css" rel="stylesheet">
  
@@ -63,7 +60,7 @@ class menu_VI
               <!-- menu profile quick info -->
               <div class="profile clearfix">
                 <div class="profile_pic">
-                  <img src="production/images/img.jpg" alt="..." class="img-circle profile_img">
+                  <img src="production/images/user.png" alt="..." class="img-circle profile_img">
                 </div>
                 <div class="profile_info">
                   <span>Bienvenido</span>
@@ -81,11 +78,11 @@ class menu_VI
                   <ul class="nav side-menu">
                     <li><a><i class="fa fa-pagelines"></i> Inventario <span class="fa fa-chevron-down"></span></a>
                       <ul class="nav child_menu">
-                        <li><a href="#" onclick="verModulo('plantas_VI/agregarPlantas');">Plantas</a></li>
-                        <li><a  href="#" onclick="verModulo('familias_VI/agregarFamilias');">Familias</a></li>
-                        <li><a  href="#" onclick="verModulo('origenes_VI/agregarOrigenes');">Origenes</a></li>
-                        <li><a  href="#" onclick="verModulo('estados_VI/agregarEstados');">Estados de conservacion</a></li>
-                        <li><a  href="#" onclick="verModulo('habitos_VI/agregarHabitos');">Habitos de crecimiento</a></li>
+                        <li class="nav-item" ><a href="#" onclick="verModulo('plantas_VI/agregarPlantas');">Plantas</a></li>
+                        <li class="nav-item"><a  href="#" onclick="verModulo('familias_VI/agregarFamilias');">Familias</a></li>
+                        <li class="nav-item"><a  href="#" onclick="verModulo('origenes_VI/agregarOrigenes');">Origenes</a></li>
+                        <li class="nav-item"><a  href="#" onclick="verModulo('estados_VI/agregarEstados');">Estados de conservacion</a></li>
+                        <li  class="nav-item"><a  href="#" onclick="verModulo('habitos_VI/agregarHabitos');">Habitos de crecimiento</a></li>
                       </ul>
                     </li>
                     <li><a><i class="fa fa-list-alt"></i> Donaciones <span class="fa fa-chevron-down"></span></a>
@@ -146,13 +143,13 @@ class menu_VI
                 <ul class=" navbar-right">
                   <li class="nav-item dropdown open" style="padding-left: 15px;">
                     <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                      <img src="production/images/img.jpg" alt=""><?php echo $nombres ?>
+                      <img src="production/images/user.png" alt=""><?php echo $nombres ?>
                     </a>
                     <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
-                      <a class="dropdown-item"  href="javascript:;"> Profile</a>
+                      <a class="dropdown-item"  href="javascript:;"> Perfil</a>
                         
-                    <a class="dropdown-item"  href="javascript:;">Help</a>
-                      <a class="dropdown-item"  href="#" onclick="salir()" ><i class="fa fa-sign-out pull-right"></i> Log Out</a>
+                    <a class="dropdown-item"  href="javascript:;">Ayuda</a>
+                      <a class="dropdown-item"  href="#" onclick="salir()" ><i class="fa fa-sign-out pull-right"></i> Cerrar sesión</a>
                     </div>
                   </li>
 
