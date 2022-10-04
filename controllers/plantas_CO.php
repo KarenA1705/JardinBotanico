@@ -101,11 +101,15 @@ class plantas_CO
     $conexion = new conexion();
     $plantas_MO = new  plantas_MO($conexion);
  
+    $especie = htmlentities($_POST['especie'], ENT_QUOTES);
     $familia = htmlentities($_POST['familia'], ENT_QUOTES);
-    $caracteristica = htmlentities($_POST['caracteristica'], ENT_QUOTES);
-    $familia_org=htmlentities($_POST['family'], ENT_QUOTES);
+    $cod_origen = htmlentities($_POST['cod_origen'], ENT_QUOTES);
+    $cod_estado = htmlentities($_POST['cod_estado'], ENT_QUOTES);
+    $cod_habito = htmlentities($_POST['cod_habito'], ENT_QUOTES);
+    $nombre_comun = htmlentities($_POST['nombre_comun'], ENT_QUOTES);
+    $stock = htmlentities($_POST['stock'], ENT_QUOTES);
 
-    if (  empty($familia) or empty($caracteristica) ) {
+    if (empty($familia)or empty($cod_origen) or empty($cod_estado) or empty($cod_habito)or empty($nombre_comun)or empty($stock) ) {
       $arreglo_respuesta = [
         "estado" => "ERROR",
         "mensaje" => "Todos los campos son obligatorios"
@@ -114,60 +118,35 @@ class plantas_CO
 
       exit(json_encode($arreglo_respuesta));
     }
-    if (strlen($familia) > 20) {
+    if (strlen($especie) > 25) {
       $arreglo_respuesta = [
         "estado" => "ERROR",
-        "mensaje" => "El tamaño del nombre debe  ser menor de 20 caracteres"
+        "mensaje" => "El tamaño del nombre de la especie deber ser menor de 25 caracteres"
 
       ];
 
       exit(json_encode($arreglo_respuesta));
     }
-    if (strlen($caracteristica) > 300) {
-      $arreglo_respuesta = [
-        "estado" => "ERROR",
-        "mensaje" => "El tamaño de las caracteristicas de la familia deber ser menor de 300 caracteres"
-
-      ];
-
-      exit(json_encode($arreglo_respuesta));
-    }
-
-    if($familia == $familia_org){
-      $plantas_MO->actualizarplantas($familia, $caracteristica,$familia_org);
-
-      $actualizado = $conexion->filasAfectadas();
-  
-      if ($actualizado) {
-  
-        $mensaje = "Registro Actualizado";
-        $estado = 'EXITO';
-      } else {
-  
-        $mensaje = "No se realizaron cambios";
-        $estado = 'ADVERTENCIA';
-      }
-  
-      $arreglo_respuesta = [
-        "estado" => $estado,
-        "mensaje" => $mensaje
-      ];
-  
-      exit(json_encode($arreglo_respuesta, true));
-    }else {
-      $arreglo_plantas = $plantas_MO->seleccionar_familia($familia);
-      if ($arreglo_plantas) {
+      if (strlen($nombre_comun) > 45) {
         $arreglo_respuesta = [
           "estado" => "ERROR",
-          "mensaje" => "El nombre de la familia ($familia) esta duplicado"
-
+          "mensaje" => "El tamaño del nombre comun de la planta deber ser menor de 45 caracteres"
+  
         ];
-
+  
+        exit(json_encode($arreglo_respuesta));
+      }
+      if (!is_numeric($stock)) {
+        $arreglo_respuesta = [
+          "estado" => "ERROR",
+          "mensaje" => "El stock debe ser valor numerico"
+  
+        ];
+  
         exit(json_encode($arreglo_respuesta));
       }
 
-    }
-    $plantas_MO->actualizarplantas($familia, $caracteristica,$familia_org);
+    $plantas_MO->actualizarplantas($especie,$familia,$cod_estado,$cod_habito,$cod_origen,$nombre_comun, $stock);
 
     $actualizado = $conexion->filasAfectadas();
 

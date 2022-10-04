@@ -26,27 +26,28 @@ class plantas_VI
         $arreglo_origenes = $origenes_MO->seleccionar();  
         $arreglo_habitos = $habitos_MO->seleccionar();
         $arreglo_estados = $estados_MO->seleccionar();
-        $existe=1;
+        $existe=0;
+        $search="";
 
 ?>
         <div class="card">
-        <div class="card-header">
-                consultar plantas del inventario
+            <div class="card-header">
+              consultar plantas del inventario
             </div>
             <div class="card-body">
-                <div class="row">
-                        <div class="col-md-5">
-                            <div class="form-group">
-                                <input type="text" placeholder="Ingresar nombre de la especie, comun o familia" class="form-control" id="especie" name="especie">
-                                 
+                <form   id="formulario_consulta">
+                    <div class="row">
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <input type="text" value="<?php $search ?>" placeholder="Ingresar nombre de la especie,nombre comun o familia" class="form-control" id="search" name="buscar">
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                         
-                            <button class="btn btn-outline-success  type="button" onclick="agregarplantas();" class="btn btn-success float-right">Consultar</button>
-                        </div>
-                </div>
-        </div>
+                            <div class="col-md-6">
+                                <button class="btn btn-outline-success"  type="button" onclick="buscarplantas();" class="btn btn-success float-right">Consultar</button>
+                            </div>
+                    </div>
+               </form>
+            </div>
         </div>
         <div class="card">
             <div class="card-header">
@@ -177,7 +178,7 @@ class plantas_VI
         </div>
         <?php 
         
-          if($existe==1){
+          if($existe==0){
             ?>
              <div class="card">
                 <div class="card-header">
@@ -199,7 +200,22 @@ class plantas_VI
                             </tr>
                         </thead>
                         <tbody id="lista_plantas">
-                            <?php
+                            
+                        </tbody>
+                    </table>
+
+                    </div>
+                </div>
+            </div>
+        <?php }
+
+         ?>
+        <script>
+            function buscarplantas() {
+                let palabra1 = document.getElementById('search').value;
+                console.log(palabra1);
+                var cadena = `
+                    <?php
                             if ($arreglo_plantas) {
 
                                 foreach ($arreglo_plantas as $objeto_plantas) {
@@ -217,10 +233,13 @@ class plantas_VI
                                     $objeto_habito = $arreglo_habito[0];
                                     $nombre_habito = $objeto_habito->nombre;
 
-                                    $especie= $objeto_plantas->nombre_familia;
+                                    $especie= $objeto_plantas->especie;
                                     $familia = $objeto_plantas->nombre_familia;
                                     $nombre_comun = $objeto_plantas->nombre_comun;
                                     $stock = $objeto_plantas->stock;
+                                    if(!empty($_POST(['buscar']))){
+                                    $palabra=$_POST(['buscar']);
+                                    if($palabra==$especie or $palabra==$familia or $palabra==$nombre_comun){
                             ?>
                                     <tr>
                                         <td id="especie_td_<?php echo $especie; ?>"> <?php echo $especie; ?> </td>
@@ -238,24 +257,23 @@ class plantas_VI
                                             <input type="hidden" id="nombre_habito_<?php echo $especie; ?>" value="<?php echo $nombre_habito; ?>">
                                             <input type="hidden" id="nombre_comun_<?php echo $especie; ?>" value="<?php echo $nombre_comun; ?>">
                                             <input type="hidden" id="stock_<?php echo $especie; ?>" value="<?php echo $stock; ?>">
+                                            <input type="hidden" id="cod_origen<?php echo $especie; ?>" value="<?php echo $cod_origen; ?>">
+                                            <input type="hidden" id="cod_estado<?php echo $especie; ?>" value="<?php echo $cod_estado; ?>">
+                                            <input type="hidden" id="cod_habito<?php echo $especie; ?>" value="<?php echo $cod_habito; ?>">
 
                                             <i class="fas fa-edit" data-toggle="modal" data-target="#Ventana_Modal" style="cursor: pointer;" onclick="verActualizarplantas('<?php echo $especie; ?>')"></i>
                                         </td>
                                     </tr>
                             <?php
+                                      }
+                                    }
                                 }
                             }
                             ?>
-                        </tbody>
-                    </table>
-
-                    </div>
-                </div>
-            </div>
-        <?php }
-
-         ?>
-        <script>
+                `;
+                document.querySelector('#lista_plantas').innerHTML = cadena;
+                
+            }
             function agregarplantas() {
 
 
@@ -299,32 +317,111 @@ class plantas_VI
             }
 
             function verActualizarplantas(especie) {
-                let especie = document.querySelector('#especie_' + especie).value;
+                //let especie1 = document.querySelector('#especie_' + especie).value;
                 let familia = document.querySelector('#familia_' + especie).value;
-                let nombre_origen = document.querySelector('#nombre_origen__' + especie).value;
+                let nombre_origen = document.querySelector('#nombre_origen_' + especie).value;
                 let nombre_estado = document.querySelector('#nombre_estado_' + especie).value;
                 let nombre_habito = document.querySelector('#nombre_habito_' + especie).value;
+                let codi_origen = document.querySelector('#cod_origen' + especie).value;
+                let codi_estado = document.querySelector('#cod_estado' + especie).value;
+                let codi_habito = document.querySelector('#cod_habito' + especie).value;
                 let nombre_comun = document.querySelector('#nombre_comun_' + especie).value;
                 let stock = document.querySelector('#stock_' + especie).value;
-
+                //console.log(codi_origen);
                 var cadena = `
                         <div class="card">
                             <div class="card-body">
-                                <form id="formulario_actualizar_plantas">
+                             <form id="formulario_actualizar_plantas">
+                            <div class="form-group">
+                            <label for="familia">Nombre familia</label>
+                            <select class="form-control" name="familia" id="familia">
+                                <option value="${familia}">${familia}</option>
+                                <?php
+                                if ($arreglo_familias) {
 
-                              
-                          
+                                    foreach ($arreglo_familias as $objeto_familia) {
+                                        $nombre_familia = $objeto_familia->nombre_familia;
+
+                                ?>
+                                        <option value="<?php echo $nombre_familia; ?>"><?php echo  $nombre_familia; ?></option>
+                                <?php
+                                    }
+                                }
+                                ?>
+                            </select>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="cod_origen">Nombre origen</label>
+                            <select class="form-control" name="cod_origen" id="cod_origen">
+                                <option value="${codi_origen}">${nombre_origen}</option>
+                                <?php
+                                if ($arreglo_origenes) {
+
+                                    foreach ($arreglo_origenes as $objeto_origen) {
+                                        $cod_origen = $objeto_origen->cod_origen;
+                                        $nombre_origen = $objeto_origen->nombre_origen;
+                                 
+
+                                ?>
+                                        <option value="<?php echo $cod_origen; ?>"><?php echo  $nombre_origen; ?></option>
+                                <?php
+                                    }
+                                }
+                                ?>
+                            </select>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="cod_estado">Estado de conservacion</label>
+                            <select class="form-control" name="cod_estado" id="cod_estado">
+                                <option value="${codi_estado}">${nombre_estado}</option>
+                                <?php
+                                if ($arreglo_estados) {
+
+                                    foreach ($arreglo_estados as $objeto_estado) {
+                                        $cod_estado = $objeto_estado->cod_estado;
+                                        $nombre = $objeto_estado->nombre;
+
+                                ?>
+                                        <option value="<?php echo $cod_estado; ?>"><?php echo  $nombre; ?></option>
+                                <?php
+                                    }
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="cod_habito">Habito de crecimiento</label>
+                            <select class="form-control" name="cod_habito" id="cod_habito">
+                                <option value="${codi_habito}">${nombre_habito}</option>
+                                <?php
+                                if ($arreglo_habitos) {
+
+                                    foreach ($arreglo_habitos as $objeto_habito) {
+                                        $cod_habito = $objeto_habito->cod_habito;
+                                        $nombre = $objeto_habito->nombre;
+
+                                ?>
+                                        <option value="<?php echo $cod_habito; ?>"><?php echo  $nombre; ?></option>
+                                <?php
+                                    }
+                                }
+                                ?>
+                            </select>
+
+                        </div>
                                     <div class="form-group">
-                                        <label for="familia">nombre de la  familia</label>
-                                        <input type="text" class="form-control" id="familia" name="familia"
-                                            value="${familia}">
+                                        <label for="nombre_comun">nombre comun</label>
+                                        <input type="text" class="form-control" id="nombre_comun" name="nombre_comun"
+                                            value="${nombre_comun}">
                                     </div>
                                     <div class="form-group">
-                                        <label for="caracteristica">caracteristica</label>
-                                        <input type="text" class="form-control" id="caracteristica" name="caracteristica"
-                                            value="${caracteristica}">
+                                        <label for="stock">Stock</label>
+                                        <input type="text" class="form-control" id="stock" name="stock"
+                                            value="${stock}">
                                     </div>
-                                    <input type="hidden" id="family" name="family" value="${familia}">
+                                    <input type="hidden" id="especie" name="especie" value="${especie}">
                                     <button type="button" onclick="actualizarplantas();" class="btn btn-success float-right">Actualizar</button>
                                 </form>
                             </div>
@@ -351,7 +448,7 @@ class plantas_VI
                         if (respuesta.estado == 'EXITO') {
 
 
-                            let familia = document.querySelector('#formulario_actualizar_plantas #familia').value;
+                          /*  let familiav = document.querySelector('#formulario_actualizar_plantas #familia').value;
 
                             let nombre = document.querySelector('#formulario_actualizar_plantas #family').value;
 
@@ -362,7 +459,7 @@ class plantas_VI
                             document.querySelector('#caracteristica_td_' + nombre).innerHTML = caracteristica;
                             document.querySelector('#caracteristica_' + nombre).value = caracteristica;
 
-
+                            */
 
                             toastr.success(respuesta.mensaje);
 

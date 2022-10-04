@@ -15,10 +15,10 @@ class plantas_MO
 
     $this->conexion->consultar($sql);
   }
-  function actualizarplantas($planta, $caracteristica,$planta_org)
+  function actualizarplantas($especie,$familia,$cod_estado,$cod_habito,$cod_origen,$nombre_comun, $stock)
   {
 
-    $sql = "update planta set nombre_planta='$planta', caracteristicas='$caracteristica'   where nombre_planta='$planta_org'";
+    $sql = "update planta set nombre_familia='$familia', cod_estado='$cod_estado',cod_habito='$cod_habito',cod_origen='$cod_origen',nombre_comun='$nombre_comun', stock='$stock'  where especie='$especie'";
 
     $this->conexion->consultar($sql);
   }
