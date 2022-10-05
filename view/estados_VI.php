@@ -58,7 +58,7 @@ class estados_VI
                 <table class="table table-bordered table-sm table-hover">
                     <thead class="thead-light">
                         <tr>
-                            <th scope="col">Codigo Etstado</th>
+                            <th scope="col">Codigo Estado</th>
                             <th style="text-align: center;">Nombre Estado</th>
                             <th style="text-align: center;">Accion</th>
                         </tr>

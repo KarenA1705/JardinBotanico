@@ -23,9 +23,9 @@ class menu_VI
       <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <link rel="icon" href="images/favicon.ico" type="image/ico" />
+      <link rel="icon" href="imagen.jpeg"  />
 
-      <title>Jardin Botanico</title>
+      <title>Jardín Botánico</title>
       <link rel="stylesheet" href="datatables/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="datatables/datatables/datatables.min.css">
     <link rel="stylesheet" type="text/css" href="datatables/datatables/DataTables-1.12.1/css/dataTables.bootstrap4.min.css">
@@ -54,7 +54,7 @@ class menu_VI
           <div class="col-md-3 left_col">
             <div class="left_col scroll-view">
               <div class="navbar nav_title" style="border: 0;">
-                <a href="index.php" class="site_title"><i  class="fa fa-leaf "></i> <span>Jardin Botanico </span></a>
+                <a href="index.php" class="site_title"><i  class="fa fa-leaf "></i> <span>Jardín Botánico </span></a>
               </div>
 
               <div class="clearfix"></div>
@@ -89,25 +89,13 @@ class menu_VI
                     </li>
                     <li><a><i class="fa fa-list-alt"></i> Donaciones <span class="fa fa-chevron-down"></span></a>
                       <ul class="nav child_menu">
-                        <li><a href="form.html">General Form</a></li>
-                        <li><a href="form_advanced.html">Advanced Components</a></li>
-                        <li><a href="form_validation.html">Form Validation</a></li>
-                        <li><a href="form_wizards.html">Form Wizard</a></li>
-                        <li><a href="form_upload.html">Form Upload</a></li>
-                        <li><a href="form_buttons.html">Form Buttons</a></li>
+                        <li><a href="#">Salientes</a></li>
+                        <li><a href="#">Entrantes</a></li>
                       </ul>
                     </li>
                     <li><a><i class="fa  fa-briefcase"></i> Entidades <span class="fa fa-chevron-down"></span></a>
                       <ul class="nav child_menu">
-                        <li><a href="general_elements.html">General Elements</a></li>
-                        <li><a href="media_gallery.html">Media Gallery</a></li>
-                        <li><a href="typography.html">Typography</a></li>
-                        <li><a href="icons.html">Icons</a></li>
-                        <li><a href="glyphicons.html">Glyphicons</a></li>
-                        <li><a href="widgets.html">Widgets</a></li>
-                        <li><a href="invoice.html">Invoice</a></li>
-                        <li><a href="inbox.html">Inbox</a></li>
-                        <li><a href="calendar.html">Calendar</a></li>
+                        <li><a href="#">Registar</a></li>
                       </ul>
                     </li>
                   </ul>
@@ -150,7 +138,6 @@ class menu_VI
                     <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
                       <a class="dropdown-item"  href="javascript:;"> Perfil</a>
                         
-                    <a class="dropdown-item"  href="javascript:;">Ayuda</a>
                       <a class="dropdown-item"  href="#" onclick="salir()" ><i class="fa fa-sign-out pull-right"></i> Cerrar sesión</a>
                     </div>
                   </li>
@@ -194,7 +181,35 @@ class menu_VI
                     <strong> </strong> Jardin Botánico Jorge Enrique Quintero Arenas
                 </footer>
       </div>
-
+      <script type="text/javascript">
+    
+            function sololetras(e){
+            
+            key=e.keyCode || e.which;
+            
+            teclado = String.fromCharCode(key).toLowerCase();
+            
+            letras = " abcdefghijklmnñopqrstuvwxyz";
+            
+            especiales = " 8-37-38-46-164";
+            
+            teclado_especial = false;
+            
+            for(var i in especiales){
+            if(key==especiales[i]){
+                teclado_especial=true; break;
+            
+            }}
+            
+            
+            if(letras.indexOf(teclado)==-1 && !teclado_especial){
+            return false;
+            
+            
+            }
+            
+            }
+        </script>
       <!-- jQuery -->
       <script src="vendors/jquery/dist/jquery.min.js"></script>
       <!-- Bootstrap -->
@@ -233,9 +248,10 @@ class menu_VI
       <script src="vendors/moment/min/moment.min.js"></script>
       <script src="vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
       <script src="vendors/toastr/toastr.min.js"></script>
-      <script src="datatables/jquery/jquery.min.js"></script>
+      
       <script src="https://unpkg.com/@popperjs/core@2"></script>
-      <script src="datatables/bootstrap/js/bootstrap.min.js"></script>
+      <!--script src="datatables/jquery/jquery.min.js"></script>
+      <script src="datatables/bootstrap/js/bootstrap.min.js"></script-->
       <script type="text/javascript" src="datatables/datatables/datatables.min.js"></script>
       <script type="text/javascript" src="datatables/main.js"></script>
      

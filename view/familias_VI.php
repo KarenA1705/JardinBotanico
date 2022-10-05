@@ -118,8 +118,7 @@ class familias_VI
                                                 <i class="fas fa-edit" data-toggle="modal" data-target="#Ventana_Modal" style="cursor: pointer;" onclick="verActualizarfamilias('${familia}')"></i>
                                             </td>
                                         </tr>
-
-                                    <tr>`;
+                                        `;
                             document.querySelector('#lista_familias').insertAdjacentHTML('afterbegin', fila);
                             document.querySelector('#formulario_agregar_familias ').reset();
 

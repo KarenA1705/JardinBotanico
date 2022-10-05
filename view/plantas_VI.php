@@ -122,28 +122,28 @@ class plantas_VI
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="especie">Nombre Especie</label>
-                                <input type="text" class="form-control" id="especie" name="especie">
+                                <input  onkeypress="return sololetras(event)" type="text" class="form-control" id="especie" name="especie">
 
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="nombre_comun">Nombre comun</label>
-                                <input type="text" class="form-control" id="nombre_comun" name="nombre_comun">
+                                <input onkeypress="return sololetras(event)" type="text" class="form-control" id="nombre_comun" name="nombre_comun">
 
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="stock">Stock</label>
-                                <input type="number" class="form-control" id="stock" name="stock">
+                                <input  type="number" class="form-control" id="stock" name="stock">
 
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="caracteristica">Caracteristicas</label>
-                                <input type="text" class="form-control" id="caracteristica" name="caracteristica">
+                                <input onkeypress="return sololetras(event)" type="text" class="form-control" id="caracteristica" name="caracteristica">
 
                             </div>
                         </div>
@@ -236,73 +236,20 @@ class plantas_VI
                     </div>
                 </div>
             </div>
- <script type="text/javascript" src="datatables/main.js"></script>
+        <script type="text/javascript" src="datatables/main.js"></script>
+
         <script>
-            function buscarplantas() {
-                let palabra1 = document.getElementById('search').value;
-                console.log(palabra1);
-                var cadena = `
-                    <?php
-                            if ($arreglo_plantas) {
-
-                                foreach ($arreglo_plantas as $objeto_plantas) {
-                                    $cod_origen= $objeto_plantas->cod_origen;
-                                    $cod_estado= $objeto_plantas->cod_estado;
-                                    $cod_habito= $objeto_plantas->cod_habito;
-    
-                                    $arreglo_origen = $origenes_MO->seleccionar($cod_origen);
-                                    $objeto_origen = $arreglo_origen[0];
-                                    $nombre_origen = $objeto_origen->nombre_origen;
-                                    $arreglo_estado = $estados_MO->seleccionar($cod_estado);
-                                    $objeto_estado = $arreglo_estado[0];
-                                    $nombre_estado = $objeto_estado->nombre;
-                                    $arreglo_habito = $habitos_MO->seleccionar($cod_habito);
-                                    $objeto_habito = $arreglo_habito[0];
-                                    $nombre_habito = $objeto_habito->nombre;
-
-                                    $especie= $objeto_plantas->especie;
-                                    $familia = $objeto_plantas->nombre_familia;
-                                    $nombre_comun = $objeto_plantas->nombre_comun;
-                                    $stock = $objeto_plantas->stock;
-                                   
-                                    $palabra='DSDSD';
-                                    if($palabra==$especie or $palabra==$familia or $palabra==$nombre_comun){
-                            ?>
-                                    <tr>
-                                        <td id="especie_td_<?php echo $especie; ?>"> <?php echo $especie; ?> </td>
-                                        <td id="familia_td_<?php echo $especie; ?>"> <?php echo $familia; ?> </td>
-                                        <td id="nombre_origen_td_<?php echo $especie; ?>"> <?php echo $nombre_origen; ?> </td>
-                                        <td id="nombre_estado_td_<?php echo $especie; ?>"> <?php echo $nombre_estado; ?> </td>
-                                        <td id="nombre_habito_td_<?php echo $especie; ?>"> <?php echo $nombre_habito; ?> </td>
-                                        <td id="nombre_comun_td_<?php echo $especie; ?>"> <?php echo $nombre_comun; ?> </td>
-                                        <td id="stock_td_<?php echo $especie; ?>"> <?php echo $stock; ?> </td>
-                                        <td style="text-align: center;">
-                                            <input type="hidden" id="especie_<?php echo $especie; ?>" value="<?php echo $especie; ?>">
-                                            <input type="hidden" id="familia_<?php echo $especie; ?>" value="<?php echo $familia; ?>">
-                                            <input type="hidden" id="nombre_origen_<?php echo $especie; ?>" value="<?php echo $nombre_origen; ?>">
-                                            <input type="hidden" id="nombre_estado_<?php echo $especie; ?>" value="<?php echo $nombre_estado; ?>">
-                                            <input type="hidden" id="nombre_habito_<?php echo $especie; ?>" value="<?php echo $nombre_habito; ?>">
-                                            <input type="hidden" id="nombre_comun_<?php echo $especie; ?>" value="<?php echo $nombre_comun; ?>">
-                                            <input type="hidden" id="stock_<?php echo $especie; ?>" value="<?php echo $stock; ?>">
-                                            <input type="hidden" id="cod_origen<?php echo $especie; ?>" value="<?php echo $cod_origen; ?>">
-                                            <input type="hidden" id="cod_estado<?php echo $especie; ?>" value="<?php echo $cod_estado; ?>">
-                                            <input type="hidden" id="cod_habito<?php echo $especie; ?>" value="<?php echo $cod_habito; ?>">
-
-                                            <i class="fas fa-edit" data-toggle="modal" data-target="#Ventana_Modal" style="cursor: pointer;" onclick="verActualizarplantas('<?php echo $especie; ?>')"></i>
-                                        </td>
-                                    </tr>
-                            <?php
-                                      
-                                    }
-                                }
-                            }
-                            ?>
-                `;
-                document.querySelector('#lista_plantas').innerHTML = cadena;
-                
-            }
+           
             function agregarplantas() {
 
+                var dato_familia = document.getElementById("familia");
+                var familia = dato_familia.options[dato_familia.selectedIndex].text;
+                var dato_origen = document.getElementById("cod_origen");
+                var nombre_origen = dato_origen.options[dato_origen.selectedIndex].text;
+                var dato_estado = document.getElementById("cod_estado");
+                var nombre_estado = dato_estado.options[dato_estado.selectedIndex].text;
+                var dato_habito = document.getElementById("cod_habito");
+                var nombre_habito = dato_habito.options[dato_habito.selectedIndex].text;
 
                 var cadena = new FormData(document.querySelector('#formulario_agregar_plantas'));
 
@@ -312,25 +259,43 @@ class plantas_VI
                     })
                     .then(respuesta => respuesta.json())
                     .then(respuesta => {
-                        let familia = document.querySelector('#formulario_agregar_plantas #familia').value;
-                        let caracteristica = document.querySelector('#formulario_agregar_plantas #caracteristica').value;
-                        if (respuesta.estado == 'EXITO') {
-             /*
-                            let fila = `
-                                    <tr>
-                                            <td id="familia_td_${familia}"> ${familia} </td>
-                                            <td id="caracteristica_td_${familia}"> ${caracteristica} </td>
-                                            <td style="text-align: center;">
-                                                <input type="hidden" id="familia_${familia}" value="${familia}">
-                                                <input type="hidden" id="caracteristica_${familia}" value="${caracteristica}">
-                                                <i class="fas fa-edit" data-toggle="modal" data-target="#Ventana_Modal" style="cursor: pointer;" onclick="verActualizarplantas('${familia}')"></i>
-                                            </td>
-                                        </tr>
+                        let especie = document.querySelector('#formulario_agregar_plantas #especie').value;
+                        let stock = document.querySelector('#formulario_agregar_plantas #stock').value;
+                        let nombre_comun = document.querySelector('#formulario_agregar_plantas #nombre_comun').value;
+                        let cod_origen = document.querySelector('#formulario_agregar_plantas #cod_origen').value;
+                        let cod_estado = document.querySelector('#formulario_agregar_plantas #cod_estado').value;
+                        let cod_habito = document.querySelector('#formulario_agregar_plantas #cod_habito').value;
 
-                                    <tr>`;
+                        if (respuesta.estado == 'EXITO') {
+             
+                            let fila = `
+                             <tr>
+                                        <td id="especie_td_${especie}"> ${especie} </td>
+                                        <td id="familia_td_${especie}"> ${familia} </td>
+                                        <td id="nombre_origen_td_${especie}"> ${nombre_origen} </td>
+                                        <td id="nombre_estado_td_${especie}"> ${nombre_estado} </td>
+                                        <td id="nombre_habito_td_${especie}"> ${nombre_habito} </td>
+                                        <td id="nombre_comun_td_${especie}"> ${nombre_comun} </td>
+                                        <td id="stock_td_${especie}"> ${stock} </td>
+                                        <td style="text-align: center;">
+                                            <input type="hidden" id="especie_${especie}" value="${especie}">
+                                            <input type="hidden" id="familia_${especie}" value="${familia}">
+                                            <input type="hidden" id="nombre_origen_${especie}" value="${nombre_origen}">
+                                            <input type="hidden" id="nombre_estado_${especie}" value="${nombre_estado}">
+                                            <input type="hidden" id="nombre_habito_${especie}" value="${nombre_habito}">
+                                            <input type="hidden" id="nombre_comun_${especie}" value="${nombre_comun}">
+                                            <input type="hidden" id="stock_${especie}" value="${stock}">
+                                            <input type="hidden" id="cod_origen${especie}" value="${cod_origen}">
+                                            <input type="hidden" id="cod_estado${especie}" value="${cod_estado}">
+                                            <input type="hidden" id="cod_habito${especie}" value="${cod_habito}">
+
+                                            <i class="fas fa-edit" data-toggle="modal" data-target="#Ventana_Modal" style="cursor: pointer;" onclick="verActualizarplantas('${especie}')"></i>
+                                        </td>
+                                    </tr>
+                                    `;
                             document.querySelector('#lista_plantas').insertAdjacentHTML('afterbegin', fila);
                             
-*/document.querySelector('#formulario_agregar_plantas ').reset();
+                            document.querySelector('#formulario_agregar_plantas ').reset();
                             toastr.success(respuesta.mensaje);
                         } else if (respuesta.estado = 'ERROR') {
 
@@ -380,7 +345,7 @@ class plantas_VI
                         </div>
                         <div class="form-group">
                             <label for="cod_origen">Nombre origen</label>
-                            <select class="form-control" name="cod_origen" id="cod_origen">
+                            <select class="form-control" name="cod_origen" id="cod_origen1">
                                 <option value="${codi_origen}">${nombre_origen}</option>
                                 <?php
                                 if ($arreglo_origenes) {
@@ -401,7 +366,7 @@ class plantas_VI
                         </div>
                         <div class="form-group">
                             <label for="cod_estado">Estado de conservacion</label>
-                            <select class="form-control" name="cod_estado" id="cod_estado">
+                            <select class="form-control" name="cod_estado" id="cod_estado1">
                                 <option value="${codi_estado}">${nombre_estado}</option>
                                 <?php
                                 if ($arreglo_estados) {
@@ -420,7 +385,7 @@ class plantas_VI
                         </div>
                         <div class="form-group">
                             <label for="cod_habito">Habito de crecimiento</label>
-                            <select class="form-control" name="cod_habito" id="cod_habito">
+                            <select class="form-control" name="cod_habito" id="cod_habito1">
                                 <option value="${codi_habito}">${nombre_habito}</option>
                                 <?php
                                 if ($arreglo_habitos) {
@@ -464,6 +429,12 @@ class plantas_VI
             function actualizarplantas() {
 
                 var cadena = new FormData(document.querySelector('#formulario_actualizar_plantas'));
+                var dato_origen = document.getElementById("cod_origen1");
+                var nombre_origen = dato_origen.options[dato_origen.selectedIndex].text;
+                var dato_estado = document.getElementById("cod_estado1");
+                var nombre_estado = dato_estado.options[dato_estado.selectedIndex].text;
+                var dato_habito = document.getElementById("cod_habito1");
+                var nombre_habito = dato_habito.options[dato_habito.selectedIndex].text;
 
                 fetch('plantas_CO/actualizarplantas', {
                         method: 'POST',
@@ -472,22 +443,34 @@ class plantas_VI
                     .then(respuesta => respuesta.json())
                     .then(respuesta => {
 
-                        if (respuesta.estado == 'EXITO') {
+                        if (respuesta.estado == 'EXITO') { 
+                            let especie = document.querySelector('#formulario_actualizar_plantas #especie').value;
+                            let familia = document.querySelector('#formulario_actualizar_plantas #familia').value;
+                            let nombre_comun = document.querySelector('#formulario_actualizar_plantas #nombre_comun').value;
+                            let cod_origen = document.querySelector('#formulario_actualizar_plantas #cod_origen1').value;
+                            let cod_estado = document.querySelector('#formulario_actualizar_plantas #cod_estado1').value;
+                            let cod_habito = document.querySelector('#formulario_actualizar_plantas #cod_habito1').value;
+                            let stock = document.querySelector('#formulario_actualizar_plantas #stock').value;
+                           
 
 
-                          /*  let familiav = document.querySelector('#formulario_actualizar_plantas #familia').value;
-
-                            let nombre = document.querySelector('#formulario_actualizar_plantas #family').value;
-
-                            let caracteristica = document.querySelector('#formulario_actualizar_plantas #caracteristica').value;
-
-                            document.querySelector('#familia_td_' + nombre).innerHTML = familia;
-                            document.querySelector('#familia_' + nombre).value = familia;
-                            document.querySelector('#caracteristica_td_' + nombre).innerHTML = caracteristica;
-                            document.querySelector('#caracteristica_' + nombre).value = caracteristica;
-
-                            */
-
+                            document.querySelector('#familia_td_' + especie).innerHTML = familia;
+                            document.querySelector('#familia_' + especie).value = familia;
+                            document.querySelector('#nombre_origen_td_' + especie).innerHTML = nombre_origen;
+                            document.querySelector('#nombre_origen_' + especie).value = nombre_origen;
+                            document.querySelector('#nombre_estado_td_' + especie).innerHTML = nombre_estado;
+                            document.querySelector('#nombre_estado_' + especie).value = nombre_estado;
+                            document.querySelector('#nombre_habito_td_' + especie).innerHTML = nombre_habito;
+                            document.querySelector('#nombre_habito_' + especie).value = nombre_habito;
+                            document.querySelector('#nombre_comun_td_' + especie).innerHTML = nombre_comun;
+                            document.querySelector('#nombre_comun_' + especie).value = nombre_comun;
+                            document.querySelector('#stock_td_' + especie).innerHTML = stock;
+                            document.querySelector('#stock_' + especie).value = stock;
+                            document.querySelector('#cod_origen' + especie).value = cod_origen;
+                            document.querySelector('#cod_estado' + especie).value = cod_estado;
+                            document.querySelector('#cod_habito' + especie).value = cod_habito;
+                            
+                        
                             toastr.success(respuesta.mensaje);
 
                         } else if (respuesta.estado = 'ERROR') {
