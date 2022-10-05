@@ -27,14 +27,14 @@ class estados_VI
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="codigo">Codigo estado</label>
-                                <input type="text" class="form-control" id="codigo" name="codigo">
+                                <input    type="text" class="form-control" id="codigo" name="codigo">
 
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="nombre">nombre estado</label>
-                                <input type="text" class="form-control" id="nombre" name="nombre">
+                                <input onkeypress="return sololetras(event)"  type="text" class="form-control" id="nombre" name="nombre">
 
                             </div>
                         </div>
@@ -148,12 +148,12 @@ class estados_VI
                           
                                     <div class="form-group">
                                         <label for="codigo">Codigo del origen</label>
-                                        <input type="text" class="form-control" id="codigo" name="codigo"
+                                        <input   type="text" class="form-control" id="codigo" name="codigo"
                                             value="${codigo}">
                                     </div>
                                     <div class="form-group">
                                         <label for="nombre">nombre del origen</label>
-                                        <input type="text" class="form-control" id="nombre" name="nombre"
+                                        <input onkeypress="return sololetras(event)"  type="text" class="form-control" id="nombre" name="nombre"
                                             value="${nombre}">
                                     </div>
                                     <input type="hidden" id="codige" name="codige" value="${codigo}">

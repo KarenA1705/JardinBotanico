@@ -143,7 +143,7 @@ class plantas_VI
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="caracteristica">Caracteristicas</label>
-                                <input onkeypress="return sololetras(event)" type="text" class="form-control" id="caracteristica" name="caracteristica">
+                                <input type="text" class="form-control" id="caracteristica" name="caracteristica">
 
                             </div>
                         </div>
@@ -405,7 +405,7 @@ class plantas_VI
                         </div>
                                     <div class="form-group">
                                         <label for="nombre_comun">nombre comun</label>
-                                        <input type="text" class="form-control" id="nombre_comun" name="nombre_comun"
+                                        <input onkeypress="return sololetras(event)"  type="text" class="form-control" id="nombre_comun" name="nombre_comun"
                                             value="${nombre_comun}">
                                     </div>
                                     <div class="form-group">
@@ -413,7 +413,7 @@ class plantas_VI
                                         <input type="text" class="form-control" id="stock" name="stock"
                                             value="${stock}">
                                     </div>
-                                    <input type="hidden" id="especie" name="especie" value="${especie}">
+                                    <input    type="hidden" id="especie" name="especie" value="${especie}">
                                     <button type="button" onclick="actualizarplantas();" class="btn btn-success float-right">Actualizar</button>
                                 </form>
                             </div>

@@ -33,10 +33,18 @@ class accesos_VI
               <!-- Custom Theme Style -->
               
               <link href="build/css/custom.min.css" rel="stylesheet">
+              <!--style type="text/css">
+                .login1{
+                  background-image: url('login.jpg');
+                  heigh: 100%;
+                  width: 100%;
+                }
+                </style-->
             </head>
 
-            <body class="login">
-              <div>
+            <body  class="login" >
+              <!--img src="login.jpg"-->
+              <div class="login">
                 <a class="hiddenanchor" id="signup"></a>
                 <a class="hiddenanchor" id="signin"></a>
 
@@ -68,7 +76,7 @@ class accesos_VI
 
                           <div>
                               <h1><i class="fa fa-leaf  "></i> Jardín Botánico</h1>
-                              <p>Jardín Botánico Jorje Enrique Quintero Arenas</p>
+                              <p>Jardín Botánico Jorge Enrique Quintero Arenas</p>
                             
                           </div>
                         </div>

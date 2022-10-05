@@ -34,7 +34,7 @@ class habitos_VI
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="nombre">nombre habito de crecimiento</label>
-                                <input type="text" class="form-control" id="nombre" name="nombre">
+                                <input onkeypress="return sololetras(event)"  type="text" class="form-control" id="nombre" name="nombre">
 
                             </div>
                         </div>
@@ -153,7 +153,7 @@ class habitos_VI
                                     </div>
                                     <div class="form-group">
                                         <label for="nombre">nombre del origen</label>
-                                        <input type="text" class="form-control" id="nombre" name="nombre"
+                                        <input onkeypress="return sololetras(event)"  type="text" class="form-control" id="nombre" name="nombre"
                                             value="${nombre}">
                                     </div>
                                     <input type="hidden" id="codige" name="codige" value="${codigo}">

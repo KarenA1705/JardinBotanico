@@ -27,7 +27,7 @@ class familias_VI
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="familia">Nombre Familia</label>
-                                <input type="text" class="form-control" id="familia" name="familia">
+                                <input onkeypress="return sololetras(event)" type="text" class="form-control" id="familia" name="familia">
 
                             </div>
                         </div>
@@ -147,7 +147,7 @@ class familias_VI
                           
                                     <div class="form-group">
                                         <label for="familia">nombre de la  familia</label>
-                                        <input type="text" class="form-control" id="familia" name="familia"
+                                        <input onkeypress="return sololetras(event)"  type="text" class="form-control" id="familia" name="familia"
                                             value="${familia}">
                                     </div>
                                     <div class="form-group">
