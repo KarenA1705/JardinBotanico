@@ -410,7 +410,7 @@ class plantas_VI
                                     </div>
                                     <div class="form-group">
                                         <label for="stock">Stock</label>
-                                        <input type="text" class="form-control" id="stock" name="stock"
+                                        <input type="number" class="form-control" id="stock" name="stock"
                                             value="${stock}">
                                     </div>
                                     <input    type="hidden" id="especie" name="especie" value="${especie}">
