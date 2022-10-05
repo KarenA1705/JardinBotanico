@@ -26,29 +26,9 @@ class plantas_VI
         $arreglo_origenes = $origenes_MO->seleccionar();  
         $arreglo_habitos = $habitos_MO->seleccionar();
         $arreglo_estados = $estados_MO->seleccionar();
-        $existe=0;
-        $search="";
 
 ?>
-        <div class="card">
-            <div class="card-header">
-              consultar plantas del inventario
-            </div>
-            <div class="card-body">
-                <form   id="formulario_consulta">
-                    <div class="row">
-                            <div class="col-md-5">
-                                <div class="form-group">
-                                    <input type="text" value="<?php $search ?>" placeholder="Ingresar nombre de la especie,nombre comun o familia" class="form-control" id="search" name="buscar">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <button class="btn btn-outline-success"  type="button" onclick="buscarplantas();" class="btn btn-success float-right">Consultar</button>
-                            </div>
-                    </div>
-               </form>
-            </div>
-        </div>
+        
         <div class="card">
             <div class="card-header">
                 Agregar plantas al inventario
@@ -176,17 +156,14 @@ class plantas_VI
                 </form>
             </div>
         </div>
-        <?php 
         
-          if($existe==0){
-            ?>
              <div class="card">
                 <div class="card-header">
                     Listar plantas del inventario
                 </div>
                 <div class="card-body">
                    <div class="table-responsive">
-                    <table class="table table-bordered table-sm table-hover">
+                    <table id="example" class="table table-striped table-bordered" style="width:100%">
                         <thead class="thead-light">
                             <tr>
                                 <th style="text-align: center;">Especie</th>
@@ -200,16 +177,66 @@ class plantas_VI
                             </tr>
                         </thead>
                         <tbody id="lista_plantas">
+                        <?php
+                            if ($arreglo_plantas) {
+
+                                foreach ($arreglo_plantas as $objeto_plantas) {
+                                    $cod_origen= $objeto_plantas->cod_origen;
+                                    $cod_estado= $objeto_plantas->cod_estado;
+                                    $cod_habito= $objeto_plantas->cod_habito;
+    
+                                    $arreglo_origen = $origenes_MO->seleccionar($cod_origen);
+                                    $objeto_origen = $arreglo_origen[0];
+                                    $nombre_origen = $objeto_origen->nombre_origen;
+                                    $arreglo_estado = $estados_MO->seleccionar($cod_estado);
+                                    $objeto_estado = $arreglo_estado[0];
+                                    $nombre_estado = $objeto_estado->nombre;
+                                    $arreglo_habito = $habitos_MO->seleccionar($cod_habito);
+                                    $objeto_habito = $arreglo_habito[0];
+                                    $nombre_habito = $objeto_habito->nombre;
+
+                                    $especie= $objeto_plantas->especie;
+                                    $familia = $objeto_plantas->nombre_familia;
+                                    $nombre_comun = $objeto_plantas->nombre_comun;
+                                    $stock = $objeto_plantas->stock;
+                                   
+                            ?>
+                                    <tr>
+                                        <td id="especie_td_<?php echo $especie; ?>"> <?php echo $especie; ?> </td>
+                                        <td id="familia_td_<?php echo $especie; ?>"> <?php echo $familia; ?> </td>
+                                        <td id="nombre_origen_td_<?php echo $especie; ?>"> <?php echo $nombre_origen; ?> </td>
+                                        <td id="nombre_estado_td_<?php echo $especie; ?>"> <?php echo $nombre_estado; ?> </td>
+                                        <td id="nombre_habito_td_<?php echo $especie; ?>"> <?php echo $nombre_habito; ?> </td>
+                                        <td id="nombre_comun_td_<?php echo $especie; ?>"> <?php echo $nombre_comun; ?> </td>
+                                        <td id="stock_td_<?php echo $especie; ?>"> <?php echo $stock; ?> </td>
+                                        <td style="text-align: center;">
+                                            <input type="hidden" id="especie_<?php echo $especie; ?>" value="<?php echo $especie; ?>">
+                                            <input type="hidden" id="familia_<?php echo $especie; ?>" value="<?php echo $familia; ?>">
+                                            <input type="hidden" id="nombre_origen_<?php echo $especie; ?>" value="<?php echo $nombre_origen; ?>">
+                                            <input type="hidden" id="nombre_estado_<?php echo $especie; ?>" value="<?php echo $nombre_estado; ?>">
+                                            <input type="hidden" id="nombre_habito_<?php echo $especie; ?>" value="<?php echo $nombre_habito; ?>">
+                                            <input type="hidden" id="nombre_comun_<?php echo $especie; ?>" value="<?php echo $nombre_comun; ?>">
+                                            <input type="hidden" id="stock_<?php echo $especie; ?>" value="<?php echo $stock; ?>">
+                                            <input type="hidden" id="cod_origen<?php echo $especie; ?>" value="<?php echo $cod_origen; ?>">
+                                            <input type="hidden" id="cod_estado<?php echo $especie; ?>" value="<?php echo $cod_estado; ?>">
+                                            <input type="hidden" id="cod_habito<?php echo $especie; ?>" value="<?php echo $cod_habito; ?>">
+
+                                            <i class="fas fa-edit" data-toggle="modal" data-target="#Ventana_Modal" style="cursor: pointer;" onclick="verActualizarplantas('<?php echo $especie; ?>')"></i>
+                                        </td>
+                                    </tr>
+                            <?php
+                                      
+                                    }
+                                }
                             
+                            ?>
                         </tbody>
                     </table>
 
                     </div>
                 </div>
             </div>
-        <?php }
-
-         ?>
+ <script type="text/javascript" src="datatables/main.js"></script>
         <script>
             function buscarplantas() {
                 let palabra1 = document.getElementById('search').value;
@@ -237,8 +264,8 @@ class plantas_VI
                                     $familia = $objeto_plantas->nombre_familia;
                                     $nombre_comun = $objeto_plantas->nombre_comun;
                                     $stock = $objeto_plantas->stock;
-                                    if(!empty($_POST(['buscar']))){
-                                    $palabra=$_POST(['buscar']);
+                                   
+                                    $palabra='DSDSD';
                                     if($palabra==$especie or $palabra==$familia or $palabra==$nombre_comun){
                             ?>
                                     <tr>
@@ -265,7 +292,7 @@ class plantas_VI
                                         </td>
                                     </tr>
                             <?php
-                                      }
+                                      
                                     }
                                 }
                             }
@@ -302,8 +329,8 @@ class plantas_VI
 
                                     <tr>`;
                             document.querySelector('#lista_plantas').insertAdjacentHTML('afterbegin', fila);
-                            document.querySelector('#formulario_agregar_plantas ').reset();
-*/
+                            
+*/document.querySelector('#formulario_agregar_plantas ').reset();
                             toastr.success(respuesta.mensaje);
                         } else if (respuesta.estado = 'ERROR') {
 

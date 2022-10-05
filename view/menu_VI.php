@@ -26,7 +26,9 @@ class menu_VI
       <link rel="icon" href="images/favicon.ico" type="image/ico" />
 
       <title>Jardin Botanico</title>
-
+      <link rel="stylesheet" href="datatables/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="datatables/datatables/datatables.min.css">
+    <link rel="stylesheet" type="text/css" href="datatables/datatables/DataTables-1.12.1/css/dataTables.bootstrap4.min.css">
       <!-- Bootstrap -->
       <link href="vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
       <!-- Font Awesome -->
@@ -231,6 +233,11 @@ class menu_VI
       <script src="vendors/moment/min/moment.min.js"></script>
       <script src="vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
       <script src="vendors/toastr/toastr.min.js"></script>
+      <script src="datatables/jquery/jquery.min.js"></script>
+      <script src="https://unpkg.com/@popperjs/core@2"></script>
+      <script src="datatables/bootstrap/js/bootstrap.min.js"></script>
+      <script type="text/javascript" src="datatables/datatables/datatables.min.js"></script>
+      <script type="text/javascript" src="datatables/main.js"></script>
      
 
       <!-- Custom Theme Scripts -->

@@ -55,7 +55,7 @@ class familias_VI
             </div>
             <div class="card-body">
 
-                <table class="table table-bordered table-sm table-hover">
+                <table class="table table-striped table-bordered" style="width:100%">
                     <thead class="thead-light">
                         <tr>
                             <th scope="col">Nombre Familia</th>
@@ -91,7 +91,7 @@ class familias_VI
 
             </div>
         </div>
-
+      
         <script>
             function agregarfamilias() {
 
