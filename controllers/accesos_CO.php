@@ -16,9 +16,20 @@ class accesos_CO
        if($arreglo)
         {
             $objeto_accesos=$arreglo[0];
+
             $documento=$objeto_accesos->documento;
             
             $_SESSION['documento']=$documento;
+        }else{
+            $arregloen=$accesos_MO->iniciarSesionEn($correo,$contrasena);
+            if($arregloen)
+            {
+                $objeto_accesos=$arregloen[0];
+    
+                $nit=$objeto_accesos->nit;
+                
+                $_SESSION['nit']=$nit;
+            }
         }
 
         header('Location: index.php');

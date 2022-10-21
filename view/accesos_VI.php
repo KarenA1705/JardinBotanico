@@ -72,10 +72,10 @@ class accesos_VI
                           </p>
 
                           <div class="clearfix"></div>
-                          <br />
+                         
 
                           <div>
-                              <h1><i class="fa fa-leaf  "></i> Jardín Botánico</h1>
+                              <h1><i class="fa fa-leaf"></i> Jardín Botánico</h1>
                               <p>Jardín Botánico Jorge Enrique Quintero Arenas</p>
                             
                           </div>
@@ -87,25 +87,35 @@ class accesos_VI
                   <div id="register" class="animate form registration_form">
                     <section class="login_content">
                       <form>
-                        <h1>Create Account</h1>
+                        <h1>Registarse</h1>
                         <div>
-                          <input type="text" class="form-control" placeholder="Username" required="" />
+                          <input type="text" class="form-control" name="nit" placeholder="Nit" required="" />
                         </div>
                         <div>
-                          <input type="email" class="form-control" placeholder="Email" required="" />
+                          <input type="text" class="form-control" name="nombre" placeholder="Nombre entidad" required="" />
                         </div>
                         <div>
-                          <input type="password" class="form-control" placeholder="Password" required="" />
+                          <input type="text" class="form-control" name="tipo" placeholder="Tipo entidad" required="" />
                         </div>
                         <div>
-                          <a class="btn btn-default submit" href="index.html">Submit</a>
+                          <input type="number" class="form-control" name="telefono" placeholder="Telefono" required="" />
+                        </div>
+                        <br>
+                        <div>
+                          <input type="email" class="form-control" name="correoen" placeholder="Correo" required="" />
+                        </div>
+                        <div>
+                          <input type="password" class="form-control" name="contrasenaen" placeholder="Contraseña" required="" />
+                        </div>
+                        <div>
+                          <a class="btn btn-default submit" type="submit" >Registrarse</a>
                         </div>
 
                         <div class="clearfix"></div>
 
                         <div class="separator">
-                          <p class="change_link">Already a member ?
-                            <a href="#signin" class="to_register"> Log in </a>
+                          <p class="change_link"> 
+                            <a href="#signin" class="to_register"> Iniciar Sesi&oacute;n </a>
                           </p>
 
                           <div class="clearfix"></div>

@@ -28,19 +28,19 @@ class familias_CO
 
       exit(json_encode($arreglo_respuesta));
     }
-    if (strlen($familia) > 20) {
+    if (strlen($familia) > 30) {
       $arreglo_respuesta = [
         "estado" => "ERROR",
-        "mensaje" => "El tamaño del nombre de la familia deber ser menor de 20 caracteres"
+        "mensaje" => "El tamaño del nombre de la familia deber ser menor de 30 caracteres"
 
       ];
 
       exit(json_encode($arreglo_respuesta));
     }
-    if (strlen($caracteristica) > 300) {
+    if (strlen($caracteristica) > 500) {
         $arreglo_respuesta = [
           "estado" => "ERROR",
-          "mensaje" => "El tamaño de las caracteristicas de la familia deber ser menor de 300 caracteres"
+          "mensaje" => "El tamaño de las caracteristicas de la familia deber ser menor de 500 caracteres"
   
         ];
   
@@ -90,19 +90,19 @@ class familias_CO
 
       exit(json_encode($arreglo_respuesta));
     }
-    if (strlen($familia) > 20) {
+    if (strlen($familia) > 30) {
       $arreglo_respuesta = [
         "estado" => "ERROR",
-        "mensaje" => "El tamaño del nombre debe  ser menor de 20 caracteres"
+        "mensaje" => "El tamaño del nombre debe  ser menor de 30 caracteres"
 
       ];
 
       exit(json_encode($arreglo_respuesta));
     }
-    if (strlen($caracteristica) > 300) {
+    if (strlen($caracteristica) > 500) {
       $arreglo_respuesta = [
         "estado" => "ERROR",
-        "mensaje" => "El tamaño de las caracteristicas de la familia deber ser menor de 300 caracteres"
+        "mensaje" => "El tamaño de las caracteristicas de la familia deber ser menor de 500 caracteres"
 
       ];
 

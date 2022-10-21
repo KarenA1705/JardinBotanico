@@ -9,6 +9,13 @@ if(isset($_SESSION['documento']))
     if(isset($_GET['ruta'])){$ruta=$_GET['ruta'];}else{$ruta='';}
 
     $front_controller=new front_controller($ruta);
+}else if(isset($_SESSION['nit']))
+{
+    require_once "librerias/front_controller.php";
+
+    if(isset($_GET['ruta'])){$ruta=$_GET['ruta'];}else{$ruta='p';}
+
+    $front_controller=new front_controller($ruta);
 }
 else if(isset($_POST['correo']) and isset($_POST['contrasena']))
 {

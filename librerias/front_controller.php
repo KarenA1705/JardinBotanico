@@ -8,8 +8,12 @@ class front_controller
             $carpeta='view';
             $clase='menu_VI';
             $metodo='verMenu';
-        }
-        else
+        }else if($ruta=='p')
+        {
+            $carpeta='view';
+            $clase='menuEn_VI';
+            $metodo='verMenu';
+        }else
         {
             $arreglo_ruta=explode('/',$ruta);
             $clase=$arreglo_ruta[0];

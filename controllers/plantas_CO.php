@@ -36,28 +36,28 @@ class plantas_CO
 
       exit(json_encode($arreglo_respuesta));
     }
-    if (strlen($especie) > 25) {
+    if (strlen($especie) > 30) {
       $arreglo_respuesta = [
         "estado" => "ERROR",
-        "mensaje" => "El tamaño del nombre de la especie deber ser menor de 25 caracteres"
+        "mensaje" => "El tamaño del nombre de la especie deber ser menor de 30 caracteres"
 
       ];
 
       exit(json_encode($arreglo_respuesta));
     }
-    if (strlen($caracteristica) > 100) {
+    if (strlen($caracteristica) > 500) {
         $arreglo_respuesta = [
           "estado" => "ERROR",
-          "mensaje" => "El tamaño de las caracteristicas de la planta deber ser menor de 100 caracteres"
+          "mensaje" => "El tamaño de las caracteristicas de la planta deber ser menor de 500 caracteres"
   
         ];
   
         exit(json_encode($arreglo_respuesta));
       }
-      if (strlen($nombre_comun) > 45) {
+      if (strlen($nombre_comun) > 50) {
         $arreglo_respuesta = [
           "estado" => "ERROR",
-          "mensaje" => "El tamaño del nombre comun de la planta deber ser menor de 45 caracteres"
+          "mensaje" => "El tamaño del nombre comun de la planta deber ser menor de 50 caracteres"
   
         ];
   
@@ -118,19 +118,19 @@ class plantas_CO
 
       exit(json_encode($arreglo_respuesta));
     }
-    if (strlen($especie) > 25) {
+    if (strlen($especie) > 30) {
       $arreglo_respuesta = [
         "estado" => "ERROR",
-        "mensaje" => "El tamaño del nombre de la especie deber ser menor de 25 caracteres"
+        "mensaje" => "El tamaño del nombre de la especie deber ser menor de 30 caracteres"
 
       ];
 
       exit(json_encode($arreglo_respuesta));
     }
-      if (strlen($nombre_comun) > 45) {
+      if (strlen($nombre_comun) > 50) {
         $arreglo_respuesta = [
           "estado" => "ERROR",
-          "mensaje" => "El tamaño del nombre comun de la planta deber ser menor de 45 caracteres"
+          "mensaje" => "El tamaño del nombre comun de la planta deber ser menor de 50 caracteres"
   
         ];
   

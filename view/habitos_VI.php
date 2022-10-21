@@ -70,7 +70,7 @@ class habitos_VI
                             foreach ($arreglo_habito as $objeto_habito) {
 
                                 $codigo = $objeto_habito->cod_habito;
-                                $nombre = $objeto_habito->nombre;
+                                $nombre = $objeto_habito->nombre_habito;
                         ?>
                                 <tr>
                                     <td id="codigo_td_<?php echo $codigo; ?>"> <?php echo $codigo; ?> </td>

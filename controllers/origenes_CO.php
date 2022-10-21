@@ -28,19 +28,19 @@ class origenes_CO
 
       exit(json_encode($arreglo_respuesta));
     }
-    if (strlen($codigo) > 25) {
+    if (strlen($codigo) > 4) {
       $arreglo_respuesta = [
         "estado" => "ERROR",
-        "mensaje" => "El tamaño del  codigo deber ser menor de 25 caracteres"
+        "mensaje" => "El tamaño del  codigo deber ser menor de 4 caracteres"
 
       ];
 
       exit(json_encode($arreglo_respuesta));
     }
-    if (strlen($nombre) > 25) {
+    if (strlen($nombre) > 30) {
         $arreglo_respuesta = [
           "estado" => "ERROR",
-          "mensaje" => "El tamaño del nombres deber ser menor de 25 caracteres"
+          "mensaje" => "El tamaño del nombres deber ser menor de 30 caracteres"
   
         ];
   
@@ -89,19 +89,19 @@ class origenes_CO
 
       exit(json_encode($arreglo_respuesta));
     }
-    if (strlen($codigo) > 25) {
+    if (strlen($codigo) > 4) {
       $arreglo_respuesta = [
         "estado" => "ERROR",
-        "mensaje" => "El tamaño del codigo debe ser menor de 25 caracteres"
+        "mensaje" => "El tamaño del codigo debe ser menor de 4 caracteres"
 
       ];
 
       exit(json_encode($arreglo_respuesta));
     }
-    if (strlen($nombre) > 25) {
+    if (strlen($nombre) > 30) {
       $arreglo_respuesta = [
         "estado" => "ERROR",
-        "mensaje" => "El tamaño del nombre  deber ser menor de 25 caracteres"
+        "mensaje" => "El tamaño del nombre  deber ser menor de 30 caracteres"
 
       ];
 

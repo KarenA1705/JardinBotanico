@@ -14,6 +14,12 @@ class accesos_MO
         $this->conexion->consultar($sql);
         return $this->conexion->extraerRegistro();
     }
+    function iniciarSesionEn($correo,$contrasena)
+    {
+        $sql="select nit from entidad where correo='$correo' and contrasena='$contrasena'";
+        $this->conexion->consultar($sql);
+        return $this->conexion->extraerRegistro();
+    }
 
 }
 ?>

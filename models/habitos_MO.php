@@ -11,14 +11,14 @@ class habitos_MO
   function agregarhabitos($codigo, $nombre)
   {
 
-    $sql = "insert into habito_crecimiento (cod_habito, nombre) values ('$codigo','$nombre' )";
+    $sql = "insert into habito_crecimiento (cod_habito, nombre_habito) values ('$codigo','$nombre' )";
 
     $this->conexion->consultar($sql);
   }
   function actualizarhabitos($codigo, $nombre,$codigo_org)
   {
 
-    $sql = "update habito_crecimiento set cod_habito='$codigo', nombre='$nombre'   where cod_habito='$codigo_org'";
+    $sql = "update habito_crecimiento set cod_habito='$codigo', nombre_habito='$nombre'   where cod_habito='$codigo_org'";
 
     $this->conexion->consultar($sql);
   }

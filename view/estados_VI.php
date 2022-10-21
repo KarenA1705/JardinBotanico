@@ -70,7 +70,7 @@ class estados_VI
                             foreach ($arreglo_estado as $objeto_estado) {
 
                                 $codigo = $objeto_estado->cod_estado;
-                                $nombre = $objeto_estado->nombre;
+                                $nombre = $objeto_estado->nombre_estado;
                         ?>
                                 <tr>
                                     <td id="codigo_td_<?php echo $codigo; ?>"> <?php echo $codigo; ?> </td>

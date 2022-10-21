@@ -86,10 +86,10 @@ class plantas_VI
 
                                     foreach ($arreglo_estados as $objeto_estado) {
                                         $cod_estado = $objeto_estado->cod_estado;
-                                        $nombre = $objeto_estado->nombre;
+                                        $nombre_estado = $objeto_estado->nombre_estado;
 
                                 ?>
-                                        <option value="<?php echo $cod_estado; ?>"><?php echo  $nombre; ?></option>
+                                        <option value="<?php echo $cod_estado; ?>"><?php echo  $nombre_estado; ?></option>
                                 <?php
                                     }
                                 }
@@ -105,10 +105,10 @@ class plantas_VI
 
                                     foreach ($arreglo_habitos as $objeto_habito) {
                                         $cod_habito = $objeto_habito->cod_habito;
-                                        $nombre = $objeto_habito->nombre;
+                                        $nombre_habito = $objeto_habito->nombre_habito;
 
                                 ?>
-                                        <option value="<?php echo $cod_habito; ?>"><?php echo  $nombre; ?></option>
+                                        <option value="<?php echo $cod_habito; ?>"><?php echo  $nombre_habito; ?></option>
                                 <?php
                                     }
                                 }
@@ -190,10 +190,10 @@ class plantas_VI
                                     $nombre_origen = $objeto_origen->nombre_origen;
                                     $arreglo_estado = $estados_MO->seleccionar($cod_estado);
                                     $objeto_estado = $arreglo_estado[0];
-                                    $nombre_estado = $objeto_estado->nombre;
+                                    $nombre_estado = $objeto_estado->nombre_estado;
                                     $arreglo_habito = $habitos_MO->seleccionar($cod_habito);
                                     $objeto_habito = $arreglo_habito[0];
-                                    $nombre_habito = $objeto_habito->nombre;
+                                    $nombre_habito = $objeto_habito->nombre_habito;
 
                                     $especie= $objeto_plantas->especie;
                                     $familia = $objeto_plantas->nombre_familia;
@@ -247,9 +247,9 @@ class plantas_VI
                 var dato_origen = document.getElementById("cod_origen");
                 var nombre_origen = dato_origen.options[dato_origen.selectedIndex].text;
                 var dato_estado = document.getElementById("cod_estado");
-                var nombre_estado = dato_estado.options[dato_estado.selectedIndex].text;
+                var nombre_estado1 = dato_estado.options[dato_estado.selectedIndex].text;
                 var dato_habito = document.getElementById("cod_habito");
-                var nombre_habito = dato_habito.options[dato_habito.selectedIndex].text;
+                var nombre_habito1 = dato_habito.options[dato_habito.selectedIndex].text;
 
                 var cadena = new FormData(document.querySelector('#formulario_agregar_plantas'));
 
@@ -273,16 +273,16 @@ class plantas_VI
                                         <td id="especie_td_${especie}"> ${especie} </td>
                                         <td id="familia_td_${especie}"> ${familia} </td>
                                         <td id="nombre_origen_td_${especie}"> ${nombre_origen} </td>
-                                        <td id="nombre_estado_td_${especie}"> ${nombre_estado} </td>
-                                        <td id="nombre_habito_td_${especie}"> ${nombre_habito} </td>
+                                        <td id="nombre_estado_td_${especie}"> ${nombre_estado1} </td>
+                                        <td id="nombre_habito_td_${especie}"> ${nombre_habito1} </td>
                                         <td id="nombre_comun_td_${especie}"> ${nombre_comun} </td>
                                         <td id="stock_td_${especie}"> ${stock} </td>
                                         <td style="text-align: center;">
                                             <input type="hidden" id="especie_${especie}" value="${especie}">
                                             <input type="hidden" id="familia_${especie}" value="${familia}">
                                             <input type="hidden" id="nombre_origen_${especie}" value="${nombre_origen}">
-                                            <input type="hidden" id="nombre_estado_${especie}" value="${nombre_estado}">
-                                            <input type="hidden" id="nombre_habito_${especie}" value="${nombre_habito}">
+                                            <input type="hidden" id="nombre_estado_${especie}" value="${nombre_estado1}">
+                                            <input type="hidden" id="nombre_habito_${especie}" value="${nombre_habito1}">
                                             <input type="hidden" id="nombre_comun_${especie}" value="${nombre_comun}">
                                             <input type="hidden" id="stock_${especie}" value="${stock}">
                                             <input type="hidden" id="cod_origen${especie}" value="${cod_origen}">
@@ -373,10 +373,10 @@ class plantas_VI
 
                                     foreach ($arreglo_estados as $objeto_estado) {
                                         $cod_estado = $objeto_estado->cod_estado;
-                                        $nombre = $objeto_estado->nombre;
+                                        $nombre_estado = $objeto_estado->nombre_estado;
 
                                 ?>
-                                        <option value="<?php echo $cod_estado; ?>"><?php echo  $nombre; ?></option>
+                                        <option value="<?php echo $cod_estado; ?>"><?php echo  $nombre_estado; ?></option>
                                 <?php
                                     }
                                 }
@@ -392,10 +392,10 @@ class plantas_VI
 
                                     foreach ($arreglo_habitos as $objeto_habito) {
                                         $cod_habito = $objeto_habito->cod_habito;
-                                        $nombre = $objeto_habito->nombre;
+                                        $nombre_habito = $objeto_habito->nombre_habito;
 
                                 ?>
-                                        <option value="<?php echo $cod_habito; ?>"><?php echo  $nombre; ?></option>
+                                        <option value="<?php echo $cod_habito; ?>"><?php echo  $nombre_habito; ?></option>
                                 <?php
                                     }
                                 }
