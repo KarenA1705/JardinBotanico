@@ -11,6 +11,11 @@ class menu_VI
 
         $objeto_coordinador=$arreglo[0];
         $nombres=$objeto_coordinador->nombres;
+        $apellidos=$objeto_coordinador->apellidos;
+        $telefono=$objeto_coordinador->telefono;
+        $correo=$objeto_coordinador->correo;
+        $contrasena=$objeto_coordinador->contrasena;
+        $documento=$objeto_coordinador->documento;
         ?>
 
   <!DOCTYPE html>
@@ -95,7 +100,7 @@ class menu_VI
                     </li>
                     <li><a><i class="fa  fa-briefcase"></i> Entidades <span class="fa fa-chevron-down"></span></a>
                       <ul class="nav child_menu">
-                        <li><a href="#">Registar</a></li>
+                        <li><a href="#" onclick="verModulo('entidades_VI/agregarentidades');">Registar</a></li>
                       </ul>
                     </li>
                   </ul>
@@ -106,18 +111,12 @@ class menu_VI
 
               <!-- /menu footer buttons -->
               <div class="sidebar-footer hidden-small">
-                <a data-toggle="tooltip" data-placement="top" title="Settings">
-                  <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+               
+                 
+                  <a data-toggle="tooltip" data-placement="top" title="Logout"  href="#" onclick="salir()"  >
+                    <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
                 </a>
-                <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-                  <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-                </a>
-                <a data-toggle="tooltip" data-placement="top" title="Lock">
-                  <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-                </a>
-                <a data-toggle="tooltip" data-placement="top" title="Logout"  href="#" onclick="salir()"  >
-                  <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-                </a>
+                
               </div>
               <!-- /menu footer buttons -->
             </div>
@@ -136,7 +135,7 @@ class menu_VI
                       <img src="production/images/user.png" alt=""><?php echo $nombres ?>
                     </a>
                     <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
-                      <a class="dropdown-item"  href="javascript:;"> Perfil</a>
+                      <a class="dropdown-item" onclick="verModulo('actCoordinador_VI/actualizarCoordinador');">Visualizar Datos</a>
                         
                       <a class="dropdown-item"  href="#" onclick="salir()" ><i class="fa fa-sign-out pull-right"></i> Cerrar sesión</a>
                     </div>
@@ -181,35 +180,7 @@ class menu_VI
                     <strong> </strong> Jardin Botánico Jorge Enrique Quintero Arenas
                 </footer>
       </div>
-      <script type="text/javascript">
-    
-            function sololetras(e){
-            
-            key=e.keyCode || e.which;
-            
-            teclado = String.fromCharCode(key).toLowerCase();
-            
-            letras = " abcdefghijklmnñopqrstuvwxyz";
-            
-            especiales = " 8-37-38-46-164";
-            
-            teclado_especial = false;
-            
-            for(var i in especiales){
-            if(key==especiales[i]){
-                teclado_especial=true; break;
-            
-            }}
-            
-            
-            if(letras.indexOf(teclado)==-1 && !teclado_especial){
-            return false;
-            
-            
-            }
-            
-            }
-        </script>
+   
       <!-- jQuery -->
       <script src="vendors/jquery/dist/jquery.min.js"></script>
       <!-- Bootstrap -->
@@ -271,6 +242,75 @@ class menu_VI
                           location.href = "index.php";
                       });
                   }
+                  function sololetras(e){
+            
+                      key=e.keyCode || e.which;
+                      
+                      teclado = String.fromCharCode(key).toLowerCase();
+                      
+                      letras = " abcdefghijklmnñopqrstuvwxyz";
+                      
+                      especiales = " 8-37-38-46-164";
+                      
+                      teclado_especial = false;
+                      
+                      for(var i in especiales){
+                      if(key==especiales[i]){
+                          teclado_especial=true; break;
+                      
+                      }}
+                      
+                      if(letras.indexOf(teclado)==-1 && !teclado_especial){
+                      return false;
+                    }
+                  
+                  }
+                
+            function verActualizarCoordinador() {
+                var cadena = `
+                        <div class="card">
+                            <div class="card-body">
+                                <form id="formulario_actualizar_coordinador">
+                                    <div class="form-group">
+                                        <label for="nomnre">nombre del coordinador</label>
+                                        <input onkeypress="return sololetras(event)"  type="text" class="form-control" id="familia" name="familia"
+                                            value="<?php echo $nombres ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="apellidos">Apellidos</label>
+                                        <input type="text" class="form-control" id="caracteristica" name="caracteristica"
+                                            value="<?php echo $apellidos ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="telefono">Telefono</label>
+                                        <input type="text" class="form-control" id="telefono" name="telefono"
+                                            value="<?php echo $telefono ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="correo">Correo</label>
+                                        <input type="text" class="form-control" id="correo" name="correo"
+                                            value="<?php echo $correo ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="contrasena">Contrasena</label>
+                                        <input type="text" class="form-control" id="contrasena" name="contrasena"
+                                            value="<?php echo $contrasena ?>">
+                                    </div>
+                                    
+                                    <input type="hidden" id="doc" name="documento" value="<?php echo $documento ?>">
+                                    <button type="button" onclick="actualizarcoordinador();" class="btn btn-success float-right">Actualizar</button>
+                                </form>
+                            </div>
+                        </div>
+                    `;
+
+                document.querySelector('#titulo_modal').innerHTML = 'Actualizar Datos Coordinador';
+
+                document.querySelector('#contenido_modal').innerHTML = cadena;
+                console.log('fwffdddddddddddwf');
+                }
+
+               
               </script>
     </body>
   </html>

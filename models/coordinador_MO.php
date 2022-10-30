@@ -27,5 +27,12 @@ class coordinador_MO
 
     return $arreglo;
   }
+  function actualizarcoordinador($documento,$nombres,$apellidos,$telefono,$correo,$contrasena)
+  {
+
+    $sql = "update coordinador set nombres='$nombres', apellidos='$apellidos',telefono='$telefono',correo='$correo',contrasena='$contrasena'  where documento='$documento'";
+
+    $this->conexion->consultar($sql);
+  }
  
 }
