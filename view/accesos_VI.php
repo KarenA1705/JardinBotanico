@@ -41,7 +41,7 @@ class accesos_VI
                 <div class="login_wrapper">
                   <div class="animate form login_form">
                     <section class="login_content">
-                      <form action="index.php" method="post">
+                      <form action="index.php" id="login" method="post">
                         <h1>INICIAR SESIÓN</h1>
                         <div class="input-group mb-2">
                           <input type="email" name="correo" class="form-control" placeholder="Correo">
@@ -51,7 +51,7 @@ class accesos_VI
                         </div>
                         <div>
                       
-                          <button type="submit" class="btn btn-success ">Iniciar Sesi&oacute;n</button>
+                          <button type="button" onclick="iniciarSesion();"class="btn btn-success ">Iniciar Sesi&oacute;n</button>
                         </div>
 
                         <div class="clearfix"></div>
@@ -148,9 +148,6 @@ class accesos_VI
                             });
 
                           } else if (respuesta.estado = 'ERROR') {
-
-                            //console.log(respuesta.mensaje);
-                            // toastr.error(respuesta.mensaje);
                             Swal.fire({
                               position: 'top-end',
                               icon: 'error',
@@ -172,14 +169,59 @@ class accesos_VI
 
                               toastr.error('No se devolvio un estado');
                           }
-                      });//.catch(e => {console.log(e)});
+                      });
               }
+              function iniciarSesion() {
+            
+            var cadena = new FormData(document.querySelector('#login'));
+            
+            fetch('./controllers/accesos1_CO.php', {
+                    method: 'POST',
+                    body: cadena
+                })
+                .then(respuesta => respuesta.json())
+                .then(respuesta => {
+
+                    if (respuesta.estado == 'EXITO') {
+                      Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        text: respuesta.mensaje ,
+                        showConfirmButton: false,
+                        timer: 3000
+                      });
+                     setTimeout(function () {
+                      location.href = "index.php";
+                      }, 3000);
+
+                    } else if (respuesta.estado = 'ERROR') {
+                      Swal.fire({
+                        position: 'top-end',
+                        icon: 'error',
+                        text: respuesta.mensaje,
+                        showConfirmButton: false,
+                        timer: 3000
+                      });
+                    } else if (respuesta.estado = 'ADVERTENCIA') {
+                      Swal.fire({
+                        position: 'top-end',
+                        icon: 'warning',
+                        text: respuesta.mensaje,
+                        showConfirmButton: false,
+                        timer: 1500
+                      });
+                        toastr.error(respuesta.mensaje);
+
+                    } else {
+
+                        toastr.error('No se devolvio un estado');
+                    }
+                });
+        }
           </script>
         <?php
       
     }
- 
-  
 }
 ?>
     

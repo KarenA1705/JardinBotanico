@@ -14,7 +14,8 @@ class accesos_CO
         $arreglo=$accesos_MO->iniciarSesion($correo,$contrasena);
 
        if($arreglo)
-        {
+        { 
+            
             $objeto_accesos=$arreglo[0];
 
             $documento=$objeto_accesos->documento;
