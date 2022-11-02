@@ -7,7 +7,7 @@ $('#example1').DataTable({
        "info":"registros del _START_ al _END_ de un total de _TOTAL_ registros",
        "infoEmpty":"no hay registros",
        "infoFiltered":"(filtrado de un total de _MAX_ registros)",
-       "sSearch":"buscar por nombre:",
+       "sSearch":"buscar por NIT, nombre o tipo:",
        "oPaginate":{
           "sFirst":"primero",
           "sLast":"ultimo",
@@ -21,13 +21,13 @@ $('#example1').DataTable({
     buttons:[ 
      {
         extend:    'excelHtml5',
-        text:      'generar excel <i class="fa fa-file-excel-o"></i> ',
+        text:      'Reporte <i class="fa fa-file-excel-o"></i> ',
         titleAttr: 'Exportar a Excel',
         className: 'btn btn-success'
      },
      {
         extend:    'pdfHtml5',
-        text:      '<i class="fa fa-file-pdf-o"></i> ',
+        text:      'Reporte <i class="fa fa-file-pdf-o"></i> ',
         titleAttr: 'Exportar a PDF',
         className: 'btn btn-danger'
      }
