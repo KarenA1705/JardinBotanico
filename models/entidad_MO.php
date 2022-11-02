@@ -15,21 +15,24 @@ class entidad_MO
 
     $this->conexion->consultar($sql);
   }
-  function actualizarentidades($nit,$nombre,$tipo,$telefono,$correo,$contrasena)
+  function actualizarentidades($nit,$nombre,$tipo,$telefono,$correo)
   {
 
-    $sql = "update entidad set nombre_entidad='$nombre', tipo_entidad='$tipo',telefono='$telefono',correo='$correo',contrasena='$contrasena'  where nit='$nit'";
+    $sql = "update entidad set nombre_entidad='$nombre', tipo_entidad='$tipo',telefono='$telefono',correo='$correo' where nit='$nit'";
 
     $this->conexion->consultar($sql);
   }
- 
+  function actualizarentidad($nit,$nombre,$tipo,$telefono,$correo,$contrasena)
+  {
+
+    $sql = "update entidad set nombre_entidad='$nombre', tipo_entidad='$tipo',telefono='$telefono',correo='$correo',contrasena='$contrasena' where nit='$nit'";
+
+    $this->conexion->consultar($sql);
+  }
   function seleccionar_entidadem($correo){
 
     $sql = "select * from entidad where correo='$correo'";
     
-
-      $sql = "select * from entidad";
-
     $this->conexion->consultar($sql);
 
     $arreglo = $this->conexion->extraerRegistro();

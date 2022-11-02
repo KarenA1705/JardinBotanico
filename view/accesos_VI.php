@@ -2,9 +2,10 @@
 class accesos_VI
 {
     function __construct(){}
- 
+   
     function iniciarSesion()
     {
+      require_once "librerias/front_controller.php";
         ?>
        <!DOCTYPE html>
           <html lang="en">
@@ -17,29 +18,18 @@ class accesos_VI
               <link rel="icon" href="imagen.jpeg"  />
               <title>Jardín Botánico </title>
 
-              <!-- Bootstrap -->
-            
               <link href="vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
               <!-- Font Awesome -->
-
               <link href="vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
               <!-- NProgress -->
-            
               <link href="vendors/nprogress/nprogress.css" rel="stylesheet">
               <!-- Animate.css -->
-              
               <link href="vendors/animate.css/animate.min.css" rel="stylesheet">
 
               <!-- Custom Theme Style -->
-              
               <link href="build/css/custom.min.css" rel="stylesheet">
-              <!--style type="text/css">
-                .login1{
-                  background-image: url('login.jpg');
-                  heigh: 100%;
-                  width: 100%;
-                }
-                </style-->
+             
+          
             </head>
 
             <body  class="login" >
@@ -52,7 +42,7 @@ class accesos_VI
                   <div class="animate form login_form">
                     <section class="login_content">
                       <form action="index.php" method="post">
-                        <h1>Login Form</h1>
+                        <h1>INICIAR SESIÓN</h1>
                         <div class="input-group mb-2">
                           <input type="email" name="correo" class="form-control" placeholder="Correo">
                         </div>
@@ -86,7 +76,7 @@ class accesos_VI
 
                   <div id="register" class="animate form registration_form">
                     <section class="login_content">
-                      <form>
+                      <form method="post" id="formulario_registrarse">
                         <h1>Registarse</h1>
                         <div>
                           <input type="text" class="form-control" name="nit" placeholder="Nit" required="" />
@@ -108,7 +98,7 @@ class accesos_VI
                           <input type="password" class="form-control" name="contrasenaen" placeholder="Contraseña" required="" />
                         </div>
                         <div>
-                          <a class="btn btn-default submit" type="submit" >Registrarse</a>
+                          <button href="#signin" type="button" onclick="registrar();" class="btn btn-success">Registrarse</button>  
                         </div>
 
                         <div class="clearfix"></div>
@@ -133,7 +123,58 @@ class accesos_VI
               </div>
             </body>
           </html>
+           
+          <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+          <script>
+              function registrar() {
+            
+                  var cadena = new FormData(document.querySelector('#formulario_registrarse'));
+                  
+                  fetch('./controllers/entidad_CO.php', {
+                          method: 'POST',
+                          body: cadena
+                      })
+                      .then(respuesta => respuesta.json())
+                      .then(respuesta => {
 
+                          if (respuesta.estado == 'EXITO') {
+                            document.querySelector('#formulario_registrarse ').reset();
+                            Swal.fire({
+                              position: 'top-end',
+                              icon: 'success',
+                              text: respuesta.mensaje,
+                              showConfirmButton: false,
+                              timer: 1500
+                            });
+
+                          } else if (respuesta.estado = 'ERROR') {
+
+                            //console.log(respuesta.mensaje);
+                            // toastr.error(respuesta.mensaje);
+                            Swal.fire({
+                              position: 'top-end',
+                              icon: 'error',
+                              text: respuesta.mensaje,
+                              showConfirmButton: false,
+                              timer: 3000
+                            });
+                          } else if (respuesta.estado = 'ADVERTENCIA') {
+                            Swal.fire({
+                              position: 'top-end',
+                              icon: 'warning',
+                              text: respuesta.mensaje,
+                              showConfirmButton: false,
+                              timer: 1500
+                            });
+                              toastr.error(respuesta.mensaje);
+
+                          } else {
+
+                              toastr.error('No se devolvio un estado');
+                          }
+                      });//.catch(e => {console.log(e)});
+              }
+          </script>
         <?php
       
     }

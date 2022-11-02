@@ -11,6 +11,7 @@ class conexion
         try {
             //Creamos nuestra nueva instancia de PDO con el driver de Postgres
              $this->enlace = new PDO("pgsql:dbname=JARDIN_BOTANICO;host=localhost;user=postgres;password=1234");
+            // $this->enlace = new PDO("pgsql:dbname=gjaksvyb;host=heffalump.db.elephantsql.com;user=gjaksvyb;password=aAWvbc_EO7u_gzs9K4hWZHimxvM4CRxW");
 
             
             //Habilitamos el modo de errores para visualizarlos

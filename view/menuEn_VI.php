@@ -120,7 +120,7 @@ class menuEn_VI
                     <i class="fa  fa-briefcase"></i> 
                     </a>
                     <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
-                      <a class="dropdown-item"  href="javascript:;"> Perfil</a>
+                      <a class="dropdown-item"  onclick="verModulo('actEntidad_VI/actualizarEntidad');"> Vizualizar datos</a>
                         
                       <a class="dropdown-item"  href="#" onclick="salir()" ><i class="fa fa-sign-out pull-right"></i> Cerrar sesión</a>
                     </div>

@@ -113,7 +113,7 @@ class entidades_VI
                                         <input type="hidden" id="tipo_<?php echo $nit; ?>" value="<?php echo $tipo; ?>">
                                         <input type="hidden" id="telefono_<?php echo $nit; ?>" value="<?php echo $telefono; ?>">
                                         <input type="hidden" id="correo_<?php echo $nit; ?>" value="<?php echo $correo; ?>">
-                                        <i class="fas fa-edit" data-toggle="modal" data-target="#Ventana_Modal" style="cursor: pointer;" onclick="verActualizarestado('<?php echo $nit; ?>')"></i>
+                                        <i class="fas fa-edit" data-toggle="modal" data-target="#Ventana_Modal" style="cursor: pointer;" onclick="verActualizarentidad('<?php echo $nit; ?>')"></i>
                                     </td>
                                 </tr>
                         <?php
@@ -132,7 +132,7 @@ class entidades_VI
 
 
                 var cadena = new FormData(document.querySelector('#formulario_agregar_entidad'));
-
+                //console.log(cadena);
                 fetch('entidades_CO/agregarentidades', {
                         method: 'POST',
                         body: cadena
@@ -156,11 +156,11 @@ class entidades_VI
                                             <td id="correo_td_${nit}">${contrasena }  </td>
                                             <td style="text-align: center;">
                                                 <input type="hidden" id="nit_${nit}" value="${nit}">
-                                                <input type="hidden" id="nombre_${nit}" value="${nombre }">
-                                                <input type="hidden" id="tipo_${nit}" value="${tipo }">
-                                                <input type="hidden" id="telefono_${nit}" value="${telefono }">
-                                                <input type="hidden" id="correo_${nit}" value="${correo }">
-                                                <i class="fas fa-edit" data-toggle="modal" data-target="#Ventana_Modal" style="cursor: pointer;" onclick="verActualizarestado('${nit}')"></i>
+                                                <input type="hidden" id="nombre_${nit}" value="${nombre}">
+                                                <input type="hidden" id="tipo_${nit}" value="${tipo}">
+                                                <input type="hidden" id="telefono_${nit}" value="${telefono}">
+                                                <input type="hidden" id="correo_${nit}" value="${correo}">
+                                                <i class="fas fa-edit" data-toggle="modal" data-target="#Ventana_Modal" style="cursor: pointer;" onclick="verActualizarentidad('${nit}')"></i>
                                             </td>
                                         </tr>
 
@@ -180,43 +180,55 @@ class entidades_VI
                     })
             }
 
-            function verActualizarestado(cod) {
-
-                let nit = document.querySelector('#nit_' + cod).value;
-                let nombre = document.querySelector('#nombre_' + cod).value;
+            function verActualizarentidad(nit) {
+                let nitt = document.querySelector('#nit_' + nit).value;
+                let nombre = document.querySelector('#nombre_' + nit).value;
+                let tipo = document.querySelector('#tipo_' + nit).value;
+                let telefono = document.querySelector('#telefono_' + nit).value;
+                let correo = document.querySelector('#correo_' + nit).value;
                 var cadena = `
                         <div class="card">
                             <div class="card-body">
-                                <form id="formulario_actualizar_estado">
+                                <form id="formulario_actualizar_entidad">
 
                               
                           
                                     <div class="form-group">
-                                        <label for="nit">nit del origen</label>
-                                        <input   type="text" class="form-control" id="nit" name="nit"
-                                            value="${nit}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="nombre">nombre del origen</label>
-                                        <input onkeypress="return sololetras(event)"  type="text" class="form-control" id="nombre" name="nombre"
+                                        <label for="nombre">nombre de la entidad</label>
+                                        <input  onkeypress="return sololetras(event)"    type="text" class="form-control" id="nombre" name="nombre"
                                             value="${nombre}">
                                     </div>
-                                    <input type="hidden" id="codige" name="codige" value="${nit}">
-                                    <button type="button" onclick="actualizarestado();" class="btn btn-success float-right">Actualizar</button>
+                                    <div class="form-group">
+                                        <label for="tipo">tipo de entidad</label>
+                                        <input onkeypress="return sololetras(event)"  type="text" class="form-control" id="tipo" name="tipo"
+                                            value="${tipo}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="nit">telefono de la entidad</label>
+                                        <input   type="number" class="form-control" id="telefono" name="telefono"
+                                            value="${telefono}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="nombre">correo</label>
+                                        <input type="text" class="form-control" id="correo" name="correo"
+                                            value="${correo}">
+                                    </div>
+                                    <input type="hidden" id="nit" name="nit" value="${nit}">
+                                    <button type="button" onclick="actualizarentidad();" class="btn btn-success float-right">Actualizar</button>
                                 </form>
                             </div>
                         </div>
                     `;
 
-                document.querySelector('#titulo_modal').innerHTML = 'Actualizar estado';
+                document.querySelector('#titulo_modal').innerHTML = 'Actualizar entidad';
 
                 document.querySelector('#contenido_modal').innerHTML = cadena;
 
             }
 
-            function actualizarestado() {
+            function actualizarentidad() {
 
-                var cadena = new FormData(document.querySelector('#formulario_actualizar_estado'));
+                var cadena = new FormData(document.querySelector('#formulario_actualizar_entidad'));
 
                 fetch('entidades_CO/actualizarentidades', {
                         method: 'POST',
@@ -228,18 +240,23 @@ class entidades_VI
                         if (respuesta.estado == 'EXITO') {
 
 
-                            let nit = document.querySelector('#formulario_actualizar_estado #nit').value;
+                            let nit = document.querySelector('#formulario_actualizar_entidad #nit').value;
+                            let nombre = document.querySelector('#formulario_actualizar_entidad #nombre').value;
+                            let tipo = document.querySelector('#formulario_actualizar_entidad #tipo').value;
+                            let telefono = document.querySelector('#formulario_actualizar_entidad #telefono').value;
+                            let correo = document.querySelector('#formulario_actualizar_entidad #correo').value;
+                            
 
-                            let codige = document.querySelector('#formulario_actualizar_estado #codige').value;
-
-                            let nombre = document.querySelector('#formulario_actualizar_estado #nombre').value;
-
-                            document.querySelector('#nit_td_' + codige).innerHTML = nit;
-                            document.querySelector('#nit_' + codige).value = nit;
-                            document.querySelector('#nombre_td_' + codige).innerHTML = nombre;
-                            document.querySelector('#nombre_' + codige).value = nombre;
-
-
+                            document.querySelector('#nit_td_' + nit).innerHTML = nit;
+                            document.querySelector('#nit_' + nit).value = nit;
+                            document.querySelector('#nombre_td_' + nit).innerHTML = nombre;
+                            document.querySelector('#nombre_' + nit).value = nombre;
+                            document.querySelector('#tipo_td_' + nit).innerHTML = tipo;
+                            document.querySelector('#tipo_' + nit).value = tipo;
+                            document.querySelector('#telefono_td_' + nit).innerHTML = telefono;
+                            document.querySelector('#telefono_' + nit).value = telefono;
+                            document.querySelector('#correo_td_' + nit).innerHTML = correo;
+                            document.querySelector('#correo_' + nit).value = correo;
 
                             toastr.success(respuesta.mensaje);
 

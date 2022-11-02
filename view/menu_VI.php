@@ -32,8 +32,8 @@ class menu_VI
 
       <title>Jardín Botánico</title>
       <link rel="stylesheet" href="datatables/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="datatables/datatables/datatables.min.css">
-    <link rel="stylesheet" type="text/css" href="datatables/datatables/DataTables-1.12.1/css/dataTables.bootstrap4.min.css">
+      <link rel="stylesheet" type="text/css" href="datatables/datatables/datatables.min.css">
+      <link rel="stylesheet" type="text/css" href="datatables/datatables/DataTables-1.12.1/css/dataTables.bootstrap4.min.css">
       <!-- Bootstrap -->
       <link href="vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
       <!-- Font Awesome -->

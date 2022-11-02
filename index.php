@@ -1,6 +1,7 @@
 <?php
 require_once "librerias/constantes.php";
 require_once "librerias/conexion.php";
+require_once "librerias/front_controller.php";
 
 if(isset($_SESSION['documento']))
 {

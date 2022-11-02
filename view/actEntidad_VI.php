@@ -1,44 +1,45 @@
 <?php
 
-class actCoordinador_VI
+class actEntidad_VI
 {
 
     function __construct()
     {
     }
 
-    function actualizarCoordinador()
-    {require_once "models/coordinador_MO.php";
+    function actualizarEntidad()
+    {require_once "models/entidad_MO.php";
         $conexion=new conexion();
-        $coordinador_MO=new coordinador_MO($conexion);
-        $arreglo=$coordinador_MO->seleccionar($_SESSION['documento']);
+        $entidad_MO=new entidad_MO($conexion);
+        $arreglo=$entidad_MO->seleccionar($_SESSION['nit']);
 
-        $objeto_coordinador=$arreglo[0];
-        $nombres=$objeto_coordinador->nombres;
-        $apellidos=$objeto_coordinador->apellidos;
-        $telefono=$objeto_coordinador->telefono;
-        $correo=$objeto_coordinador->correo;
-        $contrasena=$objeto_coordinador->contrasena;
-        $documento=$objeto_coordinador->documento;
+        $objeto_entidad=$arreglo[0];
+        $nombre=$objeto_entidad->nombre_entidad;
+        $tipo=$objeto_entidad->tipo_entidad;
+        $telefono=$objeto_entidad->telefono;
+        $correo=$objeto_entidad->correo;
+        $contrasena=$objeto_entidad->contrasena;
+        $nit=$objeto_entidad->nit;
 
 ?>
         <div class="card">
         <div class="card-header">
-               Actualizar Datos del coordinador
+               Actualizar Datos de la entidad
             </div>
             <div class="card-body">
-                <form id="formulario_actualizar_coordinador">
+                <form id="formulario_actualizar_entidad">
 
                 <div class="form-group">
-                                        <label for="nomnre">nombre del coordinador</label>
-                                        <input onkeypress="return sololetras(event)"  type="text" class="form-control" id="familia" name="nombres"
-                                            value="<?php echo $nombres ?>">
+                                        <label for="nomnre">nombre del entidad</label>
+                                        <input onkeypress="return sololetras(event)"  type="text" class="form-control" id="nombre" name="nombre"
+                                            value="<?php echo $nombre ?>">
                                     </div>
                                     <div class="form-group">
-                                        <label for="apellidos">Apellidos</label>
-                                        <input onkeypress="return sololetras(event)"  type="text" class="form-control" id="apellidos" name="apellidos"
-                                            value="<?php echo $apellidos ?>">
+                                        <label for="apellidos">Tipo</label>
+                                        <input onkeypress="return sololetras(event)"  type="text" class="form-control" id="tipo" name="tipo"
+                                            value="<?php echo $tipo ?>">
                                     </div>
+                                    
                                     <div class="form-group">
                                         <label for="telefono">Telefono</label>
                                         <input type="number" class="form-control" id="telefono" name="telefono"
@@ -55,8 +56,8 @@ class actCoordinador_VI
                                             value="<?php echo $contrasena ?>">
                                     </div>
                                     
-                                    <input type="hidden" id="doc" name="documento" value="<?php echo $documento ?>">
-                                    <button type="button" onclick="actualizarcoordinador();" class="btn btn-success float-right">Actualizar</button>
+                                    <input type="hidden" id="nit" name="nit" value="<?php echo $nit ?>">
+                                    <button type="button" onclick="actualizarentidad();" class="btn btn-success float-right">Actualizar</button>
                     <br>
 
                 </form>
@@ -64,11 +65,11 @@ class actCoordinador_VI
         </div>
         <script>
 
-            function actualizarcoordinador() {
+            function actualizarentidad() {
 
-                var cadena = new FormData(document.querySelector('#formulario_actualizar_coordinador'));
+                var cadena = new FormData(document.querySelector('#formulario_actualizar_entidad'));
 
-                fetch('coordinador_CO/actualizarcoordinador', {
+                fetch('entidades_CO/agregarentidades', {
                         method: 'POST',
                         body: cadena
                     })
