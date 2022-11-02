@@ -33,7 +33,7 @@ class entidades_VI
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="nombre">nombre Entidad</label>
-                                <input onkeypress="return sololetras(event)"  type="text" class="form-control" id="nombre" name="nombre">
+                                <input   type="text" class="form-control" id="nombre" name="nombre">
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -195,7 +195,7 @@ class entidades_VI
                           
                                     <div class="form-group">
                                         <label for="nombre">nombre de la entidad</label>
-                                        <input  onkeypress="return sololetras(event)"    type="text" class="form-control" id="nombre" name="nombre"
+                                        <input     type="text" class="form-control" id="nombre" name="nombre"
                                             value="${nombre}">
                                     </div>
                                     <div class="form-group">

@@ -31,7 +31,7 @@ class actEntidad_VI
 
                 <div class="form-group">
                                         <label for="nomnre">nombre del entidad</label>
-                                        <input onkeypress="return sololetras(event)"  type="text" class="form-control" id="nombre" name="nombre"
+                                        <input  type="text" class="form-control" id="nombre" name="nombre"
                                             value="<?php echo $nombre ?>">
                                     </div>
                                     <div class="form-group">
