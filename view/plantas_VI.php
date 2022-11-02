@@ -196,13 +196,14 @@ class plantas_VI
                                     $nombre_habito = $objeto_habito->nombre_habito;
 
                                     $especie= $objeto_plantas->especie;
+                                    $especie1= str_replace('_',' ',$especie);
                                     $familia = $objeto_plantas->nombre_familia;
                                     $nombre_comun = $objeto_plantas->nombre_comun;
                                     $stock = $objeto_plantas->stock;
                                    
                             ?>
                                     <tr>
-                                        <td id="especie_td_<?php echo $especie; ?>"> <?php echo $especie; ?> </td>
+                                        <td id="especie_td_<?php echo $especie; ?>"> <?php echo $especie1; ?> </td>
                                         <td id="familia_td_<?php echo $especie; ?>"> <?php echo $familia; ?> </td>
                                         <td id="nombre_origen_td_<?php echo $especie; ?>"> <?php echo $nombre_origen; ?> </td>
                                         <td id="nombre_estado_td_<?php echo $especie; ?>"> <?php echo $nombre_estado; ?> </td>
@@ -259,7 +260,8 @@ class plantas_VI
                     })
                     .then(respuesta => respuesta.json())
                     .then(respuesta => {
-                        let especie = document.querySelector('#formulario_agregar_plantas #especie').value;
+                        let especie1 = document.querySelector('#formulario_agregar_plantas #especie').value;
+                        let especie = especie1.replace(' ','_');
                         let stock = document.querySelector('#formulario_agregar_plantas #stock').value;
                         let nombre_comun = document.querySelector('#formulario_agregar_plantas #nombre_comun').value;
                         let cod_origen = document.querySelector('#formulario_agregar_plantas #cod_origen').value;
@@ -270,7 +272,7 @@ class plantas_VI
              
                             let fila = `
                              <tr>
-                                        <td id="especie_td_${especie}"> ${especie} </td>
+                                        <td id="especie_td_${especie}"> ${especie1} </td>
                                         <td id="familia_td_${especie}"> ${familia} </td>
                                         <td id="nombre_origen_td_${especie}"> ${nombre_origen} </td>
                                         <td id="nombre_estado_td_${especie}"> ${nombre_estado1} </td>

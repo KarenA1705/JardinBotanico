@@ -100,7 +100,7 @@ class menu_VI
                     </li>
                     <li><a><i class="fa  fa-briefcase"></i> Entidades <span class="fa fa-chevron-down"></span></a>
                       <ul class="nav child_menu">
-                        <li><a href="#" onclick="verModulo('entidades_VI/agregarentidades');">Registar</a></li>
+                        <li><a href="#" onclick="verModulo('entidades_VI/agregarentidades');">Gestionar</a></li>
                       </ul>
                     </li>
                   </ul>
@@ -135,7 +135,7 @@ class menu_VI
                       <img src="production/images/user.png" alt=""><?php echo $nombres ?>
                     </a>
                     <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
-                      <a class="dropdown-item" onclick="verModulo('actCoordinador_VI/actualizarCoordinador');">Visualizar Datos</a>
+                      <a class="dropdown-item" onclick="verModulo('actCoordinador_VI/actualizarCoordinador');">Visualizar/Editar Datos</a>
                         
                       <a class="dropdown-item"  href="#" onclick="salir()" ><i class="fa fa-sign-out pull-right"></i> Cerrar sesión</a>
                     </div>

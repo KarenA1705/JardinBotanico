@@ -79,8 +79,9 @@ class accesos_VI
                       <form method="post" id="formulario_registrarse">
                         <h1>Registarse</h1>
                         <div>
-                          <input type="text" class="form-control" name="nit" placeholder="Nit" required="" />
+                          <input type="number" class="form-control" name="nit" placeholder="Nit" required="" />
                         </div>
+                        <br>
                         <div>
                           <input type="text" class="form-control" name="nombre" placeholder="Nombre entidad" required="" />
                         </div>

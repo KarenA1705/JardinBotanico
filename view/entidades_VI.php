@@ -27,7 +27,7 @@ class entidades_VI
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="nit">NIT Entidad</label>
-                                <input    type="text" class="form-control" id="nit" name="nit">
+                                <input    type="number" class="form-control" id="nit" name="nit">
                             </div>
                         </div>
                         <div class="col-md-3">
