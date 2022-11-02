@@ -233,7 +233,7 @@ class menuEn_VI
       <script src="vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
       <script src="vendors/toastr/toastr.min.js"></script>
       
-      <script src="https://unpkg.com/@popperjs/core@2"></script>
+      <script src="https://unpkg.com/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
       <!--script src="datatables/jquery/jquery.min.js"></script>
       <script src="datatables/bootstrap/js/bootstrap.min.js"></script-->
       <script type="text/javascript" src="datatables/datatables/datatables.min.js"></script>

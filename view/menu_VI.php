@@ -21,7 +21,7 @@ class menu_VI
   <!DOCTYPE html>
   <html lang="en">
     <head>
-    <script src="https://kit.fontawesome.com/7d38072211.js" crossorigin="anonymous"></script>
+   
     
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
       <!-- Meta, title, CSS, favicons, etc. -->
@@ -220,12 +220,18 @@ class menu_VI
       <script src="vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
       <script src="vendors/toastr/toastr.min.js"></script>
       
-      <script src="https://unpkg.com/@popperjs/core@2"></script>
+      <script src="https://unpkg.com/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
       <!--script src="datatables/jquery/jquery.min.js"></script>
       <script src="datatables/bootstrap/js/bootstrap.min.js"></script-->
       <script type="text/javascript" src="datatables/datatables/datatables.min.js"></script>
       <script type="text/javascript" src="datatables/main.js"></script>
-     
+
+      <script src="datatables/datatables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>  
+      <script src="datatables/datatables/JSZip-2.5.0/jszip.min.js"></script>    
+      <script src="datatables/datatables/pdfmake-0.1.36/pdfmake.min.js"></script>    
+      <script src="datatables/datatables/pdfmake-0.1.36/vfs_fonts.js"></script>
+      <script src="datatables/datatables/Buttons-1.5.6/js/buttons.html5.min.js"></script>
+      <script src="https://kit.fontawesome.com/7d38072211.js" crossorigin="anonymous"></script>
 
       <!-- Custom Theme Scripts -->
       <script src="build/js/custom.min.js"></script>

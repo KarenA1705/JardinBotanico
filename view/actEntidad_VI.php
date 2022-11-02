@@ -69,7 +69,7 @@ class actEntidad_VI
 
                 var cadena = new FormData(document.querySelector('#formulario_actualizar_entidad'));
 
-                fetch('entidades_CO/agregarentidades', {
+                fetch('entidades_CO/actualizarentidad', {
                         method: 'POST',
                         body: cadena
                     })

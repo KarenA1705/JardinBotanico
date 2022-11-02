@@ -15,6 +15,23 @@ $('#example1').DataTable({
           "sPrevious":"anterior"
        },
        "sProcessing":"procesando....",
-    }
+    },
+    responsive: "true",
+    dom: 'Bfrtilp',       
+    buttons:[ 
+     {
+        extend:    'excelHtml5',
+        text:      'generar excel <i class="fa fa-file-excel-o"></i> ',
+        titleAttr: 'Exportar a Excel',
+        className: 'btn btn-success'
+     },
+     {
+        extend:    'pdfHtml5',
+        text:      '<i class="fa fa-file-pdf-o"></i> ',
+        titleAttr: 'Exportar a PDF',
+        className: 'btn btn-danger'
+     }
+      
+  ]
   });
 });
