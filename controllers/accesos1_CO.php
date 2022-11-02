@@ -11,6 +11,7 @@ $correo = htmlentities($_POST['correo'], ENT_QUOTES);
 $contrasena = htmlentities($_POST['contrasena'], ENT_QUOTES);
  
 
+
 if ( empty($correo) or empty($contrasena)) {
   $arreglo_respuesta = [
     "estado" => "ERROR",
@@ -18,6 +19,13 @@ if ( empty($correo) or empty($contrasena)) {
 
   ];
 
+  exit(json_encode($arreglo_respuesta));
+}
+if (!(filter_var($correo, FILTER_VALIDATE_EMAIL))) {
+  $arreglo_respuesta = [
+    "estado" => "ERROR",
+    "mensaje" => "por favor ingrese un correo valido"
+  ];
   exit(json_encode($arreglo_respuesta));
 }
  
