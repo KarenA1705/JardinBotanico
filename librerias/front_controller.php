@@ -28,6 +28,10 @@ class front_controller
             {
                 $carpeta="view";
             }
+            else if($sufijo=='MO')
+            {
+                $carpeta="models";
+            }
         }
 
         $archivo=$clase.".php";

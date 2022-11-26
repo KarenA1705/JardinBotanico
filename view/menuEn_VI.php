@@ -16,7 +16,7 @@ class menuEn_VI
   <!DOCTYPE html>
   <html lang="en">
     <head>
-    <script src="https://kit.fontawesome.com/7d38072211.js" crossorigin="anonymous"></script>
+   
     
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
       <!-- Meta, title, CSS, favicons, etc. -->
@@ -30,6 +30,7 @@ class menuEn_VI
     <link rel="stylesheet" type="text/css" href="datatables/datatables/datatables.min.css">
     <link rel="stylesheet" type="text/css" href="datatables/datatables/DataTables-1.12.1/css/dataTables.bootstrap4.min.css">
       <!-- Bootstrap -->
+      
       <link href="vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
       <!-- Font Awesome -->
       <link href="vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
@@ -86,7 +87,7 @@ class menuEn_VI
                     <li><a><i class="fa fa-list-alt"></i> Donaciones <span class="fa fa-chevron-down"></span></a>
                       <ul class="nav child_menu">
                         <li><a href="#">Salientes</a></li>
-                        <li><a href="#">Entrantes</a></li>
+                        <li><a  onclick="verModulo('donacion_entrante_en_VI/agregardonacionentranteen');" href="#">Entrantes</a></li>
                       </ul>
                     </li>
                      
@@ -238,6 +239,15 @@ class menuEn_VI
       <script src="datatables/bootstrap/js/bootstrap.min.js"></script-->
       <script type="text/javascript" src="datatables/datatables/datatables.min.js"></script>
       <script type="text/javascript" src="datatables/main.js"></script>
+      <script src="datatables/datatables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>  
+      <script src="datatables/datatables/JSZip-2.5.0/jszip.min.js"></script>    
+      <script src="datatables/datatables/pdfmake-0.1.36/pdfmake.min.js"></script>    
+      <script src="datatables/datatables/pdfmake-0.1.36/vfs_fonts.js"></script>
+      <script src="datatables/datatables/Buttons-1.5.6/js/buttons.html5.min.js"></script>
+
+
+      <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+      <script src="https://kit.fontawesome.com/7d38072211.js" crossorigin="anonymous"></script>
      
 
       <!-- Custom Theme Scripts -->

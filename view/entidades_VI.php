@@ -39,7 +39,11 @@ class entidades_VI
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="nombre">Tipo de Entidad</label>
-                                <input onkeypress="return sololetras(event)"  type="text" class="form-control" id="tipo" name="tipo">
+                                <select class="form-control" name="tipo" id="tipo">
+                                    <option value="PRIVADA">PRIVADA</option>
+                                    <option value="PUBLICA">PUBLICA</option>
+                                </select>
+                                <!--input onkeypress="return sololetras(event)"  type="text" class="form-control" id="tipo" name="tipo"-->
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -200,8 +204,13 @@ class entidades_VI
                                     </div>
                                     <div class="form-group">
                                         <label for="tipo">tipo de entidad</label>
-                                        <input onkeypress="return sololetras(event)"  type="text" class="form-control" id="tipo" name="tipo"
-                                            value="${tipo}">
+                
+                                        <select class="form-control" name="tipo" id="tipo">
+                                            <option value="${tipo}">${tipo}</option>
+                                            <option value="PRIVADA">PRIVADA</option>
+                                            <option value="PUBLICA">PUBLICA</option>
+                                        </select>
+                                    
                                     </div>
                                     <div class="form-group">
                                         <label for="nit">telefono de la entidad</label>

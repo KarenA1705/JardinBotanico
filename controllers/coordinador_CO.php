@@ -30,6 +30,13 @@ class coordinador_CO
 
       exit(json_encode($arreglo_respuesta));
     }
+    if (!(filter_var($correo, FILTER_VALIDATE_EMAIL))) {
+      $arreglo_respuesta = [
+        "estado" => "ERROR",
+        "mensaje" => "por favor ingrese un correo valido"
+      ];
+      exit(json_encode($arreglo_respuesta));
+    }
     if (strlen($nombres) > 30) {
       $arreglo_respuesta = [
         "estado" => "ERROR",

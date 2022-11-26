@@ -39,6 +39,26 @@ class entidad_MO
 
     return $arreglo;
   }
+  function seleccionar_entidadnom($nombre){
+
+    $sql = "select * from entidad where nombre_entidad='$nombre'";
+    
+    $this->conexion->consultar($sql);
+
+    $arreglo = $this->conexion->extraerRegistro();
+
+    return $arreglo;
+  }
+  function seleccionar_entidadte($telefono){
+
+    $sql = "select * from entidad where telefono='$telefono'";
+    
+    $this->conexion->consultar($sql);
+
+    $arreglo = $this->conexion->extraerRegistro();
+
+    return $arreglo;
+  }
 
   function seleccionar($nit= '')
   {

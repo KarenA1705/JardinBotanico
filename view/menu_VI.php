@@ -94,7 +94,7 @@ class menu_VI
                     </li>
                     <li><a><i class="fa fa-list-alt"></i> Donaciones <span class="fa fa-chevron-down"></span></a>
                       <ul class="nav child_menu">
-                        <li><a href="#">Salientes</a></li>
+                        <li><a href="#" onclick="verModulo('donacion_saliente_co_VI/vizualizarPeticiones');">Salientes</a></li>
                         <li><a href="#">Entrantes</a></li>
                       </ul>
                     </li>

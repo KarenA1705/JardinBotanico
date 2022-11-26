@@ -114,6 +114,26 @@ class entidades_CO
 
       exit(json_encode($arreglo_respuesta));
     }
+    $arreglo_entidad_nombre = $entidades_MO->seleccionar_entidadnom($nombre);
+    if ($arreglo_entidad_nombre) {
+      $arreglo_respuesta = [
+        "estado" => "ERROR",
+        "mensaje" => "El nombre  ($nombre) esta duplicado"
+
+      ];
+
+      exit(json_encode($arreglo_respuesta));
+    }
+    $arreglo_entidad_telefono = $entidades_MO->seleccionar_entidadte($telefono);
+    if ($arreglo_entidad_telefono) {
+      $arreglo_respuesta = [
+        "estado" => "ERROR",
+        "mensaje" => "El telefono  ($telefono) esta duplicado"
+
+      ];
+
+      exit(json_encode($arreglo_respuesta));
+    }
     $entidades_MO->agregarentidades($nit,$nombre,$tipo,$telefono,$correo,$contrasena);
     /*$familia= $conexion->lastInsertId();*/
     $arreglo_respuesta = [
@@ -191,7 +211,6 @@ class entidades_CO
       exit(json_encode($arreglo_respuesta));
     }
    
-
     $entidad_MO->actualizarentidades($nit,$nombre,$tipo,$telefono,$correo);
 
     $actualizado = $conexion->filasAfectadas();
@@ -288,7 +307,6 @@ class entidades_CO
 
       exit(json_encode($arreglo_respuesta));
     }
-   
 
     $entidad_MO->actualizarentidad($nit,$nombre,$tipo,$telefono,$correo,$contrasena);
 
