@@ -11,7 +11,7 @@ class donacion_entrante_en_MO
   function agregardonacion($id_donacion , $nit,$documento,$fecha,$cod_departamento,$cod_municipio,$cod_lugar)
   {
 
-    $sql = "insert into donacion_saliente(id_donacion , nit,documento,fecha,cod_lugar,cod_municipio,cod_departamento,total_plantas,estado) values ('$id_donacion','$nit','$documento','$fecha','$cod_lugar','$cod_municipio','$cod_departamento',0,default)";
+    $sql = "insert into donacion_saliente(id_donacion,nit,documento,fecha,cod_lugar,cod_municipio,cod_departamento,observacion,total_plantas,estado) values ('$id_donacion','$nit','$documento','$fecha','$cod_lugar','$cod_municipio','$cod_departamento','EN PROCESO',0,default)";
 
     $this->conexion->consultar($sql);
   }
@@ -85,6 +85,23 @@ class donacion_entrante_en_MO
     $arreglo = $this->conexion->extraerRegistro();
 
     return $arreglo;
+  }
+  function actualizar($id_donacion,$cod_departamento,$cod_municipio,$cod_lugar){
+     
+    $sql = "update donacion_saliente set cod_departamento='$cod_departamento',cod_municipio='$cod_municipio',cod_lugar='$cod_lugar' where id_donacion='$id_donacion'";
+
+    $this->conexion->consultar($sql);
+
+  }
+  function aceptar($id_donacion){
+    $sql = "update donacion_saliente set  estado='2',observacion='CUMPLE CON LAS CONDICIONES' where id_donacion='$id_donacion'";
+
+    $this->conexion->consultar($sql);
+  }
+  function rechazar($id_donacion){
+    $sql = "update donacion_saliente set  estado='3',observacion='NO CUMPLE CON LAS CONDICIONES' where id_donacion='$id_donacion'";
+
+    $this->conexion->consultar($sql);
   }
   function seleccionarDetalle($id_donacion= '')
   {

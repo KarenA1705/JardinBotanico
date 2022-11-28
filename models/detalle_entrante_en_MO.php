@@ -49,12 +49,22 @@ class detalle_entrante_en_MO
     $this->conexion->consultar($sql);
 
   }
-function restar_donacion($id_donacion,$cantidad){
-  $sql = "update donacion_saliente set total_plantas=total_plantas-$cantidad where id_donacion='$id_donacion'";
+  function restar_donacion($id_donacion,$cantidad){
+    $sql = "update donacion_saliente set total_plantas=total_plantas-$cantidad where id_donacion='$id_donacion'";
 
-  $this->conexion->consultar($sql);
+    $this->conexion->consultar($sql);
+  }
+  function agregar_donacion($id_donacion,$cantidad){
+    $sql = "update donacion_saliente set total_plantas=total_plantas+$cantidad where id_donacion='$id_donacion'";
 
-}
+    $this->conexion->consultar($sql);
+
+  }
+  function actdetalle($id_donacion,$id_detalle,$especie,$cantidad){
+    $sql = "update detalle_donacion_saliente set especie='$especie',cantidad=$cantidad where id_donacion=$id_donacion and id_detalle_donacion='$id_detalle'";
+
+    $this->conexion->consultar($sql);
+  }
 
 
   function seleccionar_detalle($id_donacion= '')

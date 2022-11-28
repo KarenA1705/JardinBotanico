@@ -16,6 +16,7 @@ class donacion_saliente_co_VI
         require_once "models/lugar_MO.php";
         require_once "models/entidad_MO.php";
         require_once "models/plantas_MO.php";
+        require_once "models/detalle_entrante_en_MO.php";
         $conexion = new conexion();
         $donacion_en_MO = new donacion_entrante_en_MO($conexion);
         $arreglo_donacion= $donacion_en_MO->seleccionardc($_SESSION['documento']);
@@ -106,8 +107,8 @@ class donacion_saliente_co_VI
                                     <td id="lugar_td_<?php echo $num; ?>"> <?php echo $nombre_lugar; ?> </td>
                                     <td id="total_td_<?php echo $num; ?>"> <?php echo $total; ?> </td>
                                     <td style="text-align: center;"> 
-                                    <i class="fa fa-check-circle" data-toggle="modal" data-target="#Ventana_Modal" style="cursor: pointer;" onclick="visualizarDonacion('<?php echo $num; ?>')"></i>
-                                    <i class="fa fa-times-circle" data-toggle="modal" data-target="#Ventana_Modal" style="cursor: pointer;" onclick="visualizarDonacion('<?php echo $num; ?>')"></i>
+                                    <i class="fa fa-check-circle"  style="cursor: pointer;" onclick="aceptar_solicitud('<?php echo $num; ?>' )"></i>
+                                    <i class="fa fa-times-circle"  style="cursor: pointer;" onclick="rechazar_solicitud('<?php echo $num; ?>' )"></i>
 
                                      </td>
                                     <td  style="text-align: center;">
@@ -121,8 +122,9 @@ class donacion_saliente_co_VI
                                         <input type="hidden" id="cod_departamento_<?php echo $num; ?>" value="<?php echo $cod_departamento; ?>">
                                         <input type="hidden" id="cod_municipio_<?php echo $num; ?>" value="<?php echo $cod_municipio; ?>">
                                         <input type="hidden" id="cod_lugar_<?php echo $num; ?>" value="<?php echo $cod_lugar; ?>">
+                                        <input type="hidden" id="estado_<?php echo $num; ?>" value="<?php echo $estado; ?>">
 
-                                        <i class="fa fa-eye" data-toggle="modal" data-target="#Ventana_Modal" style="cursor: pointer;" onclick="visualizarDonacion('<?php echo $num; ?>')"></i>
+                                        <i class="fa fa-eye"   style="cursor: pointer;" data-toggle="modal" data-target="#nueva_<?php echo $num; ?>"></i>
 
                                     </td>
                                 </tr>
@@ -136,6 +138,81 @@ class donacion_saliente_co_VI
 
             </div>
         </div>
+        <?php foreach($arreglo_donacion as $obj_don){ ?>
+        <div  class="modal fade" id="nueva_<?php echo $obj_don->id_donacion; ?>" tabindex="-1" aria-labelledby="titulo" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="titulo_modal1">Detalles de la solicitud</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body" id="otro_contenido_modal">
+                            <div class="col-md-9">
+                            <p>N° Donacion: <?php echo $obj_don->id_donacion; ?> </P>
+                            </div>
+                            <div >
+                                <p>Fecha: <?php echo $obj_don->fecha; ?> </P>
+                            </div>
+                            <div class="col-md-9">
+                            <?php 
+                            if($obj_don->estado==1){?>
+                            <p>Estado: Pendiente</P>
+                            <?php 
+                            }else if($obj_don->estado==2){?>
+                                <p>Estado: Aprobada</P>
+                            <?php 
+                            }else if($obj_don->estado==3){?>
+                                <p>Estado: Rechazada</P>
+                            <?php 
+                            }
+                                $arreglo_lugar = $lugar_MO->seleccionar($obj_don->cod_lugar);
+                                $objeto_lugar = $arreglo_lugar[0];
+                                $nombre_lugar = $objeto_lugar->nombre_lugar;?>
+                            </div>
+                            <div >
+                                <p>Lugar: <?php echo $nombre_lugar; ?> </P>
+                            </div>
+
+                            <table class="table table-bordered table-sm table-hover">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th scope="col">N° detalle</th>
+                                            <th scope="col">Especie</th>
+                                            <th style="text-align: center;">cantidad</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody id="listar_entidad">
+                                        <?php  
+                                            $detalle = new detalle_entrante_en_MO($conexion);
+                                            $arreglo_detalle= $detalle->seleccionar_detalle($obj_don->id_donacion);
+                                            //print_r($arreglo_detalle);
+                                            foreach ($arreglo_detalle as $objeto_detalle) {
+                                                $id_detalle = $objeto_detalle->id_detalle_donacion;
+                                                $id_donacion = $objeto_detalle->id_donacion;
+                                                $planta = $objeto_detalle->especie;
+                                                $total= $objeto_detalle->cantidad;?>
+                                        <tr>
+                                            <td id="detalle_td_<?php echo $id_donacion; ?>_<?php echo $id_detalle; ?>"> <?php echo $id_detalle; ?> </td>
+                                            <td id="planta_td_<?php echo $id_donacion; ?>_<?php echo $id_detalle; ?>"> <?php echo $planta; ?> </td>
+                                            <td style="text-align: center;" id="total_td_<?php echo $id_donacion; ?>_<?php echo $id_detalle; ?>"> <?php echo $total; ?> </td>
+                                           
+                                        </tr>
+                                        <?php 
+                                        }
+                                    
+                                        ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+          </div>
+          <?php
+                }
+         ?>
         <script type="text/javascript" src="datatables/don.js"></script>
         <script type="text/javascript" src="datatables/ent.js"></script>
         <script>
@@ -146,78 +223,128 @@ class donacion_saliente_co_VI
                 });
                 }
        
-
- 
-        
-            
-
-            /*function visualizarDonacion(id_donacion) {
-                
-                var data2 = {
-                        "id_donacion":id_donacion,
-                        
+            function aceptar_solicitud(id_donacion){
+                var estado=document.querySelector('#estado_' +id_donacion).value;
+                if( estado!='1'){
+                    Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Esta solicitud ya fue rechazada o aceptada',
+                    })
+                }else{
+                    Swal.fire({
+                    title: 'Estas seguro de aceptar esta solicitud?',
+                    text: "",
+                    icon: 'success',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'si, confirmar'
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        var data2 = {
+                        "id_donacion":id_donacion
                         };
-                fetch('detalle_entrante_en_CO/traerdetalle', {
+                        //console.log(data2);
+                        fetch('donacion_entrante_en_CO/aceptar_solicitud', {
                         method: 'POST',
                         body: JSON.stringify(data2),
                         headers: {
                             'Content-Type': 'application/json'// AQUI indicamos el formato
                         }
-                    })
-                    .then(respuesta => respuesta.json())
-                    .then(respuesta => {
+                        })
+                        .then(respuesta => respuesta.json())
+                        .then(respuesta => {
                         
-                        if (respuesta.estado == 'EXITO') {
+                            if (respuesta.estado == 'EXITO') {
 
-                            var cadena = `
-                        <div class="card">
-                            <div class="card-body">
-                                <form id="formulario_actualizar_entidad">
+                                Swal.fire(
+                                'Aprobado!',
+                                'La solicitud ha sido aprobada',
+                                'success'
+                                )
+                                document.getElementById("id_td_"+id_donacion).className = "table-success";
+                                document.querySelector('#estado_' +id_donacion).value = 2;
+                                
+                            } else if (respuesta.estado = 'ERROR') {
 
-                              
-                          
-                                    <div class="form-group">
-                                        <label for="nombre">nombre de la entidad</label>
-                                        <input     type="text" class="form-control" id="nombre" name="nombre"
-                                            value=" echo $fecha; ?>">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="tipo">tipo de entidad</label>
-                
-                                        <select class="form-control" name="tipo" id="tipo">
-                                            <option value=""></option>
-                                            <option value="PRIVADA">PRIVADA</option>
-                                            <option value="PUBLICA">PUBLICA</option>
-                                        </select>
-                                    
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="nit">telefono de la entidad</label>
-                                        <input   type="number" class="form-control" id="telefono" name="telefono"
-                                            value="">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="nombre">correo</label>
-                                        <input type="text" class="form-control" id="correo" name="correo"
-                                            value="">
-                                    </div>
-                                    <input type="hidden" id="nit" name="nit" value="">
-                                    <button type="button" onclick="actualizarentidad();" class="btn btn-success float-right">Actualizar</button>
-                                </form>
-                            </div>
-                        </div>
-                    `;
+                                Swal.fire(
+                                'Error!',
+                                'La solicitud no fue aprobada',
+                                'danger'
+                                )
 
-                        }
+                            } else {
+
+                                toastr.error('No se devolvio un estado');
+                            }
+                        })
+                   
+                    }
+                 })
+                }
+            }
+            function rechazar_solicitud(id_donacion1){
+                var estado1=document.querySelector('#estado_' +id_donacion1).value;
+                if( estado1!='1'){
+                    Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Esta solicitud ya fue rechazada o aceptada',
                     })
+                }else{
+                    Swal.fire({
+                    title: 'Estas seguro de rechazar esta solicitud?',
+                    text: "",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'si, rechazar'
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        var data2 = {
+                        "id_donacion":id_donacion1
+                        };
+                        //console.log(data2);
+                        fetch('donacion_entrante_en_CO/rechazar_solicitud', {
+                        method: 'POST',
+                        body: JSON.stringify(data2),
+                        headers: {
+                            'Content-Type': 'application/json'// AQUI indicamos el formato
+                        }
+                        })
+                        .then(respuesta => respuesta.json())
+                        .then(respuesta => {
+                        
+                            if (respuesta.estado == 'EXITO') {
 
-               
-                document.querySelector('#titulo_modal').innerHTML = 'Datos donacion';
+                                Swal.fire(
+                                'Rechazado!',
+                                'La solicitud ha sido rechazada',
+                                'success'
+                                )
+                                document.getElementById("id_td_"+id_donacion1).className = "table-danger";
+                                document.querySelector('#estado_' +id_donacion1).value = 3;
+                                
+                            } else if (respuesta.estado = 'ERROR') {
 
-                document.querySelector('#contenido_modal').innerHTML = cadena;
+                                Swal.fire(
+                                'Error!',
+                                'La solicitud no fue rechazada',
+                                'danger'
+                                )
 
-            }*/
+                            } else {
 
+                                toastr.error('No se devolvio un estado');
+                            }
+                        })
+                   
+                    }
+                 })
+                }
+            }
             function actualizarentidad() {
 
                 var cadena = new FormData(document.querySelector('#formulario_actualizar_entidad'));

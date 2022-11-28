@@ -232,6 +232,7 @@ class menu_VI
       <script src="datatables/datatables/pdfmake-0.1.36/vfs_fonts.js"></script>
       <script src="datatables/datatables/Buttons-1.5.6/js/buttons.html5.min.js"></script>
       <script src="https://kit.fontawesome.com/7d38072211.js" crossorigin="anonymous"></script>
+      <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
       <!-- Custom Theme Scripts -->
       <script src="build/js/custom.min.js"></script>

@@ -78,6 +78,95 @@ class detalle_entrante_en_CO
 
     exit(json_encode($arreglo_respuesta));
   }
+  function actualizar()
+  {
+
+    $conexion = new conexion();
+    $detalle_en_MO = new detalle_entrante_en_MO($conexion);
+   
+    $id_donacion = htmlentities($_POST['id_donacion'], ENT_QUOTES);
+    $id_detalle = htmlentities($_POST['id_detalle'], ENT_QUOTES);
+    $cantidad_org = htmlentities($_POST['cantidad_org'], ENT_QUOTES);
+    $especie = htmlentities($_POST['especie1'], ENT_QUOTES);
+    $especieorg = htmlentities($_POST['especie_org'], ENT_QUOTES);
+    $cantidad = htmlentities($_POST['cantidad1'], ENT_QUOTES);
+  
+      //exit($cantidad_org."<<<<<<".$especie."<<<<<<".$cantidad."<<<<<<".$especieorg);
+   
+  
+
+    if ( empty($especie) or empty($cantidad)) {
+      $arreglo_respuesta = [
+        "estado" => "ERROR",
+        "mensaje" => "Todos los campos son obligatorios"
+
+      ];
+
+      exit(json_encode($arreglo_respuesta));
+    }
+    if($especie==$especieorg){
+      $planta_MO= new plantas_MO($conexion);
+      $arreglo_planta=$planta_MO->seleccionar_planta($especie);
+      
+      foreach($arreglo_planta as $objeto_planta){
+          $stock = $objeto_planta->stock;
+      }
+      
+    
+      if ($cantidad>$stock) {
+          $arreglo_respuesta = [
+            "estado" => "ERROR",
+            "mensaje" => "Stock de plantas no disponible"
+    
+          ];
+    
+          exit(json_encode($arreglo_respuesta));
+        }
+
+      $valor=$cantidad-$cantidad_org;
+      $resta=$stock-$valor;
+      $detalle_en_MO->restarStock($especie,$resta);
+      $detalle_en_MO->actdetalle($id_donacion,$id_detalle,$especie,$cantidad);
+
+    }else{
+      
+      $planta_MO= new plantas_MO($conexion);
+      $arreglo_planta=$planta_MO->seleccionar_planta($especie);
+      
+      foreach($arreglo_planta as $objeto_planta){
+          $stock = $objeto_planta->stock;
+      }
+      
+    
+      if ($cantidad>$stock) {
+          $arreglo_respuesta = [
+            "estado" => "ERROR",
+            "mensaje" => "Stock de plantas no disponible"
+    
+          ];
+    
+          exit(json_encode($arreglo_respuesta));
+        }
+
+      $resta=$stock-$cantidad;
+       $detalle_en_MO->restarStock($especie,$resta);
+       //$detalle_en_MO->restar_donacion($id_donacion,$cantidad_org);
+       $detalle_en_MO->actdetalle($id_donacion,$id_detalle,$especie,$cantidad);
+       $detalle_en_MO->actualizarPlanta($especieorg, $cantidad_org);
+       
+    }
+ 
+    //$donacion_en_MO->actualizar($id_donacion,$cod_departamento,$cod_municipio,$cod_lugar);
+
+    /*$codigo= $conexion->lastInsertId();*/
+    $arreglo_respuesta = [
+      "estado" => "EXITO",
+      "mensaje" => "Registro actualizado"
+
+    ];
+
+    exit(json_encode($arreglo_respuesta));
+  }
   function eliminardetalle()
   {
 
@@ -112,6 +201,7 @@ class detalle_entrante_en_CO
 
     exit(json_encode($arreglo_respuesta, true));
   }
+
 
 
 }
