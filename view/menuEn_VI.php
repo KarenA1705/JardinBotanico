@@ -86,7 +86,7 @@ class menuEn_VI
                     </li>
                     <li><a><i class="fa fa-list-alt"></i> Donaciones <span class="fa fa-chevron-down"></span></a>
                       <ul class="nav child_menu">
-                        <li><a href="#">Salientes</a></li>
+                        <li><a onclick="verModulo('donacion_saliente_en_VI/agregardonacionsalienteen');" href="#">Salientes</a></li>
                         <li><a  onclick="verModulo('donacion_entrante_en_VI/agregardonacionentranteen');" href="#">Entrantes</a></li>
                       </ul>
                     </li>

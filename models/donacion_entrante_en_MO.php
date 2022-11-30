@@ -22,7 +22,16 @@ class donacion_entrante_en_MO
     $this->conexion->consultar($sql);
 
   }
-  
+  function consultarespera($nit){
+
+    $sql = "select * from donacion_saliente where nit='$nit' and estado='1'";
+    
+    $this->conexion->consultar($sql);
+
+    $arreglo = $this->conexion->extraerRegistro();
+
+    return $arreglo;
+  }
   
   function eliminardonacion($id_donacion){
     $sql = "delete from donacion_saliente where id_donacion=$id_donacion";

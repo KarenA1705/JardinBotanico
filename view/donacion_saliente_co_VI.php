@@ -39,7 +39,7 @@ class donacion_saliente_co_VI
 
         <div class="card">
             <div class="card-header">
-                Listar Donaciones
+                Listar solicitudes de donaciones
             </div>
             <div class="card-body">
 

@@ -1,24 +1,21 @@
 <?php
 
-class donacion_entrante_en_VI
+class donacion_saliente_en_VI
 {
 
     function __construct()
     {
     }
 
-    function agregardonacionentranteen()
+    function agregardonacionsalienteen()
     {
 
-        require_once "models/donacion_entrante_en_MO.php";
-        require_once "models/municipio_MO.php";
-        require_once "models/departamento_MO.php";
-        require_once "models/lugar_MO.php";
+        require_once "models/donacion_saliente_en_MO.php";
         require_once "models/coordinador_MO.php";
         require_once "models/plantas_MO.php";
-        require_once "models/detalle_entrante_en_MO.php";
+        require_once "models/detalle_saliente_en_MO.php";
         $conexion = new conexion();
-        $donacion_en_MO = new donacion_entrante_en_MO($conexion);
+        $donacion_en_MO = new donacion_saliente_en_MO($conexion);
         $arreglo_donacion= $donacion_en_MO->seleccionar($_SESSION['nit']);
         $max_val= $donacion_en_MO->seleccionarMax();
         //print_r($max_val);
@@ -26,12 +23,6 @@ class donacion_entrante_en_VI
             $max_valor=$valor->mayor;
         }
         
-        $municipio_MO = new municipio_MO($conexion);
-        $arreglo_municipio= $municipio_MO->seleccionar();
-        $departamento_MO = new departamento_MO($conexion);
-        $arreglo_departamento= $departamento_MO->seleccionar();
-        $lugar_MO = new lugar_MO($conexion);
-        $arreglo_lugar= $lugar_MO->seleccionar();
         $coordinador_MO = new coordinador_MO($conexion);
         $arreglo_coordinador= $coordinador_MO->seleccionar();
         $planta_MO = new plantas_MO($conexion);
@@ -40,50 +31,26 @@ class donacion_entrante_en_VI
 ?>
         <div  class="card">
         <div class="card-header">
-                Agregar solicitud 
+                Agregar donacion
             </div>
             <div class="card-body">
                 <form name='prueba' id="formulario_factura">
-
+                    
+                            
+                    
+                      
                     <div class="row">
+                         <div class="col-md-4">
+                                 
+                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="nit">Numero factura</label>
                                 <input  readonly type="text" class="form-control" id="numero" name="numero" value="<?php echo  $max_valor+1 ; ?>">
                             </div>
                         </div>
-                        <div class="col-md-3">
-                            <label for="departamento">Escoja departamento</label>
-                            <select onchange="departamento1()"  class="form-control" name="departamento" id="departamento">
-                                <option value="">seleccione</option>
-                                <?php
-                                if ($arreglo_departamento) {
-
-                                    foreach ($arreglo_departamento as $objeto_departamento) {
-                                        $nombre_departamento = $objeto_departamento->nombre_departamento;
-                                        $cod_departamento = $objeto_departamento->cod_departamento;
-
-                                ?>
-                                
-                                    <option value="<?php echo $cod_departamento; ?>" > <?php echo  $nombre_departamento; ?> </option>
-                                <?php
-                                    }
-                                }
-                                ?>
-                            </select>
-                        </div>
-                        <div class="col-md-3">
-                        <label for="municipio">Escoja municipio</label>
-                            <select class="form-control" id="municipio" name="municipio">
-
-                            </select>
-                       </div>
-                       <div class="col-md-3">
-                        <label for="lugar">Escoja lugar</label>
-                            <select class="form-control" id="lugar" name="lugar">
-
-                            </select>
-                       </div>
+                        
+                      
                         <div class="col-md-12">
                             <br>
                              
@@ -100,7 +67,7 @@ class donacion_entrante_en_VI
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h4 class="modal-title" id="titulo_modal1">Detalles de la solicitud</h4>
+                                <h4 class="modal-title" id="titulo_modal1">Detalles de la donacion</h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -124,12 +91,10 @@ class donacion_entrante_en_VI
                                 <p>Estado: Rechazada</P>
                             <?php 
                             }
-                                $arreglo_lugar = $lugar_MO->seleccionar($obj_don->cod_lugar);
-                                $objeto_lugar = $arreglo_lugar[0];
-                                $nombre_lugar = $objeto_lugar->nombre_lugar;?>
+                                 ?>
                             </div>
                             <div >
-                                <p>Lugar: <?php echo $nombre_lugar; ?> </P>
+                                <p>Lugar: UFPSO?> </P>
                             </div>
 
                             <table class="table table-bordered table-sm table-hover">
@@ -141,7 +106,7 @@ class donacion_entrante_en_VI
                                             <?php 
                                             $fechas = explode("-", $obj_don->fecha);
                                             date_default_timezone_set('UTC');
-                                            date_default_timezone_set("America/Bogota");
+                                            date_default_timezone_set("America/Mexico_City");
                                             $fecha1 = date('Y-m-d');
                                             $fechas1 = explode("-", $fecha1);
                                               if($obj_don->estado!=1 or $fechas1[0]-$fechas[0]>=1 or $fechas1[1]-$fechas[1]>=1 or $fechas1[2]-$fechas[2]>2){
@@ -156,7 +121,7 @@ class donacion_entrante_en_VI
                                     </thead>
                                     <tbody id="listar_entidad">
                                         <?php  
-                                            $detalle = new detalle_entrante_en_MO($conexion);
+                                            $detalle = new detalle_saliente_en_MO($conexion);
                                             $arreglo_detalle= $detalle->seleccionar_detalle($obj_don->id_donacion);
                                             //print_r($arreglo_detalle);
                                             foreach ($arreglo_detalle as $objeto_detalle) {
@@ -195,7 +160,7 @@ class donacion_entrante_en_VI
          ?>
         <div style="display:none;" id="formulario_detalle" class="card">
          <div class="card-header">
-                Agregar plantas a la solicitud
+                Agregar plantas a la donacion a realizar
             </div>
             <div class="card-body">
                 <form name='prueba' id="formulario_agregar_entidad">
@@ -242,7 +207,7 @@ class donacion_entrante_en_VI
                         </div>
                         <div class="col-md-12">
                             <br>
-                            <button type="button" onclick="verModulo('donacion_entrante_en_VI/agregardonacionentranteen');" class="btn btn-warning float-right">Finalizar solicitud</button>
+                            <button type="button" onclick="verModulo('donacion_saliente_en_VI/agregardonacionsalienteen');" class="btn btn-warning float-right">Finalizar solicitud</button>
                         </div>
                     </div>
                     <br>
@@ -286,9 +251,7 @@ class donacion_entrante_en_VI
                             <th scope="col">N° Donacion</th>
                             <th style="text-align: center;">Coordinador </th>
                             <th style="text-align: center;">fecha </th>
-                            <th style="text-align: center;">departamento</th>
-                            <th style="text-align: center;">municipio</th>
-                            <th style="text-align: center;">lugar</th>
+                             
                             <th style="text-align: center;">total</th>
                             <th style="text-align: center;">Accion</th>
                         </tr>
@@ -298,22 +261,10 @@ class donacion_entrante_en_VI
                         if ($arreglo_donacion) {
 
                             foreach ($arreglo_donacion as $objeto_donacion) {
-                                $cod_departamento = $objeto_donacion->cod_departamento;
-                                $cod_municipio = $objeto_donacion->cod_municipio;
-                                $cod_lugar = $objeto_donacion->cod_lugar;
+                                
                                 $documento = $objeto_donacion->documento;
 
-                                $arreglo_departamento = $departamento_MO->seleccionar($cod_departamento);
-                                $objeto_departamento = $arreglo_departamento[0];
-                                $nombre_departamento = $objeto_departamento->nombre_departamento;
-
-                                $arreglo_municipio = $municipio_MO->seleccionar($cod_municipio);
-                                $objeto_municipio = $arreglo_municipio[0];
-                                $nombre_municipio = $objeto_municipio->nombre_municipio;
-
-                                $arreglo_lugar = $lugar_MO->seleccionar($cod_lugar);
-                                $objeto_lugar = $arreglo_lugar[0];
-                                $nombre_lugar = $objeto_lugar->nombre_lugar;
+                                
 
                                 $arreglo_coordinador = $coordinador_MO->seleccionar($documento);
                                 $nombre = $arreglo_coordinador[0]->nombres;
@@ -337,21 +288,15 @@ class donacion_entrante_en_VI
                                     
                                     <td id="nombre_td_<?php echo $num; ?>"> <?php echo $nombre; ?> </td>
                                     <td id="fecha_td_<?php echo $num; ?>"> <?php echo $fecha; ?> </td>
-                                    <td id="departamento_td_<?php echo $num; ?>"> <?php echo $nombre_departamento; ?> </td>
-                                    <td id="municipio_td_<?php echo $num; ?>"> <?php echo $nombre_municipio; ?> </td>
-                                    <td id="lugar_td_<?php echo $num; ?>"> <?php echo $nombre_lugar; ?> </td>
+                                    
                                     <td style="text-align: center;" id="total_td_<?php echo $num; ?>"> <?php echo $total; ?> </td>
                                     <td  style="text-align: center;">
                                         <input type="hidden" id="id_<?php echo $num; ?>" value="<?php echo $num; ?>">
                                         <input type="hidden" id="nombre_<?php echo $num; ?>" value="<?php echo $nombre; ?>">
                                         <input type="hidden" id="fehca_<?php echo $num; ?>" value="<?php echo $fecha; ?>">
-                                        <input type="hidden" id="nombre_departamento_<?php echo $num; ?>" value="<?php echo $nombre_departamento; ?>">
-                                        <input type="hidden" id="nombre_municipio_<?php echo $num; ?>" value="<?php echo $nombre_municipio; ?>">
-                                        <input type="hidden" id="nombre_lugar_<?php echo $num; ?>" value="<?php echo $nombre_lugar; ?>">
+                                         
                                         <input type="hidden" id="total_<?php echo $num; ?>" value="<?php echo $total; ?>">
-                                        <input type="hidden" id="cod_departamento_<?php echo $num; ?>" value="<?php echo $cod_departamento; ?>">
-                                        <input type="hidden" id="cod_municipio_<?php echo $num; ?>" value="<?php echo $cod_municipio; ?>">
-                                        <input type="hidden" id="cod_lugar_<?php echo $num; ?>" value="<?php echo $cod_lugar; ?>">
+                                         
                                         <input type="hidden" id="documento_<?php echo $num; ?>" value="<?php echo $documento; ?>">
 
                                         <i class="fa fa-eye"   style="cursor: pointer;" data-toggle="modal" data-target="#nueva_<?php echo $num; ?>"></i>
@@ -379,131 +324,13 @@ class donacion_entrante_en_VI
                     $('#contenido').html(respuesta);
                 });
                 }
-            function departamento11()
-                    {
-                        var cod_departamento= document.getElementById('departamento1').value;
-                        console.log(cod_departamento);
-                        let municipio1 = document.querySelector('#municipio1');
-                        let lugar1 = document.querySelector('#lugar1');
-                        var object = new FormData();
-                        object.append("departamento",cod_departamento);
-                        fetch("departamento_CO/showMunicipio", {
-                        method: "POST",
-                        body: object,
-                        })
-                        .then((respuesta) => respuesta.text())
-                        .then(function (response) {
-                            
-                            const municipios = JSON.parse(response);
-                            let template = '<option class="FORM-CONTROL" selected disable value="">Seleccione</option>'
-                            let template1 = '<option class="FORM-CONTROL" selected disable value=""></option>'
-                            municipios.forEach(muni => {
-                            template += "<option value="+muni.cod_municipio+">"+muni.nombre_municipio+"</option>"
-                            });
-                            municipio1.innerHTML = template
-                            
-                            lugar1.innerHTML=template1
-                        })
-                        .catch(function (error) {
-                            console.log(error);
-                        });
-
-                        municipio1.addEventListener('change', function(){
-                            const valor = municipio1.value;
-                            lugar(valor);
-                        })
-                    }
-                    function lugar(municipio)
-                    {
-                         
-                        let lugar1 = document.querySelector('#lugar1');
-                        var object = new FormData();
-                        object.append("municipio",municipio);
-                         
-                        fetch("departamento_CO/showLugar", {
-                        method: "POST",
-                        body: object,
-                        })
-                        .then((respuesta) => respuesta.text())
-                        .then(function (response) {
-                            
-                            const lugares = JSON.parse(response);
-                            let template = '<option class="FORM-CONTROL" selected disable value="">Seleccione</option>'
-                            lugares.forEach(luga => {
-                            template += "<option value="+luga.cod_lugar+">"+luga.nombre_lugar+"</option>"
-                            });
-                            lugar1.innerHTML = template
-                        })
-                        .catch(function (error) {
-                            console.log(error);
-                        });
-
-                    }
-                    function departamento1()
-                    {
-                        var cod_depa= document.getElementById('departamento').value;
-                        console.log(cod_depa);
-                        let municipio = document.querySelector('#municipio');
-                        let lugar = document.querySelector('#lugar');
-                        var object = new FormData();
-                        object.append("departamento",cod_depa);
-                        fetch("departamento_CO/showMunicipio", {
-                        method: "POST",
-                        body: object,
-                        })
-                        .then((respuesta) => respuesta.text())
-                        .then(function (response) {
-                            
-                            const municipios = JSON.parse(response);
-                            let template = '<option class="FORM-CONTROL" selected disable value="">Seleccione</option>'
-                            let template1 = '<option class="FORM-CONTROL" selected disable value=""></option>'
-                            municipios.forEach(muni => {
-                            template += "<option value="+muni.cod_municipio+">"+muni.nombre_municipio+"</option>"
-                            });
-                            municipio.innerHTML = template
-                            
-                            lugar.innerHTML=template1
-                        })
-                        .catch(function (error) {
-                            console.log(error);
-                        });
-
-                        municipio.addEventListener('change', function(){
-                            const valor = municipio.value;
-                            lugar1(valor);
-                        })
-                    }
-                    function lugar1(municipio)
-                    {
-                         
-                        let lugar1 = document.querySelector('#lugar');
-                        var object = new FormData();
-                        object.append("municipio",municipio);
-                         
-                        fetch("departamento_CO/showLugar", {
-                        method: "POST",
-                        body: object,
-                        })
-                        .then((respuesta) => respuesta.text())
-                        .then(function (response) {
-                            
-                            const lugares = JSON.parse(response);
-                            let template = '<option class="FORM-CONTROL" selected disable value="">Seleccione</option>'
-                            lugares.forEach(luga => {
-                            template += "<option value="+luga.cod_lugar+">"+luga.nombre_lugar+"</option>"
-                            });
-                            lugar1.innerHTML = template
-                        })
-                        .catch(function (error) {
-                            console.log(error);
-                        });
-
-                    }
+             
+                  
   
             function ocultar_agregarfactura(){
                   var cadena = new FormData(document.querySelector('#formulario_factura'));
                   //console.log(cadena);
-                  fetch('donacion_entrante_en_CO/agregardonacion', {
+                  fetch('donacion_saliente_en_CO/agregardonacion', {
                         method: 'POST',
                         body: cadena
                     })
@@ -543,7 +370,7 @@ class donacion_entrante_en_VI
                         "cantidad":cantidad,
                         "especie":especie
                         };
-                fetch('detalle_entrante_en_CO/agregardetalle', {
+                fetch('detalle_saliente_en_CO/agregardetalle', {
                         method: 'POST',
                         body: JSON.stringify(data2),
                         headers: {
@@ -620,7 +447,7 @@ class donacion_entrante_en_VI
                         "id_donacion":id
                         };
                         //console.log(data2);
-                        fetch('donacion_entrante_en_CO/eliminardonacion', {
+                        fetch('donacion_saliente_en_CO/eliminardonacion', {
                         method: 'POST',
                         body: JSON.stringify(data2),
                         headers: {
@@ -676,7 +503,7 @@ class donacion_entrante_en_VI
                         "especie":especie
                         };
                         //console.log(data2);
-                        fetch('detalle_entrante_en_CO/eliminardetalle', {
+                        fetch('detalle_saliente_en_CO/eliminardetalle', {
                         method: 'POST',
                         body: JSON.stringify(data2),
                         headers: {
@@ -729,12 +556,7 @@ class donacion_entrante_en_VI
 
                 document.querySelector('#contenido_modal').innerHTML = `<p>el tiempo y/o estado de dicha peticion no permite su actualizacion</p>`;
                 }else{
-                let municipio = document.querySelector('#nombre_municipio_' + id).value;
-                let lugar = document.querySelector('#nombre_lugar_' + id).value;
-                let departamento = document.querySelector('#nombre_departamento_' + id).value;
-                let cod_muni = document.querySelector('#cod_municipio_' + id).value;
-                let cod_luga = document.querySelector('#cod_lugar_' + id).value;
-                let cod_depa = document.querySelector('#cod_departamento_' + id).value;
+               
            
                 var cadena = `
                         <div class="card">
@@ -748,40 +570,7 @@ class donacion_entrante_en_VI
                                         <input  readonly type="text" class="form-control" id="numero" name="numero" value="${id}">
                                     </div>
                     
-                            <div class="form-group">
-                            <label for="departamento">Escoja departamento</label>
-                            <select onchange="departamento11()"  class="form-control" name="departamento" id="departamento1">
-                                <option value="">seleccione</option>
-                                <?php
-                                $arreglo_departamento1 = $departamento_MO->seleccionar();
-                                //print_r($arreglo_departamento1);
-                                if ($arreglo_departamento1) {
-
-                                    foreach ($arreglo_departamento1 as $objeto_departamento1) {
-                                        $nombre_departamento = $objeto_departamento1->nombre_departamento;
-                                        $cod_departamento = $objeto_departamento1->cod_departamento;
-
-                                ?>
-                                
-                                    <option value="<?php echo $cod_departamento; ?>" > <?php echo  $nombre_departamento; ?> </option>
-                                <?php
-                                    }
-                                }
-                                ?>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                        <label for="municipio">Escoja municipio</label>
-                            <select class="form-control" id="municipio1" name="municipio">
-
-                            </select>
-                       </div>
-                       <div class="form-group">
-                        <label for="lugar">Escoja lugar</label>
-                            <select class="form-control" id="lugar1" name="lugar">
-
-                            </select>
-                       </div>
+                          
                        <input    type="hidden" id="id" name="id" value="${id}">
                        <button type="button" onclick="actualizardonacion();" class="btn btn-success float-right">Actualizar</button>
                                 </form>
@@ -800,7 +589,7 @@ class donacion_entrante_en_VI
 
                 var cadena = new FormData(document.querySelector('#formulario_actualizar_donacion'));
                
-                fetch('donacion_entrante_en_CO/actualizar', {
+                fetch('donacion_saliente_en_CO/actualizar', {
                         method: 'POST',
                         body: cadena
                     })
@@ -808,28 +597,11 @@ class donacion_entrante_en_VI
                     .then(respuesta => {
 
                         if (respuesta.estado == 'EXITO') {
-                            var dato_depar = document.getElementById("departamento1");
-                            var nombre_depar = dato_depar.options[dato_depar.selectedIndex].text;
-                            var dato_muni = document.getElementById("municipio1");
-                            var nombre_muni = dato_muni.options[dato_muni.selectedIndex].text;
-                            var dato_lugar = document.getElementById("lugar1");
-                            var nombre_lugar = dato_lugar.options[dato_lugar.selectedIndex].text;
-
+                            
                             let num = document.querySelector('#formulario_actualizar_donacion #id').value;
-                            let departamento = document.querySelector('#formulario_actualizar_donacion #departamento1').value;
-                            let lugar = document.querySelector('#formulario_actualizar_donacion #lugar1').value;
-                            let municipio = document.querySelector('#formulario_actualizar_donacion #municipio1').value;
-                            console.log(nombre_depar);
+                             
                         
-                            document.querySelector('#departamento_td_' + num).innerHTML = nombre_depar;
-                            document.querySelector('#nombre_departamento_' + num).value = nombre_depar;
-                            document.querySelector('#cod_departamento_' + num).value = departamento;
-                            document.querySelector('#lugar_td_' + num).innerHTML = nombre_lugar;
-                            document.querySelector('#nombre_lugar_' + num).value = nombre_lugar;
-                            document.querySelector('#cod_lugar_' + num).value = lugar;
-                            document.querySelector('#municipio_td_' + num).innerHTML = nombre_muni;
-                            document.querySelector('#nombre_municipio_' + num).value = nombre_muni;
-                            document.querySelector('#cod_municipio_' + num).value = municipio;
+                            
                              
 
                             toastr.success(respuesta.mensaje);
@@ -871,7 +643,7 @@ class donacion_entrante_en_VI
                                 <option value="${especie}">${especie}</option>
                                 <?php
                                 $arreglo_plantas1= $planta_MO->seleccionar();
-                                //print_r($arreglo_departamento1);
+                                 
                                 if ($arreglo_plantas1) {
 
                                     foreach ($arreglo_plantas1 as $objeto_planta1) {
@@ -905,14 +677,14 @@ class donacion_entrante_en_VI
 
                 document.querySelector('#titulo_modal').innerHTML = 'Actualizar peticion';
                 document.querySelector('#contenido_modal').innerHTML = cadena;
-               // console.log('<?php //echo $cod_departamento; ?>');
+               
                 
             }
             function actualizardetalle() {
 
                 var cadena = new FormData(document.querySelector('#formulario_actualizar_detalle'));
 
-                fetch('detalle_entrante_en_CO/actualizar', {
+                fetch('detalle_saliente_en_CO/actualizar', {
                         method: 'POST',
                         body: cadena
                     })
