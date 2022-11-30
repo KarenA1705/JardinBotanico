@@ -66,6 +66,16 @@ class detalle_entrante_en_MO
     $this->conexion->consultar($sql);
   }
 
+  function consulplan($id_donacion,$id_detalle,$especie){
+    $sql = "select * from detalle_donacion_saliente where id_donacion=$id_donacion  and especie='$especie'";
+    
+    $this->conexion->consultar($sql);
+
+    $arreglo = $this->conexion->extraerRegistro();
+
+    return $arreglo;
+  }
+
 
   function seleccionar_detalle($id_donacion= '')
   {

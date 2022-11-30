@@ -23,13 +23,25 @@ class detalle_entrante_en_CO
     $id_detalle=$datos['id_detalle'];
     $especie=$datos['especie'];
     
-    //print_r($cantidad);
+    $especie_repe=$detalle_en_MO->consulplan($id_donacion,$id_detalle,$especie);
+    if ($especie_repe) {
+     $arreglo_respuesta = [
+       "estado" => "ERROR",
+       "mensaje" => "esa planta ya esta registrada en el detalle, seleccione otra"
+   
+     ];
+   
+     exit(json_encode($arreglo_respuesta));
+   }
+    if ($cantidad==0 ) {
+      $arreglo_respuesta = [
+        "estado" => "ERROR",
+        "mensaje" => "La cantidad no puede ser cero"
 
-    /*$id_donacion = htmlentities($_POST['numero1'], ENT_QUOTES);
-    $id_detalle=htmlentities($_POST['numero_detalle'], ENT_QUOTES);
-    $especie=htmlentities($_POST['planta'], ENT_QUOTES);
-    $cantidad=htmlentities($_POST['cantidad'], ENT_QUOTES);*/
+      ];
 
+      exit(json_encode($arreglo_respuesta));
+    }
     if ( empty($id_donacion) or empty($id_detalle) or empty($especie) or empty($cantidad) ) {
       $arreglo_respuesta = [
         "estado" => "ERROR",
@@ -39,15 +51,7 @@ class detalle_entrante_en_CO
 
       exit(json_encode($arreglo_respuesta));
     }
-    if ( $cantidad==0 ) {
-        $arreglo_respuesta = [
-          "estado" => "ERROR",
-          "mensaje" => "La cantidad no puede ser cero"
-  
-        ];
-  
-        exit(json_encode($arreglo_respuesta));
-      }
+    
     $planta_MO= new plantas_MO($conexion);
     $arreglo_planta=$planta_MO->seleccionar_planta($especie);
     
@@ -55,7 +59,6 @@ class detalle_entrante_en_CO
         $stock = $objeto_planta->stock;
     }
     
-  
     if ($cantidad>$stock) {
         $arreglo_respuesta = [
           "estado" => "ERROR",
@@ -93,7 +96,7 @@ class detalle_entrante_en_CO
   
       //exit($cantidad_org."<<<<<<".$especie."<<<<<<".$cantidad."<<<<<<".$especieorg);
    
-  
+    
 
     if ( empty($especie) or empty($cantidad)) {
       $arreglo_respuesta = [
@@ -129,6 +132,16 @@ class detalle_entrante_en_CO
       $detalle_en_MO->actdetalle($id_donacion,$id_detalle,$especie,$cantidad);
 
     }else{
+      $especie_repe=$detalle_en_MO->consulplan($id_donacion,$id_detalle,$especie);
+      if ($especie_repe) {
+       $arreglo_respuesta = [
+         "estado" => "ERROR",
+         "mensaje" => "esa planta ya esta registrada en el detalle, seleccione otra"
+     
+       ];
+     
+       exit(json_encode($arreglo_respuesta));
+     }
       
       $planta_MO= new plantas_MO($conexion);
       $arreglo_planta=$planta_MO->seleccionar_planta($especie);

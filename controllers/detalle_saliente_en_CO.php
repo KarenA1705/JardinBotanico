@@ -23,12 +23,7 @@ class detalle_saliente_en_CO
     $id_detalle=$datos['id_detalle'];
     $especie=$datos['especie'];
     
-    //print_r($cantidad);
-
-    /*$id_donacion = htmlentities($_POST['numero1'], ENT_QUOTES);
-    $id_detalle=htmlentities($_POST['numero_detalle'], ENT_QUOTES);
-    $especie=htmlentities($_POST['planta'], ENT_QUOTES);
-    $cantidad=htmlentities($_POST['cantidad'], ENT_QUOTES);*/
+   
 
     if ( empty($id_donacion) or empty($id_detalle) or empty($especie) or empty($cantidad) ) {
       $arreglo_respuesta = [
