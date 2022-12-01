@@ -23,8 +23,26 @@ class detalle_saliente_en_CO
     $id_detalle=$datos['id_detalle'];
     $especie=$datos['especie'];
     
-   
+    if ( $cantidad==0 ) {
+      $arreglo_respuesta = [
+        "estado" => "ERROR",
+        "mensaje" => "La cantidad no puede ser cero"
 
+      ];
+
+      exit(json_encode($arreglo_respuesta));
+    }
+
+    $especie_repe=$detalle_en_MO->consulplan($id_donacion,$id_detalle,$especie);
+    if ($especie_repe) {
+     $arreglo_respuesta = [
+       "estado" => "ERROR",
+       "mensaje" => "esa planta ya esta registrada en el detalle, seleccione otra"
+   
+     ];
+   
+     exit(json_encode($arreglo_respuesta));
+   }
     if ( empty($id_donacion) or empty($id_detalle) or empty($especie) or empty($cantidad) ) {
       $arreglo_respuesta = [
         "estado" => "ERROR",
@@ -34,34 +52,16 @@ class detalle_saliente_en_CO
 
       exit(json_encode($arreglo_respuesta));
     }
-    if ( $cantidad==0 ) {
+    if ($cantidad>50) {
         $arreglo_respuesta = [
           "estado" => "ERROR",
-          "mensaje" => "La cantidad no puede ser cero"
+          "mensaje" => "la cantidad excede el limite"
   
         ];
   
         exit(json_encode($arreglo_respuesta));
       }
-    $planta_MO= new plantas_MO($conexion);
-    $arreglo_planta=$planta_MO->seleccionar_planta($especie);
     
-    foreach($arreglo_planta as $objeto_planta){
-        $stock = $objeto_planta->stock;
-    }
-    
-  
-    if ($cantidad>$stock) {
-        $arreglo_respuesta = [
-          "estado" => "ERROR",
-          "mensaje" => "Stock de plantas no disponible"
-  
-        ];
-  
-        exit(json_encode($arreglo_respuesta));
-      }
-      $resta=$stock-$cantidad;
-    $detalle_en_MO->restarStock($especie,$resta);
     $detalle_en_MO->agregardetalle($id_donacion,$id_detalle,$especie,$cantidad);
 
     /*$codigo= $conexion->lastInsertId();*/
@@ -86,8 +86,25 @@ class detalle_saliente_en_CO
     $especieorg = htmlentities($_POST['especie_org'], ENT_QUOTES);
     $cantidad = htmlentities($_POST['cantidad1'], ENT_QUOTES);
   
-      //exit($cantidad_org."<<<<<<".$especie."<<<<<<".$cantidad."<<<<<<".$especieorg);
-   
+       
+      if ($cantidad>50) {
+        $arreglo_respuesta = [
+          "estado" => "ERROR",
+          "mensaje" => "la cantidad excede el limite"
+  
+        ];
+  
+        exit(json_encode($arreglo_respuesta));
+      }
+      if ( $cantidad==0 ) {
+        $arreglo_respuesta = [
+          "estado" => "ERROR",
+          "mensaje" => "La cantidad no puede ser cero"
+  
+        ];
+  
+        exit(json_encode($arreglo_respuesta));
+      }
   
 
     if ( empty($especie) or empty($cantidad)) {
@@ -100,60 +117,15 @@ class detalle_saliente_en_CO
       exit(json_encode($arreglo_respuesta));
     }
     if($especie==$especieorg){
-      $planta_MO= new plantas_MO($conexion);
-      $arreglo_planta=$planta_MO->seleccionar_planta($especie);
-      
-      foreach($arreglo_planta as $objeto_planta){
-          $stock = $objeto_planta->stock;
-      }
-      
-    
-      if ($cantidad>$stock) {
-          $arreglo_respuesta = [
-            "estado" => "ERROR",
-            "mensaje" => "Stock de plantas no disponible"
-    
-          ];
-    
-          exit(json_encode($arreglo_respuesta));
-        }
-
-      $valor=$cantidad-$cantidad_org;
-      $resta=$stock-$valor;
-      $detalle_en_MO->restarStock($especie,$resta);
+   
       $detalle_en_MO->actdetalle($id_donacion,$id_detalle,$especie,$cantidad);
 
     }else{
       
-      $planta_MO= new plantas_MO($conexion);
-      $arreglo_planta=$planta_MO->seleccionar_planta($especie);
-      
-      foreach($arreglo_planta as $objeto_planta){
-          $stock = $objeto_planta->stock;
-      }
-      
-    
-      if ($cantidad>$stock) {
-          $arreglo_respuesta = [
-            "estado" => "ERROR",
-            "mensaje" => "Stock de plantas no disponible"
-    
-          ];
-    
-          exit(json_encode($arreglo_respuesta));
-        }
-
-      $resta=$stock-$cantidad;
-       $detalle_en_MO->restarStock($especie,$resta);
-       //$detalle_en_MO->restar_donacion($id_donacion,$cantidad_org);
        $detalle_en_MO->actdetalle($id_donacion,$id_detalle,$especie,$cantidad);
-       $detalle_en_MO->actualizarPlanta($especieorg, $cantidad_org);
-       
+   
     }
- 
-    //$donacion_en_MO->actualizar($id_donacion,$cod_departamento,$cod_municipio,$cod_lugar);
-
-    /*$codigo= $conexion->lastInsertId();*/
+  
     $arreglo_respuesta = [
       "estado" => "EXITO",
       "mensaje" => "Registro actualizado"
@@ -177,7 +149,7 @@ class detalle_saliente_en_CO
 
     $detalle_en_MO->eliminardetalle($id_donacion,$id_detalle);
     $detalle_en_MO->restar_donacion($id_donacion,$cantidad);
-    $detalle_en_MO->actualizarPlanta($especie, $cantidad);
+ 
     $eliminado = $conexion->filasAfectadas();
     if ($eliminado) {
   

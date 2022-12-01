@@ -98,11 +98,13 @@ class donacion_saliente_en_MO
 
     $this->conexion->consultar($sql);
   }
+
   function rechazar($id_donacion){
     $sql = "update donacion_entrante set  estado='3',observacion='NO CUMPLE CON LAS CONDICIONES' where id_donacion='$id_donacion'";
 
     $this->conexion->consultar($sql);
   }
+  
   function seleccionarDetalle($id_donacion= '')
   {
 

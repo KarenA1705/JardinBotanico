@@ -33,15 +33,16 @@ class detalle_entrante_en_CO
    
      exit(json_encode($arreglo_respuesta));
    }
+
     if ($cantidad==0 ) {
-      $arreglo_respuesta = [
-        "estado" => "ERROR",
-        "mensaje" => "La cantidad no puede ser cero"
-
-      ];
-
-      exit(json_encode($arreglo_respuesta));
-    }
+        $arreglo_respuesta = [
+          "estado" => "ERROR",
+          "mensaje" => "La cantidad no puede ser cero"
+  
+        ];
+  
+        exit(json_encode($arreglo_respuesta));
+      }
     if ( empty($id_donacion) or empty($id_detalle) or empty($especie) or empty($cantidad) ) {
       $arreglo_respuesta = [
         "estado" => "ERROR",
@@ -59,6 +60,7 @@ class detalle_entrante_en_CO
         $stock = $objeto_planta->stock;
     }
     
+  
     if ($cantidad>$stock) {
         $arreglo_respuesta = [
           "estado" => "ERROR",
@@ -96,7 +98,7 @@ class detalle_entrante_en_CO
   
       //exit($cantidad_org."<<<<<<".$especie."<<<<<<".$cantidad."<<<<<<".$especieorg);
    
-    
+  
 
     if ( empty($especie) or empty($cantidad)) {
       $arreglo_respuesta = [

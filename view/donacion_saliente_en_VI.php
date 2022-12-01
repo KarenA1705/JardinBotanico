@@ -45,7 +45,7 @@ class donacion_saliente_en_VI
                          </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="nit">Numero factura</label>
+                                <label for="nit">Numero donacion</label>
                                 <input  readonly type="text" class="form-control" id="numero" name="numero" value="<?php echo  $max_valor+1 ; ?>">
                             </div>
                         </div>
@@ -106,7 +106,7 @@ class donacion_saliente_en_VI
                                             <?php 
                                             $fechas = explode("-", $obj_don->fecha);
                                             date_default_timezone_set('UTC');
-                                            date_default_timezone_set("America/Mexico_City");
+                                            date_default_timezone_set("America/Bogota");
                                             $fecha1 = date('Y-m-d');
                                             $fechas1 = explode("-", $fecha1);
                                               if($obj_don->estado!=1 or $fechas1[0]-$fechas[0]>=1 or $fechas1[1]-$fechas[1]>=1 or $fechas1[2]-$fechas[2]>2){
@@ -241,7 +241,7 @@ class donacion_saliente_en_VI
 
         <div class="card">
             <div class="card-header">
-                Listar solicitudes de donaciones
+                Listar donaciones
             </div>
             <div class="card-body">
 
