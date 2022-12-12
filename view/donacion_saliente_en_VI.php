@@ -94,7 +94,7 @@ class donacion_saliente_en_VI
                                  ?>
                             </div>
                             <div >
-                                <p>Lugar: UFPSO?> </P>
+                                <p>Lugar: UFPSO </P>
                             </div>
 
                             <table class="table table-bordered table-sm table-hover">
@@ -300,7 +300,7 @@ class donacion_saliente_en_VI
                                         <input type="hidden" id="documento_<?php echo $num; ?>" value="<?php echo $documento; ?>">
 
                                         <i class="fa fa-eye"   style="cursor: pointer;" data-toggle="modal" data-target="#nueva_<?php echo $num; ?>"></i>
-                                        <i class="fas fa-edit" data-toggle="modal" data-target="#Ventana_Modal" style="cursor: pointer;" onclick="verActualizardonacion('<?php echo $num; ?>','<?php echo $fecha; ?>','<?php echo $estado; ?>')"></i>
+                                        <!--i class="fas fa-edit" data-toggle="modal" data-target="#Ventana_Modal" style="cursor: pointer;" onclick="verActualizardonacion('<?php echo $num; ?>','<?php echo $fecha; ?>','<?php echo $estado; ?>')"></i-->
                                         <i class="fa fa-trash"   style="cursor: pointer;" onclick="verEliminarDonacion('<?php echo $num; ?>','<?php echo $fecha; ?>','<?php echo $estado; ?>',this)"></i>
 
                                     </td>
