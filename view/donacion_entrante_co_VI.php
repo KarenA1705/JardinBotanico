@@ -173,8 +173,8 @@ class donacion_entrante_co_VI
           <?php
                 }
          ?>
-        <script type="text/javascript" src="datatables/don.js"></script>
-        <script type="text/javascript" src="datatables/ent.js"></script>
+        <script type="text/javascript" src="datatables/dons.js"></script>
+        
         <script>
              function verModulo(ruta) {
 

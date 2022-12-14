@@ -207,7 +207,7 @@ class donacion_saliente_en_VI
                         </div>
                         <div class="col-md-12">
                             <br>
-                            <button type="button" onclick="verModulo('donacion_saliente_en_VI/agregardonacionsalienteen');" class="btn btn-warning float-right">Finalizar solicitud</button>
+                            <button type="button" onclick="verModulo('donacion_saliente_en_VI/agregardonacionsalienteen');" class="btn btn-warning float-right">Finalizar donacion</button>
                         </div>
                     </div>
                     <br>
@@ -315,8 +315,8 @@ class donacion_saliente_en_VI
 
             </div>
         </div>
-        <script type="text/javascript" src="datatables/don.js"></script>
-        <script type="text/javascript" src="datatables/ent.js"></script>
+        <script type="text/javascript" src="datatables/dons.js"></script>
+         
         <script>
              function verModulo(ruta) {
 

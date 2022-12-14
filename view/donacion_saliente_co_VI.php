@@ -214,7 +214,7 @@ class donacion_saliente_co_VI
                 }
          ?>
         <script type="text/javascript" src="datatables/don.js"></script>
-        <script type="text/javascript" src="datatables/ent.js"></script>
+  
         <script>
              function verModulo(ruta) {
 
